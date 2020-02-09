@@ -20,7 +20,6 @@ const createMoviesCardTemplate = (moviesList) => {
 const MainPage = ({promoFilm, filmList}) => {
 
   const {filmName, filmGenre, filmYear} = promoFilm;
-  const _filmList = filmList;
 
   return (
     <div>
@@ -133,7 +132,7 @@ const MainPage = ({promoFilm, filmList}) => {
             </li>
           </ul>
           <div className="catalog__movies-list">
-            {createMoviesCardTemplate(_filmList)}
+            {createMoviesCardTemplate(filmList)}
 
 
           </div>
