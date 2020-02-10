@@ -2,9 +2,11 @@ import React from "react";
 import MainPage from "./../main-screen/main-screen.jsx";
 import PropTypes from "prop-types";
 
+const movieTitleClickHandler = () => {};
+
 const App = ({promoFilm, filmList}) => {
   return (
-    <MainPage promoFilm={promoFilm} filmList={filmList}/>
+    <MainPage promoFilm={promoFilm} filmList={filmList} onMovieTitleClick={movieTitleClickHandler}/>
   );
 };
 

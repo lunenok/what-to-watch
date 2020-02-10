@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const createMoviesCardTemplate = (moviesList) => {
+const createMoviesCardTemplate = (moviesList, onMovieTitleClick) => {
   return moviesList
   .map((movie, i) => {
     return (
@@ -10,14 +10,14 @@ const createMoviesCardTemplate = (moviesList) => {
           <img src="img/pulp-fiction.jpg" alt={movie} width={280} height={175} />
         </div>
         <h3 className="small-movie-card__title">
-          <a className="small-movie-card__link" href="movie-page.html">{movie}</a>
+          <a className="small-movie-card__link" href="#" onClick={onMovieTitleClick}>{movie}</a>
         </h3>
       </article>
     );
   });
 };
 
-const MainPage = ({promoFilm, filmList}) => {
+const MainPage = ({promoFilm, filmList, onMovieTitleClick}) => {
 
   const {filmName, filmGenre, filmYear} = promoFilm;
 
@@ -132,7 +132,7 @@ const MainPage = ({promoFilm, filmList}) => {
             </li>
           </ul>
           <div className="catalog__movies-list">
-            {createMoviesCardTemplate(filmList)}
+            {createMoviesCardTemplate(filmList, onMovieTitleClick)}
 
 
           </div>
@@ -163,7 +163,8 @@ MainPage.propTypes = {
     filmName: PropTypes.string.isRequired,
     filmGenre: PropTypes.string.isRequired,
     filmYear: PropTypes.number.isRequired
-  }).isRequired
+  }).isRequired,
+  onMovieTitleClick: PropTypes.func
 };
 
 export default MainPage;
