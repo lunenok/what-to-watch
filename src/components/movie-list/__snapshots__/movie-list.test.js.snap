@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should movie list render correctly 1`] = `
+<div
+  className="catalog__movies-list"
+>
+  <article
+    className="small-movie-card catalog__movies-card"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <div
+      className="small-movie-card__image"
+    >
+      <img
+        alt="Bohemian Rhapsody"
+        height={175}
+        src="img/pulp-fiction.jpg"
+        width={280}
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+    >
+      <a
+        className="small-movie-card__link"
+        href="#"
+        onClick={[Function]}
+      >
+        Bohemian Rhapsody
+      </a>
+    </h3>
+  </article>
+  <article
+    className="small-movie-card catalog__movies-card"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <div
+      className="small-movie-card__image"
+    >
+      <img
+        alt="Battlefield Earth: A Saga of the Year 3000"
+        height={175}
+        src="img/pulp-fiction.jpg"
+        width={280}
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+    >
+      <a
+        className="small-movie-card__link"
+        href="#"
+        onClick={[Function]}
+      >
+        Battlefield Earth: A Saga of the Year 3000
+      </a>
+    </h3>
+  </article>
+</div>
+`;

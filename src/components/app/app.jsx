@@ -1,22 +1,38 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import MainPage from "./../main-screen/main-screen.jsx";
 import PropTypes from "prop-types";
 
 const movieTitleClickHandler = () => {};
 
-const App = ({promoFilm, filmList}) => {
-  return (
-    <MainPage promoFilm={promoFilm} filmList={filmList} onMovieTitleClick={movieTitleClickHandler}/>
-  );
-};
+class App extends PureComponent {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <MainPage
+        promoFilm={this.props.promoFilm}
+        movieList={this.props.movieList}
+        onMovieTitleClick={movieTitleClickHandler}
+      />
+    );
+  }
+}
 
 App.propTypes = {
-  filmList: PropTypes.arrayOf(PropTypes.string).isRequired,
   promoFilm: PropTypes.exact({
     filmName: PropTypes.string.isRequired,
     filmGenre: PropTypes.string.isRequired,
     filmYear: PropTypes.number.isRequired
-  }).isRequired
+  }).isRequired,
+  movieList: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    img: PropTypes.string.isRequired
+  }))
 };
 
 export default App;

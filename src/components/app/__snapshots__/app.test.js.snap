@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Render App 1`] = `
-<div>
+Array [
   <div
     className="visually-hidden"
   >
@@ -109,7 +109,7 @@ exports[`Render App 1`] = `
         </g>
       </symbol>
     </svg>
-  </div>
+  </div>,
   <section
     className="movie-card"
   >
@@ -246,7 +246,7 @@ exports[`Render App 1`] = `
         </div>
       </div>
     </div>
-  </section>
+  </section>,
   <div
     className="page-content"
   >
@@ -367,12 +367,14 @@ exports[`Render App 1`] = `
       >
         <article
           className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <div
             className="small-movie-card__image"
           >
             <img
-              alt="The Godfather"
+              alt="Bohemian Rhapsody"
               height={175}
               src="img/pulp-fiction.jpg"
               width={280}
@@ -386,18 +388,20 @@ exports[`Render App 1`] = `
               href="#"
               onClick={[Function]}
             >
-              The Godfather
+              Bohemian Rhapsody
             </a>
           </h3>
         </article>
         <article
           className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <div
             className="small-movie-card__image"
           >
             <img
-              alt="The Shawshank Redemption"
+              alt="Battlefield Earth: A Saga of the Year 3000"
               height={175}
               src="img/pulp-fiction.jpg"
               width={280}
@@ -411,32 +415,7 @@ exports[`Render App 1`] = `
               href="#"
               onClick={[Function]}
             >
-              The Shawshank Redemption
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="Schindler's List"
-              height={175}
-              src="img/pulp-fiction.jpg"
-              width={280}
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="#"
-              onClick={[Function]}
-            >
-              Schindler's List
+              Battlefield Earth: A Saga of the Year 3000
             </a>
           </h3>
         </article>
@@ -486,6 +465,6 @@ exports[`Render App 1`] = `
         </p>
       </div>
     </footer>
-  </div>
-</div>
+  </div>,
+]
 `;
