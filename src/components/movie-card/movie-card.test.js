@@ -15,7 +15,7 @@ it(`Should movie card render correctly`, () => {
     .create(<MovieCard
       key={testMovie.id}
       filmInfo={testMovie}
-      onMovieTitleClick={() => {}}
+      onMovieClick={() => {}}
       onCardMouseHoverOn={() => {}}
       onCardMouseHoverOff={() => {}}
     />)

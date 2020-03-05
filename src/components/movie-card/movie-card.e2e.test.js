@@ -16,12 +16,12 @@ Enzyme.configure({
 });
 
 it(`Should movie title button be pressed`, () => {
-  const onMovieTitleClick = jest.fn();
+  const onCardClick = jest.fn();
   const movieCards = shallow(
       <MovieCard
         key={testMovie.id}
         filmInfo={testMovie}
-        onMovieTitleClick={onMovieTitleClick}
+        onMovieTitleClick={onCardClick}
         onCardMouseHoverOn={() => {}}
         onCardMouseHoverOff={() => {}}
       />
@@ -30,7 +30,7 @@ it(`Should movie title button be pressed`, () => {
   movieTitleLink.forEach((it) => {
     it.props().onClick();
   });
-  expect(onMovieTitleClick.mock.calls.length).toBe(1);
+  expect(onCardClick.mock.calls.length).toBe(1);
 });
 
 it(`Handler mouse get data`, () => {

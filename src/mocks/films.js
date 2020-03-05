@@ -4,6 +4,11 @@ export const MovieList = [
     title: `Bohemian Rhapsody`,
     genre: `Drama`,
     year: 2019,
+    rating: 8.9,
+    reviews: 200,
+    director: `Nikita Mikhalkov`,
+    starring: `Edward Norton, Jude Law`,
+    description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
     img: `bohemian-rhapsody.jpg`
   },
   {
@@ -11,6 +16,11 @@ export const MovieList = [
     title: `Battlefield Earth: A Saga of the Year 3000`,
     genre: `Drama`,
     year: 2019,
+    rating: 3.9,
+    reviews: 100,
+    director: `Nikita Mikhalkov`,
+    starring: `Edward Norton, Jude Law`,
+    description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
     img: `bohemian-rhapsody.jpg`
   },
   {
@@ -18,6 +28,11 @@ export const MovieList = [
     title: `Epic Movie`,
     genre: `Drama`,
     year: 2019,
+    rating: 2.9,
+    reviews: 55,
+    director: `Nikita Mikhalkov`,
+    starring: `Edward Norton, Jude Law`,
+    description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
     img: `bohemian-rhapsody.jpg`
   },
   {
@@ -25,6 +40,11 @@ export const MovieList = [
     title: `Santa Claus Conquers the Martians`,
     genre: `Drama`,
     year: 2019,
+    rating: 6.9,
+    reviews: 65,
+    director: `Nikita Mikhalkov`,
+    starring: `Edward Norton, Jude Law`,
+    description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
     img: `bohemian-rhapsody.jpg`
   },
   {
@@ -32,6 +52,11 @@ export const MovieList = [
     title: `United Passions`,
     genre: `Drama`,
     year: 2019,
+    rating: 5.9,
+    reviews: 90,
+    director: `Nikita Mikhalkov`,
+    starring: `Edward Norton, Jude Law`,
+    description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
     img: `bohemian-rhapsody.jpg`
   },
   {
@@ -39,6 +64,11 @@ export const MovieList = [
     title: `Howard the Duck`,
     genre: `Drama`,
     year: 2019,
+    rating: 2.9,
+    reviews: 145,
+    director: `Nikita Mikhalkov`,
+    starring: `Edward Norton, Jude Law`,
+    description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
     img: `bohemian-rhapsody.jpg`
   },
   {
@@ -46,6 +76,11 @@ export const MovieList = [
     title: `Jack and Jill`,
     genre: `Drama`,
     year: 2019,
+    rating: 6.9,
+    reviews: 155,
+    director: `Nikita Mikhalkov`,
+    starring: `Edward Norton, Jude Law`,
+    description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
     img: `bohemian-rhapsody.jpg`
   },
   {
@@ -53,6 +88,11 @@ export const MovieList = [
     title: `Cannibal Holocaust`,
     genre: `Drama`,
     year: 2019,
+    rating: 9.9,
+    reviews: 199,
+    director: `Nikita Mikhalkov`,
+    starring: `Edward Norton, Jude Law`,
+    description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
     img: `bohemian-rhapsody.jpg`
   }
 ];

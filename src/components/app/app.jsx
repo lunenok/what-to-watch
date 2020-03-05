@@ -1,21 +1,58 @@
 import React, {PureComponent} from "react";
-import MainPage from "./../main-screen/main-screen.jsx";
+import {Switch, Route, BrowserRouter} from "react-router-dom";
 import PropTypes from "prop-types";
-
-const movieTitleClickHandler = () => {};
+import MainPage from "./../main-screen/main-screen.jsx";
+import MoviePage from "./../movie-page/movie-page.jsx";
 
 class App extends PureComponent {
   constructor(props) {
     super(props);
+    this.state = {curentMovie: null};
+    this._renderMovieScreen = this._renderMovieScreen.bind(this);
+    this._setMovie = this._setMovie.bind(this);
   }
 
-  render() {
+  _setMovie(movie) {
+    this.setState({
+      curentMovie: movie
+    });
+  }
+
+  _renderMovieScreen() {
+    const clickedMovie = this.state;
+
+    if (clickedMovie.curentMovie) {
+      return (
+        <MoviePage
+          curentMovie={clickedMovie.curentMovie}
+        />
+      );
+    }
+
     return (
       <MainPage
         promoFilm={this.props.promoFilm}
         movieList={this.props.movieList}
-        onMovieTitleClick={movieTitleClickHandler}
+        onMovieClick={this._setMovie}
       />
+    );
+  }
+
+  render() {
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            {this._renderMovieScreen()}
+          </Route>
+          <Route exact path="/movie-page">
+            <MoviePage
+              curentMovie={this.props.movieList[2]}
+            />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+
     );
   }
 }
