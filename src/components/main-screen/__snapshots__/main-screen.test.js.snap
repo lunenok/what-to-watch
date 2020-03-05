@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Should main-screen render correctly 1`] = `
-<div>
+Array [
   <div
     className="visually-hidden"
   >
@@ -109,7 +109,7 @@ exports[`Should main-screen render correctly 1`] = `
         </g>
       </symbol>
     </svg>
-  </div>
+  </div>,
   <section
     className="movie-card"
   >
@@ -246,7 +246,7 @@ exports[`Should main-screen render correctly 1`] = `
         </div>
       </div>
     </div>
-  </section>
+  </section>,
   <div
     className="page-content"
   >
@@ -367,12 +367,14 @@ exports[`Should main-screen render correctly 1`] = `
       >
         <article
           className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <div
             className="small-movie-card__image"
           >
             <img
-              alt="The Godfather"
+              alt="Bohemian Rhapsody"
               height={175}
               src="img/pulp-fiction.jpg"
               width={280}
@@ -384,19 +386,22 @@ exports[`Should main-screen render correctly 1`] = `
             <a
               className="small-movie-card__link"
               href="#"
+              onClick={[Function]}
             >
-              The Godfather
+              Bohemian Rhapsody
             </a>
           </h3>
         </article>
         <article
           className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <div
             className="small-movie-card__image"
           >
             <img
-              alt="The Shawshank Redemption"
+              alt="Battlefield Earth: A Saga of the Year 3000"
               height={175}
               src="img/pulp-fiction.jpg"
               width={280}
@@ -408,32 +413,9 @@ exports[`Should main-screen render correctly 1`] = `
             <a
               className="small-movie-card__link"
               href="#"
+              onClick={[Function]}
             >
-              The Shawshank Redemption
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="Schindler's List"
-              height={175}
-              src="img/pulp-fiction.jpg"
-              width={280}
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="#"
-            >
-              Schindler's List
+              Battlefield Earth: A Saga of the Year 3000
             </a>
           </h3>
         </article>
@@ -483,6 +465,6 @@ exports[`Should main-screen render correctly 1`] = `
         </p>
       </div>
     </footer>
-  </div>
-</div>
+  </div>,
+]
 `;

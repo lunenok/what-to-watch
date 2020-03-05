@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import MainPage from "./main-screen.jsx";
+import MovieList from "./movie-list.jsx";
 
 const movieTestList = [
   {
@@ -19,19 +19,11 @@ const movieTestList = [
   }
 ];
 
-const promoFilmTest = {
-  filmName: `The Wizard of Oz`,
-  filmGenre: `Adventure`,
-  filmYear: 1939
-};
-
-
-it(`Should main-screen render correctly`, () => {
+it(`Should movie list render correctly`, () => {
   const tree = renderer
     .create(
-        <MainPage
-          promoFilm={promoFilmTest}
-          movieList={movieTestList}
+        <MovieList
+          movies={movieTestList}
           onMovieTitleClick={() => {}}
         />
     )

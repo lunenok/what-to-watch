@@ -1,28 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
+import MovieList from "./../movie-list/movie-list.jsx";
 
-const createMoviesCardTemplate = (moviesList, onMovieTitleClick) => {
-  return moviesList
-  .map((movie, i) => {
-    return (
-      <article key={i} className="small-movie-card catalog__movies-card">
-        <div className="small-movie-card__image">
-          <img src="img/pulp-fiction.jpg" alt={movie} width={280} height={175} />
-        </div>
-        <h3 className="small-movie-card__title">
-          <a className="small-movie-card__link" href="#" onClick={onMovieTitleClick}>{movie}</a>
-        </h3>
-      </article>
-    );
-  });
-};
 
-const MainPage = ({promoFilm, filmList, onMovieTitleClick}) => {
+const MainPage = ({promoFilm, movieList, onMovieTitleClick}) => {
 
   const {filmName, filmGenre, filmYear} = promoFilm;
 
+
   return (
-    <div>
+    <React.Fragment>
       <div className="visually-hidden">
         {/* inject:svg */}<svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"><symbol id="add" viewBox="0 0 19 20">
           {/* Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch */}
@@ -131,11 +118,10 @@ const MainPage = ({promoFilm, filmList, onMovieTitleClick}) => {
               <a href="#" className="catalog__genres-link">Thrillers</a>
             </li>
           </ul>
-          <div className="catalog__movies-list">
-            {createMoviesCardTemplate(filmList, onMovieTitleClick)}
-
-
-          </div>
+          <MovieList
+            movies={movieList}
+            onMovieTitleClick={onMovieTitleClick}
+          />
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
           </div>
@@ -153,18 +139,24 @@ const MainPage = ({promoFilm, filmList, onMovieTitleClick}) => {
           </div>
         </footer>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 
 MainPage.propTypes = {
-  filmList: PropTypes.arrayOf(PropTypes.string).isRequired,
   promoFilm: PropTypes.exact({
     filmName: PropTypes.string.isRequired,
     filmGenre: PropTypes.string.isRequired,
     filmYear: PropTypes.number.isRequired
   }).isRequired,
-  onMovieTitleClick: PropTypes.func
+  movieList: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    img: PropTypes.string.isRequired
+  })).isRequired,
+  onMovieTitleClick: PropTypes.func.isRequired
 };
 
 export default MainPage;
