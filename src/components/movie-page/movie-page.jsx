@@ -7,7 +7,7 @@ class MoviePage extends PureComponent {
   }
 
   render() {
-    const {title, genre, year, rating, reviews, director, starring, description} = this.props.curentMovie;
+    const {title, genre, year, rating, reviews, director, starring, description} = this.props.currentMovie;
     const formatedRating = rating.toString().replace(`.`, `,`);
 
     return (
@@ -175,7 +175,7 @@ class MoviePage extends PureComponent {
 }
 
 MoviePage.propTypes = {
-  curentMovie: PropTypes.shape({
+  currentMovie: PropTypes.shape({
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,

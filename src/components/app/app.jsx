@@ -7,24 +7,24 @@ import MoviePage from "./../movie-page/movie-page.jsx";
 class App extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {curentMovie: null};
+    this.state = {currentMovie: null};
     this._renderMovieScreen = this._renderMovieScreen.bind(this);
     this._setMovie = this._setMovie.bind(this);
   }
 
   _setMovie(movie) {
     this.setState({
-      curentMovie: movie
+      currentMovie: movie
     });
   }
 
   _renderMovieScreen() {
-    const clickedMovie = this.state;
+    const {currentMovie} = this.state;
 
-    if (clickedMovie.curentMovie) {
+    if (currentMovie) {
       return (
         <MoviePage
-          curentMovie={clickedMovie.curentMovie}
+          currentMovie={currentMovie}
         />
       );
     }
@@ -44,10 +44,11 @@ class App extends PureComponent {
         <Switch>
           <Route exact path="/">
             {this._renderMovieScreen()}
+            {/* Тут сделать навлинки */}
           </Route>
-          <Route exact path="/movie-page">
+          <Route path="/movie-page/">
             <MoviePage
-              curentMovie={this.props.movieList[2]}
+              currentMovie={this.props.movieList[1]}
             />
           </Route>
         </Switch>

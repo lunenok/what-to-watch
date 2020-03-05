@@ -4,17 +4,27 @@ import App from "./app.jsx";
 
 const movieTestList = [
   {
-    id: 1,
-    title: `Bohemian Rhapsody`,
+    id: 3,
+    title: `Epic Movie`,
     genre: `Drama`,
     year: 2019,
+    rating: 2.9,
+    reviews: 55,
+    director: `Nikita Mikhalkov`,
+    starring: `Edward Norton, Jude Law`,
+    description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
     img: `bohemian-rhapsody.jpg`
   },
   {
-    id: 2,
-    title: `Battlefield Earth: A Saga of the Year 3000`,
+    id: 4,
+    title: `Santa Claus Conquers the Martians`,
     genre: `Drama`,
     year: 2019,
+    rating: 6.9,
+    reviews: 65,
+    director: `Nikita Mikhalkov`,
+    starring: `Edward Norton, Jude Law`,
+    description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
     img: `bohemian-rhapsody.jpg`
   }
 ];

@@ -18,7 +18,7 @@ const testMovie = {
 it(`Should movie card render correctly`, () => {
   const tree = renderer
     .create(<MoviePage
-      curentMovie={testMovie}
+      currentMovie={testMovie}
     />)
     .toJSON();
 

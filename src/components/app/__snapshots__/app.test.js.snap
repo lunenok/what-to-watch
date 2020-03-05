@@ -375,7 +375,7 @@ Array [
             onClick={[Function]}
           >
             <img
-              alt="Bohemian Rhapsody"
+              alt="Epic Movie"
               height={175}
               src="img/pulp-fiction.jpg"
               width={280}
@@ -389,7 +389,7 @@ Array [
               href="#"
               onClick={[Function]}
             >
-              Bohemian Rhapsody
+              Epic Movie
             </a>
           </h3>
         </article>
@@ -403,7 +403,7 @@ Array [
             onClick={[Function]}
           >
             <img
-              alt="Battlefield Earth: A Saga of the Year 3000"
+              alt="Santa Claus Conquers the Martians"
               height={175}
               src="img/pulp-fiction.jpg"
               width={280}
@@ -417,7 +417,7 @@ Array [
               href="#"
               onClick={[Function]}
             >
-              Battlefield Earth: A Saga of the Year 3000
+              Santa Claus Conquers the Martians
             </a>
           </h3>
         </article>
