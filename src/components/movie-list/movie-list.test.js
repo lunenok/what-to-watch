@@ -24,7 +24,7 @@ it(`Should movie list render correctly`, () => {
     .create(
         <MovieList
           movies={movieTestList}
-          onMovieTitleClick={() => {}}
+          onMovieClick={() => {}}
         />
     )
     .toJSON();

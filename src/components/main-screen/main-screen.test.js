@@ -32,7 +32,7 @@ it(`Should main-screen render correctly`, () => {
         <MainPage
           promoFilm={promoFilmTest}
           movieList={movieTestList}
-          onMovieTitleClick={() => {}}
+          onMovieClick={() => {}}
         />
     )
     .toJSON();

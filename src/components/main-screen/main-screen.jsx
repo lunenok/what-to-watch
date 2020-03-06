@@ -3,10 +3,9 @@ import PropTypes from "prop-types";
 import MovieList from "./../movie-list/movie-list.jsx";
 
 
-const MainPage = ({promoFilm, movieList, onMovieTitleClick}) => {
+const MainPage = ({promoFilm, movieList, onMovieClick}) => {
 
   const {filmName, filmGenre, filmYear} = promoFilm;
-
 
   return (
     <React.Fragment>
@@ -120,7 +119,7 @@ const MainPage = ({promoFilm, movieList, onMovieTitleClick}) => {
           </ul>
           <MovieList
             movies={movieList}
-            onMovieTitleClick={onMovieTitleClick}
+            onMovieClick={onMovieClick}
           />
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
@@ -156,7 +155,7 @@ MainPage.propTypes = {
     year: PropTypes.number.isRequired,
     img: PropTypes.string.isRequired
   })).isRequired,
-  onMovieTitleClick: PropTypes.func.isRequired
+  onMovieClick: PropTypes.func.isRequired
 };
 
 export default MainPage;
