@@ -14,10 +14,10 @@ const testMovie = {
 
 it(`Should video play`, () => {
   const {videoSrc, imgSrc} = testMovie;
-  const moviePlayer = mount(<VideoPlayer videoSrc={videoSrc} imgSrc={imgSrc}/>)
+  const moviePlayer = mount(<VideoPlayer videoSrc={videoSrc} imgSrc={imgSrc}/>);
   expect(moviePlayer.state(`isPlaying`)).toBe(true);
 
   const componentWillUnmount = jest.spyOn(moviePlayer.instance(), `componentWillUnmount`);
   moviePlayer.unmount();
   expect(componentWillUnmount).toHaveBeenCalled();
-})
+});
