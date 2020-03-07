@@ -5,7 +5,9 @@ import MovieCard from "./../movie-card/movie-card.jsx";
 class MovieList extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {activeCard: null};
+    this.state = {
+      activeCard: null
+    };
     this._onCardMouseHoverOn = this._onCardMouseHoverOn.bind(this);
     this._onCardMouseHoverOff = this._onCardMouseHoverOff.bind(this);
   }
@@ -24,6 +26,7 @@ class MovieList extends PureComponent {
 
   render() {
     const {movies, onMovieClick} = this.props;
+    const {activeCard} = this.state;
     return (
       <div className="catalog__movies-list">
         {movies.map((movie) =>
@@ -33,6 +36,7 @@ class MovieList extends PureComponent {
             onMovieClick={onMovieClick}
             onCardMouseHoverOn={this._onCardMouseHoverOn}
             onCardMouseHoverOff={this._onCardMouseHoverOff}
+            isPlaying={activeCard === movie}
           />
         )}
       </div>
@@ -43,7 +47,11 @@ class MovieList extends PureComponent {
 MovieList.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    imgSrc: PropTypes.string.isRequired,
+    videoSrc: PropTypes.string.isRequired
   })).isRequired,
   onMovieClick: PropTypes.func.isRequired
 };

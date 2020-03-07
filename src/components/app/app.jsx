@@ -69,7 +69,8 @@ App.propTypes = {
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
-    img: PropTypes.string.isRequired
+    imgSrc: PropTypes.string.isRequired,
+    videoSrc: PropTypes.string.isRequired
   }))
 };
 

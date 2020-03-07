@@ -9,7 +9,8 @@ export const MovieList = [
     director: `Nikita Mikhalkov`,
     starring: `Edward Norton, Jude Law`,
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    img: `bohemian-rhapsody.jpg`
+    imgSrc: `bohemian-rhapsody.jpg`,
+    videoSrc: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
   },
   {
     id: 2,
@@ -21,7 +22,8 @@ export const MovieList = [
     director: `Nikita Mikhalkov`,
     starring: `Edward Norton, Jude Law`,
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    img: `bohemian-rhapsody.jpg`
+    imgSrc: `dardjeeling-limited.jpg`,
+    videoSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
   },
   {
     id: 3,
@@ -33,7 +35,8 @@ export const MovieList = [
     director: `Nikita Mikhalkov`,
     starring: `Edward Norton, Jude Law`,
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    img: `bohemian-rhapsody.jpg`
+    imgSrc: `shutter-island.jpg`,
+    videoSrc: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
   },
   {
     id: 4,
@@ -45,7 +48,8 @@ export const MovieList = [
     director: `Nikita Mikhalkov`,
     starring: `Edward Norton, Jude Law`,
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    img: `bohemian-rhapsody.jpg`
+    imgSrc: `mindhunter.jpg`,
+    videoSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
   },
   {
     id: 5,
@@ -57,7 +61,8 @@ export const MovieList = [
     director: `Nikita Mikhalkov`,
     starring: `Edward Norton, Jude Law`,
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    img: `bohemian-rhapsody.jpg`
+    imgSrc: `snatch.jpg`,
+    videoSrc: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
   },
   {
     id: 6,
@@ -69,7 +74,8 @@ export const MovieList = [
     director: `Nikita Mikhalkov`,
     starring: `Edward Norton, Jude Law`,
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    img: `bohemian-rhapsody.jpg`
+    imgSrc: `orlando.jpg`,
+    videoSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
   },
   {
     id: 7,
@@ -81,7 +87,8 @@ export const MovieList = [
     director: `Nikita Mikhalkov`,
     starring: `Edward Norton, Jude Law`,
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    img: `bohemian-rhapsody.jpg`
+    imgSrc: `moonrise-kingdom.jpg`,
+    videoSrc: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
   },
   {
     id: 8,
@@ -93,7 +100,8 @@ export const MovieList = [
     director: `Nikita Mikhalkov`,
     starring: `Edward Norton, Jude Law`,
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    img: `bohemian-rhapsody.jpg`
+    imgSrc: `war-of-the-worlds.jpg`,
+    videoSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
   }
 ];
 

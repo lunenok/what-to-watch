@@ -16,7 +16,7 @@ exports[`Should movie list render correctly 1`] = `
       <img
         alt="Bohemian Rhapsody"
         height={175}
-        src="img/pulp-fiction.jpg"
+        src="img/war-of-the-worlds.jpg"
         width={280}
       />
     </div>
@@ -44,7 +44,7 @@ exports[`Should movie list render correctly 1`] = `
       <img
         alt="Battlefield Earth: A Saga of the Year 3000"
         height={175}
-        src="img/pulp-fiction.jpg"
+        src="img/war-of-the-worlds.jpg"
         width={280}
       />
     </div>

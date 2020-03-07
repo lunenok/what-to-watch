@@ -13,7 +13,7 @@ exports[`Should movie card render correctly 1`] = `
     <img
       alt="Bohemian Rhapsody"
       height={175}
-      src="img/pulp-fiction.jpg"
+      src="img/bohemian-rhapsody.jpg"
       width={280}
     />
   </div>

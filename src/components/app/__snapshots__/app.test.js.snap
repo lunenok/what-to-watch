@@ -377,7 +377,7 @@ Array [
             <img
               alt="Epic Movie"
               height={175}
-              src="img/pulp-fiction.jpg"
+              src="img/war-of-the-worlds.jpg"
               width={280}
             />
           </div>
@@ -405,7 +405,7 @@ Array [
             <img
               alt="Santa Claus Conquers the Martians"
               height={175}
-              src="img/pulp-fiction.jpg"
+              src="img/war-of-the-worlds.jpg"
               width={280}
             />
           </div>

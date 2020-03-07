@@ -377,7 +377,7 @@ Array [
             <img
               alt="Bohemian Rhapsody"
               height={175}
-              src="img/pulp-fiction.jpg"
+              src="img/war-of-the-worlds.jpg"
               width={280}
             />
           </div>
@@ -405,7 +405,7 @@ Array [
             <img
               alt="Battlefield Earth: A Saga of the Year 3000"
               height={175}
-              src="img/pulp-fiction.jpg"
+              src="img/war-of-the-worlds.jpg"
               width={280}
             />
           </div>

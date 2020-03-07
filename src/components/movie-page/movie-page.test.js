@@ -11,8 +11,7 @@ const testMovie = {
   reviews: 45,
   director: `Nikita Mikhalkov`,
   starring: `Jude Law`,
-  description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort.`,
-  img: `bohemian-rhapsody.jpg`
+  description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort.`
 };
 
 it(`Should movie card render correctly`, () => {

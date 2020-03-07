@@ -8,7 +8,8 @@ const testMovie = {
   title: `Bohemian Rhapsody`,
   genre: `Drama`,
   year: 2019,
-  img: `bohemian-rhapsody.jpg`
+  imgSrc: `bohemian-rhapsody.jpg`,
+  videoSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
 };
 
 Enzyme.configure({
@@ -25,6 +26,7 @@ it(`Should movie title button be pressed`, () => {
         onMovieClick={onCardClick}
         onCardMouseHoverOn={() => {}}
         onCardMouseHoverOff={() => {}}
+        isPlaying={false}
       />
   );
   const movieTitleLink = movieCards.find(`.small-movie-card__link`);
@@ -43,6 +45,7 @@ it(`Handler mouse get data`, () => {
         onMovieClick={() => {}}
         onCardMouseHoverOn={onCardMouseHover}
         onCardMouseHoverOff={() => {}}
+        isPlaying={false}
       />
   );
   const movieCard = movieCards.find(`article`);
