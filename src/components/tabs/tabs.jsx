@@ -5,9 +5,7 @@ const TabNames = {
   OVERVIEW: `overview`,
   DETAILS: `details`,
   REVIEWS: `reviews`
-}
-
-
+};
 
 class Tabs extends PureComponent {
   constructor(props) {
@@ -15,18 +13,26 @@ class Tabs extends PureComponent {
 
     this.state = {
       selectedTab: TabNames.OVERVIEW
-    }
+    };
   }
 
   getActiveClass(tabName) {
-  return this.state.selectedTab === tabName ? `movie-nav__item--active` : ``;
+    return this.state.selectedTab === tabName ? `movie-nav__item--active` : ``;
   }
 
+  // Переписать и использовать
+  // getDuration(duration) {
+  //   const hours = Math.floor(duration / 60);
+  //   const minutes = duration % 60;
+  //   const time = {hours: hours, minutes: minutes};
+  //   return time;
+  // }
+
   render() {
-    const {genre, rating, reviews, director, starring, description} = this.props.currentMovie;
+    const {genre, rating, reviews, director, starring, description, textReviews, duration, year} = this.props.currentMovie;
     const formatedRating = rating.toString().replace(`.`, `,`);
     const {selectedTab} = this.state;
-    console.log(selectedTab);
+
     return (
       <div className="movie-card__desc">
         <nav className="movie-nav movie-card__nav">
@@ -73,7 +79,15 @@ class Tabs extends PureComponent {
               <p>{description}</p>
               {/* <p>Gustave prides himself on providing first-class service to the hotel's guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave's lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.</p> */}
               <p className="movie-card__director"><strong>Director: {director}</strong></p>
-              <p className="movie-card__starring"><strong>Starring: {starring}</strong></p>
+              <p className="movie-card__starring">
+                <strong>
+                  Starring:
+                  {starring.map((actor) => {
+                    return actor;
+                  })
+                  .join(`, `)}
+                </strong>
+              </p>
             </div>
           </React.Fragment>
         )}
@@ -89,25 +103,17 @@ class Tabs extends PureComponent {
                 <p className="movie-card__details-item">
                   <strong className="movie-card__details-name">Starring</strong>
                   <span className="movie-card__details-value">
-                    Bill Murray, <br />
-                    Edward Norton, <br />
-                    Jude Law, <br />
-                    Willem Dafoe, <br />
-                    Saoirse Ronan, <br />
-                    Tony Revoloru, <br />
-                    Tilda Swinton, <br />
-                    Tom Wilkinson, <br />
-                    Owen Wilkinson, <br />
-                    Adrien Brody, <br />
-                    Ralph Fiennes, <br />
-                    Jeff Goldblum
+                    {starring.map((actor) => {
+                      return actor;
+                    }).
+                    join(`, \n`)}
                   </span>
                 </p>
               </div>
               <div className="movie-card__text-col">
                 <p className="movie-card__details-item">
                   <strong className="movie-card__details-name">Run Time</strong>
-                  <span className="movie-card__details-value">1h 39m</span>
+                  <span className="movie-card__details-value">{duration}</span>
                 </p>
                 <p className="movie-card__details-item">
                   <strong className="movie-card__details-name">Genre</strong>
@@ -115,7 +121,7 @@ class Tabs extends PureComponent {
                 </p>
                 <p className="movie-card__details-item">
                   <strong className="movie-card__details-name">Released</strong>
-                  <span className="movie-card__details-value">2014</span>
+                  <span className="movie-card__details-value">{year}</span>
                 </p>
               </div>
             </div>;
@@ -126,111 +132,57 @@ class Tabs extends PureComponent {
           <React.Fragment>
             <div className="movie-card__reviews movie-card__row">
               <div className="movie-card__reviews-col">
-                <div className="review">
-                  <blockquote className="review__quote">
-                    <p className="review__text">
-                      Discerning travellers and Wes Anderson fans will luxuriate in the
-                      glorious Mittel-European kitsch of one of the director's funniest and
-                      most exquisitely designed movies in years.
-                    </p>
-                    <footer className="review__details">
-                      <cite className="review__author">Kate Muir</cite>
-                      <time className="review__date" dateTime="2016-12-24">
-                        December 24, 2016
-                      </time>
-                    </footer>
-                  </blockquote>
-                  <div className="review__rating">8,9</div>
-                </div>
-                <div className="review">
-                  <blockquote className="review__quote">
-                    <p className="review__text">
-                      Anderson's films are too precious for some, but for those of us
-                      willing to lose ourselves in them, they're a delight. "The Grand
-                      Budapest Hotel" is no different, except that he has added a hint of
-                      gravitas to the mix, improving the recipe.
-                    </p>
-                    <footer className="review__details">
-                      <cite className="review__author">Bill Goodykoontz</cite>
-                      <time className="review__date" dateTime="2015-11-18">
-                        November 18, 2015
-                      </time>
-                    </footer>
-                  </blockquote>
-                  <div className="review__rating">8,0</div>
-                </div>
-                <div className="review">
-                  <blockquote className="review__quote">
-                    <p className="review__text">
-                      I didn't find it amusing, and while I can appreciate the creativity,
-                      it's an hour and 40 minutes I wish I could take back.
-                    </p>
-                    <footer className="review__details">
-                      <cite className="review__author">Amanda Greever</cite>
-                      <time className="review__date" dateTime="2015-11-18">
-                        November 18, 2015
-                      </time>
-                    </footer>
-                  </blockquote>
-                  <div className="review__rating">8,0</div>
-                </div>
+
+                {textReviews.map((review) => {
+                  const {author, date, text, reviewRating} = review;
+                  return (
+                    <div key={author} className="review">
+                      <blockquote className="review__quote">
+                        <p className="review__text">
+                          {text}
+                        </p>
+                        <footer className="review__details">
+                          <cite className="review__author">{author}</cite>
+                          <time className="review__date" dateTime={date}>
+                            {date}
+                          </time>
+                        </footer>
+                      </blockquote>
+                      <div className="review__rating">{reviewRating}</div>
+                    </div>
+                  );
+                })}
               </div>
               <div className="movie-card__reviews-col">
-                <div className="review">
-                  <blockquote className="review__quote">
-                    <p className="review__text">
-                      The mannered, madcap proceedings are often delightful, occasionally
-                      silly, and here and there, gruesome and/or heartbreaking.
-                    </p>
-                    <footer className="review__details">
-                      <cite className="review__author">Matthew Lickona</cite>
-                      <time className="review__date" dateTime="2016-12-20">
-                        December 20, 2016
-                      </time>
-                    </footer>
-                  </blockquote>
-                  <div className="review__rating">7,2</div>
-                </div>
-                <div className="review">
-                  <blockquote className="review__quote">
-                    <p className="review__text">
-                      It is certainly a magical and childlike way of storytelling, even if
-                      the content is a little more adult.
-                    </p>
-                    <footer className="review__details">
-                      <cite className="review__author">Paula Fleri-Soler</cite>
-                      <time className="review__date" dateTime="2016-12-20">
-                        December 20, 2016
-                      </time>
-                    </footer>
-                  </blockquote>
-                  <div className="review__rating">7,6</div>
-                </div>
-                <div className="review">
-                  <blockquote className="review__quote">
-                    <p className="review__text">
-                      It is certainly a magical and childlike way of storytelling, even if
-                      the content is a little more adult.
-                    </p>
-                    <footer className="review__details">
-                      <cite className="review__author">Paula Fleri-Soler</cite>
-                      <time className="review__date" dateTime="2016-12-20">
-                        December 20, 2016
-                      </time>
-                    </footer>
-                  </blockquote>
-                  <div className="review__rating">7,0</div>
-                </div>
+                {/* Здесь будето вторая колонка с отзывами */}
               </div>
             </div>;
           </React.Fragment>
         )}
 
-
       </div>
-    )
+    );
   }
 
 }
+
+Tabs.propTypes = {
+  currentMovie: PropTypes.shape({
+    genre: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    reviews: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf(PropTypes.string).isRequired,
+    description: PropTypes.string.isRequired,
+    textReviews: PropTypes.arrayOf(PropTypes.shape({
+      author: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
+      reviewRating: PropTypes.number.isRequired
+    })),
+    duration: PropTypes.number.isRequired,
+    year: PropTypes.number.isRequired
+  })
+};
 
 export default Tabs;

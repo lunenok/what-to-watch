@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import Tabs from "./../tabs/tabs.jsx"
+import Tabs from "./../tabs/tabs.jsx";
 
 class MoviePage extends PureComponent {
   constructor(props) {
@@ -8,8 +8,7 @@ class MoviePage extends PureComponent {
   }
 
   render() {
-    const {title, genre, year, rating} = this.props.currentMovie;
-    const formatedRating = rating.toString().replace(`.`, `,`);
+    const {title, genre, year} = this.props.currentMovie;
 
     return (
       <React.Fragment>
@@ -156,7 +155,7 @@ MoviePage.propTypes = {
     rating: PropTypes.number.isRequired,
     reviews: PropTypes.number.isRequired,
     director: PropTypes.string.isRequired,
-    starring: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf.isRequired,
     description: PropTypes.string.isRequired
   }).isRequired
 };

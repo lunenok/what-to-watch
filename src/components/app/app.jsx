@@ -48,7 +48,7 @@ class App extends PureComponent {
           </Route>
           <Route path="/movie-page/">
             <MoviePage
-              currentMovie={this.props.movieList[1]}
+              currentMovie={this.state.currentMovie}
             />
           </Route>
         </Switch>

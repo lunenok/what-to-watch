@@ -10,10 +10,12 @@ class MovieList extends PureComponent {
     };
     this._onCardMouseHoverOn = this._onCardMouseHoverOn.bind(this);
     this._onCardMouseHoverOff = this._onCardMouseHoverOff.bind(this);
+
+    this.timerId = null;
   }
 
   _onCardMouseHoverOn(movie) {
-    setTimeout(() => {
+    this.timerId = setTimeout(() => {
       this.setState({
         activeCard: movie
       });
@@ -24,6 +26,11 @@ class MovieList extends PureComponent {
     this.setState({
       activeCard: null
     });
+    clearTimeout(this.timerId);
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timerId);
   }
 
   render() {
