@@ -374,12 +374,12 @@ Array [
             className="small-movie-card__image"
             onClick={[Function]}
           >
-            <img
-              alt="Bohemian Rhapsody"
+            <video
               height={175}
-              src="img/war-of-the-worlds.jpg"
+              muted={true}
               width={280}
             />
+             :
           </div>
           <h3
             className="small-movie-card__title"
@@ -402,12 +402,12 @@ Array [
             className="small-movie-card__image"
             onClick={[Function]}
           >
-            <img
-              alt="Battlefield Earth: A Saga of the Year 3000"
+            <video
               height={175}
-              src="img/war-of-the-worlds.jpg"
+              muted={true}
               width={280}
             />
+             :
           </div>
           <h3
             className="small-movie-card__title"

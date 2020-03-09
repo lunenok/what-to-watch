@@ -10,7 +10,6 @@ class MovieCard extends PureComponent {
   render() {
     const {filmInfo, onMovieClick, onCardMouseHoverOn, onCardMouseHoverOff, isPlaying} = this.props;
     const {id, title, videoSrc, imgSrc} = filmInfo;
-
     return (
       <article
         key={id}
@@ -26,10 +25,7 @@ class MovieCard extends PureComponent {
             onMovieClick(filmInfo);
           }}
         >
-          {isPlaying ?
-            <VideoPlayer videoSrc={videoSrc} imgSrc={imgSrc}/> :
-            <img src={`img/` + imgSrc} alt={title} width={280} height={175} />
-          }
+          <VideoPlayer videoSrc={videoSrc} imgSrc={imgSrc} isPlaying={isPlaying}/> :
         </div>
         <h3 className="small-movie-card__title">
           <a

@@ -18,6 +18,7 @@ it(`Should video player render correctrly`, () => {
         <VideoPlayer
           videoSrc={videoSrc}
           imgSrc={imgSrc}
+          isPlaying={true}
         />, {
           createNodeMock: () => {
             return {};

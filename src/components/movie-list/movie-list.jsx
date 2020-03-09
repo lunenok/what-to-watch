@@ -13,9 +13,11 @@ class MovieList extends PureComponent {
   }
 
   _onCardMouseHoverOn(movie) {
-    this.setState({
-      activeCard: movie
-    });
+    setTimeout(() => {
+      this.setState({
+        activeCard: movie
+      });
+    }, 1000);
   }
 
   _onCardMouseHoverOff() {
