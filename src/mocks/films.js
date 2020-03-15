@@ -114,7 +114,7 @@ export const MovieList = [
   {
     id: 5,
     title: `United Passions`,
-    genre: `Drama`,
+    genre: `Comedy`,
     year: 2019,
     duration: 55,
     rating: 5.9,
@@ -142,7 +142,7 @@ export const MovieList = [
   {
     id: 6,
     title: `Howard the Duck`,
-    genre: `Drama`,
+    genre: `Comedy`,
     year: 2019,
     duration: 22,
     rating: 2.9,
@@ -170,7 +170,7 @@ export const MovieList = [
   {
     id: 7,
     title: `Jack and Jill`,
-    genre: `Drama`,
+    genre: `Comedy`,
     year: 2019,
     duration: 35,
     rating: 6.9,
@@ -198,7 +198,7 @@ export const MovieList = [
   {
     id: 8,
     title: `Cannibal Holocaust`,
-    genre: `Drama`,
+    genre: `Comedy`,
     year: 2019,
     duration: 88,
     rating: 9.9,

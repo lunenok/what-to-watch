@@ -25,6 +25,8 @@ class App extends PureComponent {
       return (
         <MoviePage
           currentMovie={currentMovie}
+          movieList={this.props.movieList}
+          onMovieClick={this._setMovie}
         />
       );
     }
