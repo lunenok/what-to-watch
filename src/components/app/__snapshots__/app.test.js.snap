@@ -374,11 +374,6 @@ Array [
             className="small-movie-card__image"
             onClick={[Function]}
           >
-            <video
-              height={175}
-              muted={true}
-              width={280}
-            />
              :
           </div>
           <h3
@@ -402,11 +397,6 @@ Array [
             className="small-movie-card__image"
             onClick={[Function]}
           >
-            <video
-              height={175}
-              muted={true}
-              width={280}
-            />
              :
           </div>
           <h3

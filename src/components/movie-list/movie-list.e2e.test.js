@@ -1,5 +1,5 @@
 import React from "react";
-import Enzyme, {shallow} from "enzyme";
+import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import MovieList from "./movie-list.jsx";
 
@@ -69,7 +69,7 @@ Enzyme.configure({
 jest.useFakeTimers();
 
 it(`Should movie start correctly in time`, () => {
-  const movieList = shallow(
+  const movieList = mount(
       <MovieList
         movies={testMovies}
         onMovieClick={()=>{}}
@@ -86,7 +86,7 @@ it(`Should movie start correctly in time`, () => {
 });
 
 it(`Should movie end correctly in time`, () => {
-  const movieList = shallow(
+  const movieList = mount(
       <MovieList
         movies={testMovies}
         onMovieClick={()=>{}}

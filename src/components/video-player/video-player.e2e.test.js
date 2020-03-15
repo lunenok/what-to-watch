@@ -7,6 +7,11 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
+window.HTMLMediaElement.prototype.load = () => { /* do nothing */ };
+window.HTMLMediaElement.prototype.play = () => { /* do nothing */ };
+window.HTMLMediaElement.prototype.pause = () => { /* do nothing */ };
+window.HTMLMediaElement.prototype.addTextTrack = () => { /* do nothing */ };
+
 const testMovie = {
   imgSrc: `bohemian-rhapsody.jpg`,
   videoSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
@@ -26,12 +31,12 @@ it(`Will confirm that video player have two states: play`, () => {
               }
             };
           }
-          return isPlaying;
+          return null;
         }
       });
 
-  moviePlayer.simulate(`play`, moviePlayer.state.isPlaying = true);
-  expect(moviePlayer.state.isPlaying).toBe(true);
+  moviePlayer.setProps({isPlaying: true});
+  expect(moviePlayer.state(`isPlaying`)).toBe(true);
 });
 
 it(`Will confirm that video player have two states: load`, () => {
@@ -52,6 +57,6 @@ it(`Will confirm that video player have two states: load`, () => {
         }
       });
 
-  moviePlayer.simulate(`load`, moviePlayer.state.isPlaying = false);
-  expect(moviePlayer.state.isPlaying).toBe(false);
+  moviePlayer.setProps({isPlaying: false});
+  expect(moviePlayer.state(`isPlaying`)).toBe(false);
 });

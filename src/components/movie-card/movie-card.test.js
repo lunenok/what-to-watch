@@ -2,6 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import MovieCard from "./movie-card.jsx";
 
+jest.mock(`../video-player/video-player`);
 const testMovie = {
   id: 1,
   title: `Bohemian Rhapsody`,
