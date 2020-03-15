@@ -25,7 +25,6 @@ class App extends PureComponent {
       return (
         <MoviePage
           currentMovie={currentMovie}
-          movieList={this.props.movieList}
           onMovieClick={this._setMovie}
         />
       );
@@ -34,7 +33,6 @@ class App extends PureComponent {
     return (
       <MainPage
         promoFilm={this.props.promoFilm}
-        movieList={this.props.movieList}
         onMovieClick={this._setMovie}
       />
     );
@@ -48,10 +46,8 @@ class App extends PureComponent {
             {this._renderMovieScreen()}
             {/* Тут сделать навлинки */}
           </Route>
-          <Route path="/movie-page/">
-            <MoviePage
-              currentMovie={this.state.currentMovie}
-            />
+          <Route path="/movie/:id">
+            <MoviePage/>
           </Route>
         </Switch>
       </BrowserRouter>

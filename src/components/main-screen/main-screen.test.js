@@ -2,6 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import MainPage from "./main-screen.jsx";
 
+jest.mock(`../video-player/video-player`);
 const movieTestList = [
   {
     id: 1,

@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import MovieCard from "./../movie-card/movie-card.jsx";
+import {NavLink} from "react-router-dom";
 
 class MovieList extends PureComponent {
   constructor(props) {
@@ -34,19 +35,19 @@ class MovieList extends PureComponent {
   }
 
   render() {
-    const {movies, onMovieClick} = this.props;
+    const {movies} = this.props;
     const {activeCard} = this.state;
     return (
       <div className="catalog__movies-list">
         {movies.map((movie) =>
-          <MovieCard
-            key={movie.id}
-            filmInfo={movie}
-            onMovieClick={onMovieClick}
-            onCardMouseHoverOn={this._onCardMouseHoverOn}
-            onCardMouseHoverOff={this._onCardMouseHoverOff}
-            isPlaying={activeCard === movie}
-          />
+          <NavLink key={movie.id} to={`/movie/${movie.id}`} className="small-movie-card catalog__movies-card" style={{color: `white`}}>
+            <MovieCard
+              filmInfo={movie}
+              onCardMouseHoverOn={this._onCardMouseHoverOn}
+              onCardMouseHoverOff={this._onCardMouseHoverOff}
+              isPlaying={activeCard === movie}
+            />
+          </NavLink>
         )}
       </div>
     );
@@ -61,8 +62,7 @@ MovieList.propTypes = {
     year: PropTypes.number.isRequired,
     imgSrc: PropTypes.string.isRequired,
     videoSrc: PropTypes.string.isRequired
-  })).isRequired,
-  onMovieClick: PropTypes.func.isRequired
+  })).isRequired
 };
 
 export default MovieList;

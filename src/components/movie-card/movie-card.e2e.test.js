@@ -1,5 +1,5 @@
 import React from "react";
-import Enzyme, {shallow} from "enzyme";
+import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import MovieCard from "./movie-card.jsx";
 
@@ -19,7 +19,7 @@ Enzyme.configure({
 it(`Should movie title button be pressed`, () => {
   const e = {preventDefault: ()=>{}};
   const onCardClick = jest.fn();
-  const movieCards = shallow(
+  const movieCards = mount(
       <MovieCard
         key={testMovie.id}
         filmInfo={testMovie}
@@ -38,7 +38,7 @@ it(`Should movie title button be pressed`, () => {
 
 it(`Handler mouse get data`, () => {
   const onCardMouseHover = jest.fn();
-  const movieCards = shallow(
+  const movieCards = mount(
       <MovieCard
         key={testMovie.id}
         filmInfo={testMovie}

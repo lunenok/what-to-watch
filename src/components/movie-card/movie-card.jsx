@@ -17,23 +17,23 @@ class MovieCard extends PureComponent {
           onCardMouseHoverOn(filmInfo);
         }}
         onMouseLeave={onCardMouseHoverOff}
-        className="small-movie-card catalog__movies-card"
+        // className="small-movie-card catalog__movies-card"
       >
         <div
           className="small-movie-card__image"
-          onClick={() => {
-            onMovieClick(filmInfo);
-          }}
+          // onClick={() => {
+          //   onMovieClick(filmInfo);
+          // }}
         >
           <VideoPlayer videoSrc={videoSrc} imgSrc={imgSrc} isPlaying={isPlaying}/> :
         </div>
         <h3 className="small-movie-card__title">
           <a
             className="small-movie-card__link" href="#"
-            onClick={(evt) => {
-              evt.preventDefault();
-              onMovieClick(filmInfo);
-            }}
+            // onClick={(evt) => {
+            //   evt.preventDefault();
+            //   onMovieClick(filmInfo);
+            // }}
           >{title}</a>
         </h3>
       </article>

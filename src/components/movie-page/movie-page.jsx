@@ -2,18 +2,34 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import Tabs from "./../tabs/tabs.jsx";
 import MovieLike from "./../movie-like/movie-like.jsx";
-import {findListOfFilmsLikeThis} from "./../../utils.js";
+import {findListOfFilmsByGenre} from "./../../utils.js";
+import {withRouter} from "react-router-dom";
+import {changeCurrentMovie} from "../../reducer";
+import {connect} from "react-redux"
+import {NavLink} from "react-router-dom";
 
 class MoviePage extends PureComponent {
   constructor(props) {
     super(props);
   }
 
-  render() {
-    const {currentMovie, movieList, onMovieClick} = this.props;
-    const {title, genre, year} = currentMovie;
-    const movieLikeThis = findListOfFilmsLikeThis(movieList, genre);
+  componentDidMount() {
+    this.props.dispatch(changeCurrentMovie(this.props.match.params.id));
+  }
 
+  componentDidUpdate(oldProps, oldState) {
+    if (this.props.match.params.id !== oldProps.match.params.id) {
+      this.props.dispatch(changeCurrentMovie(this.props.match.params.id))
+    }
+  }
+
+  render() {
+    const {currentMovie, movies} = this.props;
+    console.log(movies);
+    if (currentMovie === null) {
+      return null
+    }
+    const {title, genre, year} = currentMovie;
     return (
       <React.Fragment>
         <div className="visually-hidden">
@@ -44,20 +60,20 @@ class MoviePage extends PureComponent {
         <section className="movie-card movie-card--full">
           <div className="movie-card__hero">
             <div className="movie-card__bg">
-              <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+              <img src="/img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
             </div>
             <h1 className="visually-hidden">WTW</h1>
             <header className="page-header movie-card__head">
               <div className="logo">
-                <a href="main.html" className="logo__link">
+                <NavLink to="/" className="logo__link">
                   <span className="logo__letter logo__letter--1">W</span>
                   <span className="logo__letter logo__letter--2">T</span>
                   <span className="logo__letter logo__letter--3">W</span>
-                </a>
+                </NavLink>
               </div>
               <div className="user-block">
                 <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width={63} height={63} />
+                  <img src="/img/avatar.jpg" alt="User avatar" width={63} height={63} />
                 </div>
               </div>
             </header>
@@ -89,17 +105,14 @@ class MoviePage extends PureComponent {
           <div className="movie-card__wrap movie-card__translate-top">
             <div className="movie-card__info">
               <div className="movie-card__poster movie-card__poster--big">
-                <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width={218} height={327} />
+                <img src="/img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width={218} height={327} />
               </div>
               <Tabs currentMovie={this.props.currentMovie}/>
             </div>
           </div>
         </section>
         <div className="page-content">
-          <MovieLike
-            movieLikeThis={movieLikeThis}
-            onMovieClick={onMovieClick}
-          />
+          <MovieLike movieLikeThis={movies}/>
           <footer className="page-footer">
             <div className="logo">
               <a href="main.html" className="logo__link logo__link--light">
@@ -119,16 +132,6 @@ class MoviePage extends PureComponent {
 }
 
 MoviePage.propTypes = {
-  currentMovie: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    reviews: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
-    starring: PropTypes.arrayOf.isRequired,
-    description: PropTypes.string.isRequired
-  }).isRequired,
   onMovieClick: PropTypes.func.isRequired,
   movieLikeThis: PropTypes.shape({
     title: PropTypes.string.isRequired,
@@ -149,4 +152,9 @@ MoviePage.propTypes = {
   ).isRequired
 };
 
-export default MoviePage;
+const mapToState = (state) => ({
+  currentMovie: state.currentMovie,
+  movies: state.movies
+})
+
+export default connect(mapToState)(withRouter(MoviePage));

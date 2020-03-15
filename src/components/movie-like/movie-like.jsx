@@ -17,7 +17,7 @@ const MovieLike = ({movieLikeThis, onMovieClick}) => {
                   onMovieClick(movie);
                 }}
               >
-                <img src={`img/` + movie.imgSrc} alt={movie.title} width={280} height={175} />
+                <img src={`/img/` + movie.imgSrc} alt={movie.title} width={280} height={175} />
               </div>
               <h3 className="small-movie-card__title">
                 <a

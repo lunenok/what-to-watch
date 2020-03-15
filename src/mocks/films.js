@@ -2,7 +2,7 @@ export const MovieList = [
   {
     id: 1,
     title: `Bohemian Rhapsody`,
-    genre: `Drama`,
+    genre: `Thriller`,
     year: 2019,
     duration: 120,
     rating: 8.9,

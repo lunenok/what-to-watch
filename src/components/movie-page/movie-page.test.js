@@ -10,7 +10,7 @@ const testMovie = {
   rating: 2.9,
   reviews: 45,
   director: `Nikita Mikhalkov`,
-  starring: `Jude Law`,
+  starring: [`Jude Law`],
   description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort.`
 };
 
