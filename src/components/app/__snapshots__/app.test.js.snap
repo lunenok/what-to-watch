@@ -374,12 +374,7 @@ Array [
             className="small-movie-card__image"
             onClick={[Function]}
           >
-            <img
-              alt="Epic Movie"
-              height={175}
-              src="img/pulp-fiction.jpg"
-              width={280}
-            />
+             :
           </div>
           <h3
             className="small-movie-card__title"
@@ -402,12 +397,7 @@ Array [
             className="small-movie-card__image"
             onClick={[Function]}
           >
-            <img
-              alt="Santa Claus Conquers the Martians"
-              height={175}
-              src="img/pulp-fiction.jpg"
-              width={280}
-            />
+             :
           </div>
           <h3
             className="small-movie-card__title"

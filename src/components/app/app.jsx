@@ -48,7 +48,7 @@ class App extends PureComponent {
           </Route>
           <Route path="/movie-page/">
             <MoviePage
-              currentMovie={this.props.movieList[1]}
+              currentMovie={this.state.currentMovie}
             />
           </Route>
         </Switch>
@@ -69,7 +69,8 @@ App.propTypes = {
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
-    img: PropTypes.string.isRequired
+    imgSrc: PropTypes.string.isRequired,
+    videoSrc: PropTypes.string.isRequired
   }))
 };
 

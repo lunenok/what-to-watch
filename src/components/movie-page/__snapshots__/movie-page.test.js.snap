@@ -273,27 +273,27 @@ Array [
               >
                 <a
                   className="movie-nav__link"
-                  href="#"
+                  onClick={[Function]}
                 >
                   Overview
                 </a>
               </li>
               <li
-                className="movie-nav__item"
+                className="movie-nav__item "
               >
                 <a
                   className="movie-nav__link"
-                  href="#"
+                  onClick={[Function]}
                 >
                   Details
                 </a>
               </li>
               <li
-                className="movie-nav__item"
+                className="movie-nav__item "
               >
                 <a
                   className="movie-nav__link"
-                  href="#"
+                  onClick={[Function]}
                 >
                   Reviews
                 </a>
@@ -342,7 +342,7 @@ Array [
               className="movie-card__starring"
             >
               <strong>
-                Starring: 
+                Starring:
                 Jude Law
               </strong>
             </p>

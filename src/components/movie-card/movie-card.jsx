@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import VideoPlayer from "./../video-player/video-player.jsx";
 
 class MovieCard extends PureComponent {
   constructor(props) {
@@ -7,9 +8,8 @@ class MovieCard extends PureComponent {
   }
 
   render() {
-    const {filmInfo, onMovieClick, onCardMouseHoverOn, onCardMouseHoverOff} = this.props;
-    const {id, title} = filmInfo;
-
+    const {filmInfo, onMovieClick, onCardMouseHoverOn, onCardMouseHoverOff, isPlaying} = this.props;
+    const {id, title, videoSrc, imgSrc} = filmInfo;
     return (
       <article
         key={id}
@@ -25,7 +25,7 @@ class MovieCard extends PureComponent {
             onMovieClick(filmInfo);
           }}
         >
-          <img src="img/pulp-fiction.jpg" alt={title} width={280} height={175} />
+          <VideoPlayer videoSrc={videoSrc} imgSrc={imgSrc} isPlaying={isPlaying}/> :
         </div>
         <h3 className="small-movie-card__title">
           <a
@@ -44,11 +44,16 @@ class MovieCard extends PureComponent {
 MovieCard.propTypes = {
   filmInfo: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    imgSrc: PropTypes.string.isRequired,
+    videoSrc: PropTypes.string.isRequired
   }).isRequired,
   onMovieClick: PropTypes.func.isRequired,
   onCardMouseHoverOn: PropTypes.func.isRequired,
-  onCardMouseHoverOff: PropTypes.func.isRequired
+  onCardMouseHoverOff: PropTypes.func.isRequired,
+  isPlaying: PropTypes.bool.isRequired
 };
 
 export default MovieCard;
