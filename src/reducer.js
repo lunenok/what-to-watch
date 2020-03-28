@@ -1,4 +1,3 @@
-import {extend} from "./utils.js";
 import {MovieList} from "./mocks/films.js";
 
 const initialState = {
@@ -27,14 +26,10 @@ const reducer = (state = initialState, action) => {
 
   switch (action.type) {
     case ActionType.CHANGE_FILTER:
-      return extend(state, {
-        genre: action.payload
-      });
+      return {...state, genre: action.payload};
 
     case ActionType.GET_FILTERED_MOVIE_LIST:
-      return extend(state, {
-        movies: action.payload
-      });
+      return {state, movies: action.payload};
 
     case ActionType.GENRE_CHANGED:
       if (action.payload === `All genres`) {

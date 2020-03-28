@@ -6,7 +6,7 @@ import GenresList from "../genres-list/genres-list.jsx";
 import {getUniqueGenres} from "./../../utils.js";
 
 
-const MainPage = ({promoFilm, movieList, onMovieClick}) => {
+const MainPage = ({promoFilm, movieList}) => {
 
   const {filmName, filmGenre, filmYear} = promoFilm;
   const uniqueGenres = getUniqueGenres(movieList);
@@ -94,7 +94,6 @@ const MainPage = ({promoFilm, movieList, onMovieClick}) => {
           />
           <MovieList
             movies={movieList}
-            // onMovieClick={onMovieClick}
           />
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
@@ -131,13 +130,10 @@ MainPage.propTypes = {
     imgSrc: PropTypes.string.isRequired,
     videoSrc: PropTypes.string.isRequired
   })).isRequired,
-  onMovieClick: PropTypes.func.isRequired
 };
 
 const mapToState = (state) => ({
   movieList: state.movies
-})
+});
 
 export default connect(mapToState)(MainPage);
-
-

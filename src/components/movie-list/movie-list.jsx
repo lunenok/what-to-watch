@@ -2,6 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import MovieCard from "./../movie-card/movie-card.jsx";
 import {NavLink} from "react-router-dom";
+import {connect} from "react-redux";
 
 class MovieList extends PureComponent {
   constructor(props) {
@@ -40,7 +41,7 @@ class MovieList extends PureComponent {
     return (
       <div className="catalog__movies-list">
         {movies.map((movie) =>
-          <NavLink key={movie.id} to={`/movie/${movie.id}`} className="small-movie-card catalog__movies-card" style={{color: `white`}}>
+          <NavLink key={movie.id} to={`/movie/${movie.id}`} className="small-movie-card catalog__movies-card" style={{color: `#c9b37e`}}>
             <MovieCard
               filmInfo={movie}
               onCardMouseHoverOn={this._onCardMouseHoverOn}

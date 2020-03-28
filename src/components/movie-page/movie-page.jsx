@@ -2,10 +2,9 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import Tabs from "./../tabs/tabs.jsx";
 import MovieLike from "./../movie-like/movie-like.jsx";
-import {findListOfFilmsByGenre} from "./../../utils.js";
 import {withRouter} from "react-router-dom";
 import {changeCurrentMovie} from "../../reducer";
-import {connect} from "react-redux"
+import {connect} from "react-redux";
 import {NavLink} from "react-router-dom";
 
 class MoviePage extends PureComponent {
@@ -19,15 +18,14 @@ class MoviePage extends PureComponent {
 
   componentDidUpdate(oldProps, oldState) {
     if (this.props.match.params.id !== oldProps.match.params.id) {
-      this.props.dispatch(changeCurrentMovie(this.props.match.params.id))
+      this.props.dispatch(changeCurrentMovie(this.props.match.params.id));
     }
   }
 
   render() {
     const {currentMovie, movies} = this.props;
-    console.log(movies);
     if (currentMovie === null) {
-      return null
+      return null;
     }
     const {title, genre, year} = currentMovie;
     return (
@@ -132,29 +130,24 @@ class MoviePage extends PureComponent {
 }
 
 MoviePage.propTypes = {
-  onMovieClick: PropTypes.func.isRequired,
-  movieLikeThis: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    reviews: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
-    starring: PropTypes.arrayOf.isRequired,
-    description: PropTypes.string.isRequired
-  }).isRequired,
-  movieList: PropTypes.arrayOf(
+  movies: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
-        imgSrc: PropTypes.string.isRequired
+        genre: PropTypes.string.isRequired,
+        year: PropTypes.number.isRequired,
+        rating: PropTypes.number.isRequired,
+        reviews: PropTypes.number.isRequired,
+        director: PropTypes.string.isRequired,
+        starring: PropTypes.arrayOf.isRequired,
+        description: PropTypes.string.isRequired
       }).isRequired
-  ).isRequired
+  ).isRequired,
+  dispatch: PropTypes.func
 };
 
 const mapToState = (state) => ({
   currentMovie: state.currentMovie,
   movies: state.movies
-})
+});
 
 export default connect(mapToState)(withRouter(MoviePage));

@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {NavLink} from "react-router-dom";
 
-const MovieLike = ({movieLikeThis, onMovieClick}) => {
+const MovieLike = ({movieLikeThis}) => {
 
   return (
     <section className="catalog catalog--like-this">
@@ -10,28 +11,14 @@ const MovieLike = ({movieLikeThis, onMovieClick}) => {
 
         {movieLikeThis.map((movie) => {
           return (
-            <article key={movie.id} className="small-movie-card catalog__movies-card">
-              <div
-                className="small-movie-card__image"
-                onClick={() => {
-                  onMovieClick(movie);
-                }}
-              >
+            <NavLink key={movie.id} to={`/movie/${movie.id}`} className="small-movie-card catalog__movies-card" style={{color: `#c9b37e`}}>
+              <div className="small-movie-card__image">
                 <img src={`/img/` + movie.imgSrc} alt={movie.title} width={280} height={175} />
               </div>
               <h3 className="small-movie-card__title">
-                <a
-                  className="small-movie-card__link"
-                  href="movie-page.html"
-                  onClick={(evt) => {
-                    evt.preventDefault();
-                    onMovieClick(movie);
-                  }}
-                >
-                  {movie.title}
-                </a>
+                <a className="small-movie-card__link" href="#">{movie.title}</a>
               </h3>
-            </article>
+            </NavLink>
           );
         })};
       </div>
@@ -47,7 +34,6 @@ MovieLike.propTypes = {
         imgSrc: PropTypes.string.isRequired
       }).isRequired
   ).isRequired,
-  onMovieClick: PropTypes.func.isRequired
 };
 
 export default MovieLike;
