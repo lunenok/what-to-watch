@@ -3,12 +3,16 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {changeGenre} from "../../reducer.js";
 
-const GenresList = ({uniqueGenres, dispatch}) => {
+const GenresList = ({uniqueGenres, dispatch, activeGenre}) => {
+
   return (
     <ul className="catalog__genres-list">
       {uniqueGenres.map((genre) => {
         return (
-          <li key={genre} className="catalog__genres-item catalog__genres-item--active">
+          <li
+            key={genre}
+            className={`catalog__genres-item + ${activeGenre === genre ? `catalog__genres-item--active` : ``}`}
+          >
             <a href="#" className="catalog__genres-link" onClick={() => dispatch(changeGenre(genre))}>
               {genre}
             </a>
@@ -21,8 +25,12 @@ const GenresList = ({uniqueGenres, dispatch}) => {
 
 GenresList.propTypes = {
   uniqueGenres: PropTypes.array,
-  dispatch: PropTypes.func
+  dispatch: PropTypes.func,
+  activeGenre: PropTypes.string.isRequired
 };
 
-export default connect()(GenresList);
+const mapToState = (state) => ({
+  activeGenre: state.genre
+});
 
+export default connect(mapToState)(GenresList);

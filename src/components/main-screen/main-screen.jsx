@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import MovieList from "./../movie-list/movie-list.jsx";
-import {connect} from "react-redux";
 import GenresList from "../genres-list/genres-list.jsx";
+import ShowMore from "../show-more/show-more.jsx";
 import {getUniqueGenres} from "./../../utils.js";
+import {connect} from "react-redux";
 
-
-const MainPage = ({promoFilm, movieList}) => {
+const MainPage = ({promoFilm, movieList, currentGenreCount, shownCount}) => {
 
   const {filmName, filmGenre, filmYear} = promoFilm;
   const uniqueGenres = getUniqueGenres(movieList);
@@ -89,15 +89,9 @@ const MainPage = ({promoFilm, movieList}) => {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <GenresList
-            uniqueGenres={uniqueGenres}
-          />
-          <MovieList
-            movies={movieList}
-          />
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <GenresList uniqueGenres={uniqueGenres}/>
+          <MovieList/>
+          {shownCount <= currentGenreCount ? <ShowMore/> : null}
         </section>
         <footer className="page-footer">
           <div className="logo">
@@ -130,10 +124,13 @@ MainPage.propTypes = {
     imgSrc: PropTypes.string.isRequired,
     videoSrc: PropTypes.string.isRequired
   })).isRequired,
+  shownCount: PropTypes.number.isRequired,
+  currentGenreCount: PropTypes.number.isRequired
 };
 
 const mapToState = (state) => ({
-  movieList: state.movies
+  shownCount: state.shownCount,
+  currentGenreCount: state.currentGenreCount
 });
 
 export default connect(mapToState)(MainPage);

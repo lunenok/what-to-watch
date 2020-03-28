@@ -262,21 +262,23 @@ Array [
         className="catalog__genres-list"
       >
         <li
-          className="catalog__genres-item catalog__genres-item--active"
+          className="catalog__genres-item + catalog__genres-item--active"
         >
           <a
             className="catalog__genres-link"
             href="#"
+            onClick={[Function]}
           >
             All genres
           </a>
         </li>
         <li
-          className="catalog__genres-item catalog__genres-item--active"
+          className="catalog__genres-item + "
         >
           <a
             className="catalog__genres-link"
             href="#"
+            onClick={[Function]}
           >
             Drama
           </a>
@@ -285,52 +287,70 @@ Array [
       <div
         className="catalog__movies-list"
       >
-        <article
+        <a
+          aria-current={null}
           className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
+          href="/movie/3"
+          onClick={[Function]}
+          style={
+            Object {
+              "color": "#c9b37e",
+            }
+          }
         >
-          <div
-            className="small-movie-card__image"
-            onClick={[Function]}
+          <article
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
           >
-             :
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="#"
-              onClick={[Function]}
+            <div
+              className="small-movie-card__image"
             >
-              Epic Movie
-            </a>
-          </h3>
-        </article>
-        <article
+               :
+            </div>
+            <h3
+              className="small-movie-card__title"
+            >
+              <a
+                className="small-movie-card__link"
+                href="#"
+              >
+                Epic Movie
+              </a>
+            </h3>
+          </article>
+        </a>
+        <a
+          aria-current={null}
           className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
+          href="/movie/4"
+          onClick={[Function]}
+          style={
+            Object {
+              "color": "#c9b37e",
+            }
+          }
         >
-          <div
-            className="small-movie-card__image"
-            onClick={[Function]}
+          <article
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
           >
-             :
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="#"
-              onClick={[Function]}
+            <div
+              className="small-movie-card__image"
             >
-              Santa Claus Conquers the Martians
-            </a>
-          </h3>
-        </article>
+               :
+            </div>
+            <h3
+              className="small-movie-card__title"
+            >
+              <a
+                className="small-movie-card__link"
+                href="#"
+              >
+                Santa Claus Conquers the Martians
+              </a>
+            </h3>
+          </article>
+        </a>
       </div>
       <div
         className="catalog__more"

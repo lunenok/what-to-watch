@@ -20,6 +20,7 @@ class App extends PureComponent {
 
   _renderMovieScreen() {
     const {currentMovie} = this.state;
+    const {movieList} = this.props;
 
     if (currentMovie) {
       return (
@@ -34,6 +35,7 @@ class App extends PureComponent {
       <MainPage
         promoFilm={this.props.promoFilm}
         onMovieClick={this._setMovie}
+        movieList={movieList}
       />
     );
   }

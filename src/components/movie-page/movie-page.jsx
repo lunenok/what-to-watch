@@ -6,6 +6,7 @@ import {withRouter} from "react-router-dom";
 import {changeCurrentMovie} from "../../reducer";
 import {connect} from "react-redux";
 import {NavLink} from "react-router-dom";
+import {resetStore} from "../../reducer.js";
 
 class MoviePage extends PureComponent {
   constructor(props) {
@@ -16,14 +17,14 @@ class MoviePage extends PureComponent {
     this.props.dispatch(changeCurrentMovie(this.props.match.params.id));
   }
 
-  componentDidUpdate(oldProps, oldState) {
+  componentDidUpdate(oldProps) {
     if (this.props.match.params.id !== oldProps.match.params.id) {
       this.props.dispatch(changeCurrentMovie(this.props.match.params.id));
     }
   }
 
   render() {
-    const {currentMovie, movies} = this.props;
+    const {currentMovie, movies, dispatch} = this.props;
     if (currentMovie === null) {
       return null;
     }
@@ -63,7 +64,7 @@ class MoviePage extends PureComponent {
             <h1 className="visually-hidden">WTW</h1>
             <header className="page-header movie-card__head">
               <div className="logo">
-                <NavLink to="/" className="logo__link">
+                <NavLink to="/" className="logo__link" onClick={() => dispatch(resetStore())}>
                   <span className="logo__letter logo__letter--1">W</span>
                   <span className="logo__letter logo__letter--2">T</span>
                   <span className="logo__letter logo__letter--3">W</span>
@@ -142,7 +143,13 @@ MoviePage.propTypes = {
         description: PropTypes.string.isRequired
       }).isRequired
   ).isRequired,
-  dispatch: PropTypes.func
+  currentMovie: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired
+  }),
+  dispatch: PropTypes.func,
+  match: PropTypes.object // Правильно?
 };
 
 const mapToState = (state) => ({

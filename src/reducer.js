@@ -1,15 +1,21 @@
 import {MovieList} from "./mocks/films.js";
 
+const DEFAULT_SHOW_NUBMER = 8;
+const totalMovieListLenght = MovieList.length;
+
 const initialState = {
   genre: `All genres`,
   currentMovie: null,
-  movies: MovieList
+  movies: MovieList,
+  currentGenreCount: totalMovieListLenght,
+  shownCount: DEFAULT_SHOW_NUBMER,
 }
 
 const ActionType = {
-  CHANGE_FILTER: `CHANGE_FILTER`,
   GENRE_CHANGED: `GENRE_CHANGED`,
-  CURRENT_MOVIE_CHANGED: `CURRENT_MOVIE_CHANGED`
+  CURRENT_MOVIE_CHANGED: `CURRENT_MOVIE_CHANGED`,
+  RESET_STORE: `RESET_STORE`,
+  SHOW_MORE: `SHOW_MORE`
 }
 
 const changeGenre = (genre) => ({
@@ -22,35 +28,46 @@ const changeCurrentMovie = (id) => ({
   payload: id
 })
 
+const changeFilmsCount = (count) => ({
+  type: ActionType.SHOW_MORE,
+  payload: count
+})
+
+const resetStore = () => ({
+  type: ActionType.RESET_STORE
+})
+
 const reducer = (state = initialState, action) => {
 
   switch (action.type) {
-    case ActionType.CHANGE_FILTER:
-      return {...state, genre: action.payload};
-
-    case ActionType.GET_FILTERED_MOVIE_LIST:
-      return {state, movies: action.payload};
-
     case ActionType.GENRE_CHANGED:
       if (action.payload === `All genres`) {
-        return {...state, movies: MovieList}
+        return {...state, movies: MovieList, genre: `All genres`, shownCount: DEFAULT_SHOW_NUBMER, currentGenreCount: totalMovieListLenght}
       }
 
-      return {...state, movies: MovieList.filter((movie) =>
+      const genreMovieList = MovieList.filter((movie) =>
         movie.genre === action.payload
-      )};
+      )
+
+      return {...state, movies: genreMovieList, genre: action.payload, currentGenreCount: genreMovieList.length, shownCount: DEFAULT_SHOW_NUBMER};
 
     case ActionType.CURRENT_MOVIE_CHANGED:
-      const m = MovieList.find(movie =>
+      const currentMovie = MovieList.find(movie =>
         movie.id == action.payload
       )
       const movieList = MovieList.filter(movie =>
-        movie.genre == m.genre
+        movie.genre == currentMovie.genre
       )
-      return {...state, currentMovie: m, movies: movieList}
+      return {...state, currentMovie: currentMovie, movies: movieList}
+
+    case ActionType.SHOW_MORE:
+      return {...state, shownCount: state.shownCount + action.payload}
+
+    case ActionType.RESET_STORE:
+      return {...state, genre: `All genres`, currentMovie: null, movies: MovieList, shownCount: DEFAULT_SHOW_NUBMER}
   }
 
   return state
 }
 
-export {reducer, ActionType, changeGenre, changeCurrentMovie};
+export {reducer, ActionType, changeGenre, changeCurrentMovie, changeFilmsCount, resetStore};

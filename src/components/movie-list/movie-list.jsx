@@ -36,11 +36,13 @@ class MovieList extends PureComponent {
   }
 
   render() {
-    const {movies} = this.props;
+    const {movies, shownCount} = this.props;
     const {activeCard} = this.state;
+
+
     return (
       <div className="catalog__movies-list">
-        {movies.map((movie) =>
+        {movies.slice(0, shownCount).map((movie) =>
           <NavLink key={movie.id} to={`/movie/${movie.id}`} className="small-movie-card catalog__movies-card" style={{color: `#c9b37e`}}>
             <MovieCard
               filmInfo={movie}
@@ -63,7 +65,13 @@ MovieList.propTypes = {
     year: PropTypes.number.isRequired,
     imgSrc: PropTypes.string.isRequired,
     videoSrc: PropTypes.string.isRequired
-  })).isRequired
+  })).isRequired,
+  shownCount: PropTypes.number.isRequired
 };
 
-export default MovieList;
+const mapToState = (state) => ({
+  movies: state.movies,
+  shownCount: state.shownCount
+});
+
+export default connect(mapToState)(MovieList);
