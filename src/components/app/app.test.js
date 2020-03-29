@@ -1,14 +1,11 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import App from "./app.jsx";
-<<<<<<< HEAD
 import {Provider} from "react-redux";
 import configureStore from 'redux-mock-store';
 
 const mockStore = configureStore([]);
 
-=======
->>>>>>> master
 jest.mock(`../video-player/video-player`);
 const movieTestList = [
   {
