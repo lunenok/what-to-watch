@@ -1,12 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import MovieList from "./movie-list.jsx";
-import {Provider} from "react-redux";
-import configureStore from 'redux-mock-store';
+import MovieLike from "./movie-like.jsx";
 
-const mockStore = configureStore([]);
-
-jest.mock(`../video-player/video-player`);
 const movieTestList = [
   {
     id: 1,
@@ -66,22 +61,12 @@ const movieTestList = [
   }
 ];
 
-it(`Should movie list render correctly`, () => {
-
-  const store = mockStore({
-    genre: `All genres`,
-    currentMovie: null,
-    movies: movieTestList
-  });
-
+it(`Should movie like-list render correctly`, () => {
   const tree = renderer
     .create(
-        <Provider store={store}>
-          <MovieList
-            movies={movieTestList}
-            onMovieClick={() => {}}
-          />
-        </Provider>
+        <MovieLike
+          movieLikeThis={movieTestList}
+        />
     )
     .toJSON();
 

@@ -1,11 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import MovieList from "./../movie-list/movie-list.jsx";
+import GenresList from "../genres-list/genres-list.jsx";
+import ShowMore from "../show-more/show-more.jsx";
+import {getUniqueGenres} from "./../../utils.js";
+import {connect} from "react-redux";
 
-
-const MainPage = ({promoFilm, movieList, onMovieClick}) => {
+const MainPage = ({promoFilm, movieList, currentGenreCount, shownCount}) => {
 
   const {filmName, filmGenre, filmYear} = promoFilm;
+  const uniqueGenres = getUniqueGenres(movieList);
 
   return (
     <React.Fragment>
@@ -85,45 +89,9 @@ const MainPage = ({promoFilm, movieList, onMovieClick}) => {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <ul className="catalog__genres-list">
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link">All genres</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Comedies</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Crime</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Documentary</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Dramas</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Horror</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Kids &amp; Family</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Romance</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Sci-Fi</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Thrillers</a>
-            </li>
-          </ul>
-          <MovieList
-            movies={movieList}
-            onMovieClick={onMovieClick}
-          />
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <GenresList uniqueGenres={uniqueGenres}/>
+          <MovieList/>
+          {shownCount <= currentGenreCount ? <ShowMore/> : null}
         </section>
         <footer className="page-footer">
           <div className="logo">
@@ -150,13 +118,25 @@ MainPage.propTypes = {
   }).isRequired,
   movieList: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    imgSrc: PropTypes.string.isRequired,
-    videoSrc: PropTypes.string.isRequired
+    released: PropTypes.number.isRequired,
+    runTime: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    scoresCount: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf(PropTypes.string.isRequired),
+    description: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
   })).isRequired,
-  onMovieClick: PropTypes.func.isRequired
+  shownCount: PropTypes.number.isRequired,
+  currentGenreCount: PropTypes.number.isRequired
 };
 
-export default MainPage;
+const mapToState = (state) => ({
+  shownCount: state.shownCount,
+  currentGenreCount: state.currentGenreCount
+});
+
+export default connect(mapToState)(MainPage);

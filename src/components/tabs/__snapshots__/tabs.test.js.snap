@@ -61,7 +61,6 @@ exports[`Should tabs page render correctly 1`] = `
       <span
         className="movie-rating__count"
       >
-        200
          ratings
       </span>
     </p>

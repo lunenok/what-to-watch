@@ -262,165 +262,87 @@ Array [
         className="catalog__genres-list"
       >
         <li
-          className="catalog__genres-item catalog__genres-item--active"
+          className="catalog__genres-item + catalog__genres-item--active"
         >
           <a
             className="catalog__genres-link"
             href="#"
+            onClick={[Function]}
           >
             All genres
           </a>
         </li>
         <li
-          className="catalog__genres-item"
+          className="catalog__genres-item + "
         >
           <a
             className="catalog__genres-link"
             href="#"
+            onClick={[Function]}
           >
-            Comedies
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Crime
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Documentary
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Dramas
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Horror
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Kids & Family
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Romance
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Sci-Fi
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Thrillers
+            Drama
           </a>
         </li>
       </ul>
       <div
         className="catalog__movies-list"
       >
-        <article
+        <a
+          aria-current={null}
           className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
+          href="/movie/3"
+          onClick={[Function]}
+          style={
+            Object {
+              "color": "#c9b37e",
+            }
+          }
         >
-          <div
-            className="small-movie-card__image"
-            onClick={[Function]}
+          <article
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
           >
-             :
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="#"
-              onClick={[Function]}
+            <div
+              className="small-movie-card__image"
+            />
+            <h3
+              className="small-movie-card__title"
             >
-              Epic Movie
-            </a>
-          </h3>
-        </article>
-        <article
+              <a
+                className="small-movie-card__link"
+                href="#"
+              />
+            </h3>
+          </article>
+        </a>
+        <a
+          aria-current={null}
           className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
+          href="/movie/4"
+          onClick={[Function]}
+          style={
+            Object {
+              "color": "#c9b37e",
+            }
+          }
         >
-          <div
-            className="small-movie-card__image"
-            onClick={[Function]}
+          <article
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
           >
-             :
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="#"
-              onClick={[Function]}
+            <div
+              className="small-movie-card__image"
+            />
+            <h3
+              className="small-movie-card__title"
             >
-              Santa Claus Conquers the Martians
-            </a>
-          </h3>
-        </article>
-      </div>
-      <div
-        className="catalog__more"
-      >
-        <button
-          className="catalog__button"
-          type="button"
-        >
-          Show more
-        </button>
+              <a
+                className="small-movie-card__link"
+                href="#"
+              />
+            </h3>
+          </article>
+        </a>
       </div>
     </section>
     <footer

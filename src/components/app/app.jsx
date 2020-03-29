@@ -20,11 +20,13 @@ class App extends PureComponent {
 
   _renderMovieScreen() {
     const {currentMovie} = this.state;
+    const {movieList} = this.props;
 
     if (currentMovie) {
       return (
         <MoviePage
           currentMovie={currentMovie}
+          onMovieClick={this._setMovie}
         />
       );
     }
@@ -32,8 +34,8 @@ class App extends PureComponent {
     return (
       <MainPage
         promoFilm={this.props.promoFilm}
-        movieList={this.props.movieList}
         onMovieClick={this._setMovie}
+        movieList={movieList}
       />
     );
   }
@@ -46,10 +48,8 @@ class App extends PureComponent {
             {this._renderMovieScreen()}
             {/* Тут сделать навлинки */}
           </Route>
-          <Route path="/movie-page/">
-            <MoviePage
-              currentMovie={this.state.currentMovie}
-            />
+          <Route path="/movie/:id">
+            <MoviePage/>
           </Route>
         </Switch>
       </BrowserRouter>
@@ -66,12 +66,18 @@ App.propTypes = {
   }).isRequired,
   movieList: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    imgSrc: PropTypes.string.isRequired,
-    videoSrc: PropTypes.string.isRequired
-  }))
+    released: PropTypes.number.isRequired,
+    runTime: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    scoresCount: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf(PropTypes.string.isRequired),
+    description: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
+  })).isRequired
 };
 
 export default App;

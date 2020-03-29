@@ -2,12 +2,16 @@ import React from "react";
 import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import MovieList from "./movie-list.jsx";
+import {Provider} from "react-redux";
+import configureStore from 'redux-mock-store';
 
-const testMovies = [
+const mockStore = configureStore([]);
+
+const movieTestList = [
   {
     id: 1,
     title: `Bohemian Rhapsody`,
-    genre: `Drama`,
+    genre: `Thriller`,
     year: 2019,
     duration: 120,
     rating: 8.9,
@@ -22,13 +26,13 @@ const testMovies = [
         author: `Kate`,
         date: `2016-12-24`,
         text: `I didn't find it amusing`,
-        rating: 9
+        reviewRating: 9
       },
       {
         author: `Roman`,
         date: `2014-06-20`,
         text: `The mannered, madcap proceedings are often delightful, occasionally silly`,
-        rating: 3
+        reviewRating: 3
       },
     ]
   },
@@ -50,13 +54,13 @@ const testMovies = [
         author: `Kate`,
         date: `2016-12-24`,
         text: `I didn't find it amusing`,
-        rating: 9
+        reviewRating: 9
       },
       {
         author: `Roman`,
         date: `2014-06-20`,
         text: `The mannered, madcap proceedings are often delightful, occasionally silly`,
-        rating: 3
+        reviewRating: 3
       },
     ]
   }
@@ -69,11 +73,20 @@ Enzyme.configure({
 jest.useFakeTimers();
 
 it(`Should movie start correctly in time`, () => {
+
+  const store = mockStore({
+    genre: `All genres`,
+    currentMovie: null,
+    movies: movieTestList
+  });
+
   const movieList = mount(
-      <MovieList
-        movies={testMovies}
-        onMovieClick={()=>{}}
-      />
+      <Provider store={store}>
+        <MovieList
+          movies={movieTestList}
+          onMovieClick={()=>{}}
+        />
+      </Provider>
   );
 
   const movieCard = movieList.find(`MovieCard`).at(0);
@@ -86,11 +99,20 @@ it(`Should movie start correctly in time`, () => {
 });
 
 it(`Should movie end correctly in time`, () => {
+
+  const store = mockStore({
+    genre: `All genres`,
+    currentMovie: null,
+    movies: movieTestList
+  });
+
   const movieList = mount(
-      <MovieList
-        movies={testMovies}
-        onMovieClick={()=>{}}
-      />
+      <Provider store={store}>
+        <MovieList
+          movies={movieTestList}
+          onMovieClick={()=>{}}
+        />
+      </Provider>
   );
   const movieCard = movieList.find(`MovieCard`).at(0);
   movieCard.simulate(`mouseEnter`);
