@@ -17,3 +17,5 @@ ReactDOM.render(
     </Provider>,
     document.querySelector(`#root`)
 );
+
+// module5-task2
