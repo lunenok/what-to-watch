@@ -118,11 +118,17 @@ MainPage.propTypes = {
   }).isRequired,
   movieList: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    imgSrc: PropTypes.string.isRequired,
-    videoSrc: PropTypes.string.isRequired
+    released: PropTypes.number.isRequired,
+    runTime: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    scoresCount: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf(PropTypes.string.isRequired),
+    description: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
   })).isRequired,
   shownCount: PropTypes.number.isRequired,
   currentGenreCount: PropTypes.number.isRequired

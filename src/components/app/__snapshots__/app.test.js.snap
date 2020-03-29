@@ -304,18 +304,14 @@ Array [
           >
             <div
               className="small-movie-card__image"
-            >
-               :
-            </div>
+            />
             <h3
               className="small-movie-card__title"
             >
               <a
                 className="small-movie-card__link"
                 href="#"
-              >
-                Epic Movie
-              </a>
+              />
             </h3>
           </article>
         </a>
@@ -336,31 +332,17 @@ Array [
           >
             <div
               className="small-movie-card__image"
-            >
-               :
-            </div>
+            />
             <h3
               className="small-movie-card__title"
             >
               <a
                 className="small-movie-card__link"
                 href="#"
-              >
-                Santa Claus Conquers the Martians
-              </a>
+              />
             </h3>
           </article>
         </a>
-      </div>
-      <div
-        className="catalog__more"
-      >
-        <button
-          className="catalog__button"
-          type="button"
-        >
-          Show more
-        </button>
       </div>
     </section>
     <footer

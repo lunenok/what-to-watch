@@ -36,13 +36,13 @@ class MovieList extends PureComponent {
   }
 
   render() {
-    const {movies, shownCount} = this.props;
+    const {movieList, shownCount} = this.props;
     const {activeCard} = this.state;
 
 
     return (
       <div className="catalog__movies-list">
-        {movies.slice(0, shownCount).map((movie) =>
+        {movieList.slice(0, shownCount).map((movie) =>
           <NavLink key={movie.id} to={`/movie/${movie.id}`} className="small-movie-card catalog__movies-card" style={{color: `#c9b37e`}}>
             <MovieCard
               filmInfo={movie}
@@ -58,19 +58,25 @@ class MovieList extends PureComponent {
 }
 
 MovieList.propTypes = {
-  movies: PropTypes.arrayOf(PropTypes.shape({
+  movieList: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    imgSrc: PropTypes.string.isRequired,
-    videoSrc: PropTypes.string.isRequired
+    released: PropTypes.number.isRequired,
+    runTime: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    scoresCount: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf(PropTypes.string.isRequired),
+    description: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
   })).isRequired,
   shownCount: PropTypes.number.isRequired
 };
 
 const mapToState = (state) => ({
-  movies: state.movies,
+  movieList: state.movies,
   shownCount: state.shownCount
 });
 

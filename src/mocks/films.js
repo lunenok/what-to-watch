@@ -1,505 +1,505 @@
 export const MovieList = [
   {
     id: 1,
-    title: `Bohemian Rhapsody`,
+    name: `Bohemian Rhapsody`,
     genre: `Thriller`,
-    year: 2019,
-    duration: 120,
+    released: 2019,
+    runTime: 120,
     rating: 8.9,
-    reviews: 200,
+    scoresCount: 200,
     director: `Nikita Mikhalkov`,
     starring: [`Edward Norton`, `Jude Law`],
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    imgSrc: `bohemian-rhapsody.jpg`,
-    videoSrc: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    previewImage: `bohemian-rhapsody.jpg`,
+    previewVideoLink: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     textReviews: [
       {
         author: `Kate`,
         date: `2016-12-24`,
         text: `I didn't find it amusing`,
-        reviewRating: 9
+        reviewRating: 9.1
       },
       {
         author: `Roman`,
         date: `2014-06-20`,
         text: `The mannered, madcap proceedings are often delightful, occasionally silly`,
-        reviewRating: 3
+        reviewRating: 5.2
       },
     ]
   },
   {
     id: 2,
-    title: `Battlefield Earth: A Saga of the Year 3000`,
+    name: `Battlefield Earth: A Saga of the Year 3000`,
     genre: `Drama`,
-    year: 2019,
-    duration: 44,
+    released: 2019,
+    runTime: 44,
     rating: 3.9,
-    reviews: 100,
+    scoresCount: 100,
     director: `Nikita Mikhalkov`,
     starring: [`Edward Norton`, `Jude Law`],
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    imgSrc: `dardjeeling-limited.jpg`,
-    videoSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    previewImage: `dardjeeling-limited.jpg`,
+    previewVideoLink: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
     textReviews: [
       {
         author: `Kate`,
         date: `2016-12-24`,
         text: `I didn't find it amusing`,
-        reviewRating: 9
+        reviewRating: 9.1
       },
       {
         author: `Roman`,
         date: `2014-06-20`,
         text: `The mannered, madcap proceedings are often delightful, occasionally silly`,
-        reviewRating: 3
+        reviewRating: 5.2
       },
     ]
   },
   {
     id: 3,
-    title: `Epic Movie`,
+    name: `Epic Movie`,
     genre: `Drama`,
-    year: 2019,
-    duration: 142,
+    released: 2019,
+    runTime: 142,
     rating: 2.9,
-    reviews: 55,
+    scoresCount: 55,
     director: `Nikita Mikhalkov`,
     starring: [`Edward Norton`, `Jude Law`],
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    imgSrc: `shutter-island.jpg`,
-    videoSrc: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    previewImage: `shutter-island.jpg`,
+    previewVideoLink: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     textReviews: [
       {
         author: `Kate`,
         date: `2016-12-24`,
         text: `I didn't find it amusing`,
-        reviewRating: 9
+        reviewRating: 9.1
       },
       {
         author: `Roman`,
         date: `2014-06-20`,
         text: `The mannered, madcap proceedings are often delightful, occasionally silly`,
-        reviewRating: 3
+        reviewRating: 5.2
       },
     ]
   },
   {
     id: 4,
-    title: `Santa Claus Conquers the Martians`,
+    name: `Santa Claus Conquers the Martians`,
     genre: `Drama`,
-    year: 2019,
-    duration: 133,
+    released: 2019,
+    runTime: 133,
     rating: 6.9,
-    reviews: 65,
+    scoresCount: 65,
     director: `Nikita Mikhalkov`,
     starring: [`Edward Norton`, `Jude Law`],
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    imgSrc: `mindhunter.jpg`,
-    videoSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    previewImage: `mindhunter.jpg`,
+    previewVideoLink: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
     textReviews: [
       {
         author: `Kate`,
         date: `2016-12-24`,
         text: `I didn't find it amusing`,
-        reviewRating: 9
+        reviewRating: 9.1
       },
       {
         author: `Roman`,
         date: `2014-06-20`,
         text: `The mannered, madcap proceedings are often delightful, occasionally silly`,
-        reviewRating: 3
+        reviewRating: 5.2
       },
     ]
   },
   {
     id: 5,
-    title: `United Passions`,
+    name: `United Passions`,
     genre: `Comedy`,
-    year: 2019,
-    duration: 55,
+    released: 2019,
+    runTime: 55,
     rating: 5.9,
-    reviews: 90,
+    scoresCount: 90,
     director: `Nikita Mikhalkov`,
     starring: [`Edward Norton`, `Jude Law`],
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    imgSrc: `snatch.jpg`,
-    videoSrc: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    previewImage: `snatch.jpg`,
+    previewVideoLink: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     textReviews: [
       {
         author: `Kate`,
         date: `2016-12-24`,
         text: `I didn't find it amusing`,
-        reviewRating: 9
+        reviewRating: 9.1
       },
       {
         author: `Roman`,
         date: `2014-06-20`,
         text: `The mannered, madcap proceedings are often delightful, occasionally silly`,
-        reviewRating: 3
+        reviewRating: 5.2
       },
     ]
   },
   {
     id: 6,
-    title: `Howard the Duck`,
+    name: `Howard the Duck`,
     genre: `Comedy`,
-    year: 2019,
-    duration: 22,
+    released: 2019,
+    runTime: 22,
     rating: 2.9,
-    reviews: 145,
+    scoresCount: 145,
     director: `Nikita Mikhalkov`,
     starring: [`Edward Norton`, `Jude Law`],
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    imgSrc: `orlando.jpg`,
-    videoSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    previewImage: `orlando.jpg`,
+    previewVideoLink: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
     textReviews: [
       {
         author: `Kate`,
         date: `2016-12-24`,
         text: `I didn't find it amusing`,
-        reviewRating: 9
+        reviewRating: 9.1
       },
       {
         author: `Roman`,
         date: `2014-06-20`,
         text: `The mannered, madcap proceedings are often delightful, occasionally silly`,
-        reviewRating: 3
+        reviewRating: 5.2
       },
     ]
   },
   {
     id: 7,
-    title: `Jack and Jill`,
+    name: `Jack and Jill`,
     genre: `Comedy`,
-    year: 2019,
-    duration: 35,
+    released: 2019,
+    runTime: 35,
     rating: 6.9,
-    reviews: 155,
+    scoresCount: 155,
     director: `Nikita Mikhalkov`,
     starring: [`Edward Norton`, `Jude Law`],
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    imgSrc: `moonrise-kingdom.jpg`,
-    videoSrc: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    previewImage: `moonrise-kingdom.jpg`,
+    previewVideoLink: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     textReviews: [
       {
         author: `Kate`,
         date: `2016-12-24`,
         text: `I didn't find it amusing`,
-        reviewRating: 9
+        reviewRating: 9.1
       },
       {
         author: `Roman`,
         date: `2014-06-20`,
         text: `The mannered, madcap proceedings are often delightful, occasionally silly`,
-        reviewRating: 3
+        reviewRating: 5.2
       },
     ]
   },
   {
     id: 8,
-    title: `Cannibal Holocaust`,
+    name: `Cannibal Holocaust`,
     genre: `Comedy`,
-    year: 2019,
-    duration: 88,
+    released: 2019,
+    runTime: 88,
     rating: 9.9,
-    reviews: 199,
+    scoresCount: 199,
     director: `Nikita Mikhalkov`,
     starring: [`Edward Norton`, `Jude Law`],
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    imgSrc: `war-of-the-worlds.jpg`,
-    videoSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    previewImage: `war-of-the-worlds.jpg`,
+    previewVideoLink: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
     textReviews: [
       {
         author: `Kate`,
         date: `2016-12-24`,
         text: `I didn't find it amusing`,
-        reviewRating: 9
+        reviewRating: 9.1
       },
       {
         author: `Roman`,
         date: `2014-06-20`,
         text: `The mannered, madcap proceedings are often delightful, occasionally silly`,
-        reviewRating: 3
+        reviewRating: 5.2
       },
     ]
   },
   {
     id: 9,
-    title: `johnny-english`,
+    name: `johnny-english`,
     genre: `Comedy`,
-    year: 1919,
-    duration: 88,
+    released: 1919,
+    runTime: 88,
     rating: 2.9,
-    reviews: 199,
+    scoresCount: 199,
     director: `Nikita Mikhalkov`,
     starring: [`Edward Norton`, `Jude Law`],
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    imgSrc: `johnny-english.jpg`,
-    videoSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    previewImage: `johnny-english.jpg`,
+    previewVideoLink: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
     textReviews: [
       {
         author: `Kate`,
         date: `2016-12-24`,
         text: `I didn't find it amusing`,
-        reviewRating: 9
+        reviewRating: 9.1
       },
       {
         author: `Roman`,
         date: `2014-06-20`,
         text: `The mannered, madcap proceedings are often delightful, occasionally silly`,
-        reviewRating: 3
+        reviewRating: 5.2
       },
     ]
   },
   {
     id: 10,
-    title: `Bohemian Rhapsody`,
+    name: `Bohemian Rhapsody`,
     genre: `Thriller`,
-    year: 2019,
-    duration: 120,
+    released: 2019,
+    runTime: 120,
     rating: 8.9,
-    reviews: 200,
+    scoresCount: 200,
     director: `Nikita Mikhalkov`,
     starring: [`Edward Norton`, `Jude Law`],
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    imgSrc: `bohemian-rhapsody.jpg`,
-    videoSrc: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    previewImage: `bohemian-rhapsody.jpg`,
+    previewVideoLink: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     textReviews: [
       {
         author: `Kate`,
         date: `2016-12-24`,
         text: `I didn't find it amusing`,
-        reviewRating: 9
+        reviewRating: 9.1
       },
       {
         author: `Roman`,
         date: `2014-06-20`,
         text: `The mannered, madcap proceedings are often delightful, occasionally silly`,
-        reviewRating: 3
+        reviewRating: 5.2
       },
     ]
   },
   {
     id: 11,
-    title: `Battlefield Earth: A Saga of the Year 3000`,
+    name: `Battlefield Earth: A Saga of the Year 3000`,
     genre: `Drama`,
-    year: 2019,
-    duration: 44,
+    released: 2019,
+    runTime: 44,
     rating: 3.9,
-    reviews: 100,
+    scoresCount: 100,
     director: `Nikita Mikhalkov`,
     starring: [`Edward Norton`, `Jude Law`],
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    imgSrc: `dardjeeling-limited.jpg`,
-    videoSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    previewImage: `dardjeeling-limited.jpg`,
+    previewVideoLink: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
     textReviews: [
       {
         author: `Kate`,
         date: `2016-12-24`,
         text: `I didn't find it amusing`,
-        reviewRating: 9
+        reviewRating: 9.1
       },
       {
         author: `Roman`,
         date: `2014-06-20`,
         text: `The mannered, madcap proceedings are often delightful, occasionally silly`,
-        reviewRating: 3
+        reviewRating: 5.2
       },
     ]
   },
   {
     id: 12,
-    title: `Epic Movie`,
+    name: `Epic Movie`,
     genre: `Drama`,
-    year: 2019,
-    duration: 142,
+    released: 2019,
+    runTime: 142,
     rating: 2.9,
-    reviews: 55,
+    scoresCount: 55,
     director: `Nikita Mikhalkov`,
     starring: [`Edward Norton`, `Jude Law`],
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    imgSrc: `shutter-island.jpg`,
-    videoSrc: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    previewImage: `shutter-island.jpg`,
+    previewVideoLink: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     textReviews: [
       {
         author: `Kate`,
         date: `2016-12-24`,
         text: `I didn't find it amusing`,
-        reviewRating: 9
+        reviewRating: 9.1
       },
       {
         author: `Roman`,
         date: `2014-06-20`,
         text: `The mannered, madcap proceedings are often delightful, occasionally silly`,
-        reviewRating: 3
+        reviewRating: 5.2
       },
     ]
   },
   {
     id: 13,
-    title: `Santa Claus Conquers the Martians`,
+    name: `Santa Claus Conquers the Martians`,
     genre: `Drama`,
-    year: 2019,
-    duration: 133,
+    released: 2019,
+    runTime: 133,
     rating: 6.9,
-    reviews: 65,
+    scoresCount: 65,
     director: `Nikita Mikhalkov`,
     starring: [`Edward Norton`, `Jude Law`],
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    imgSrc: `mindhunter.jpg`,
-    videoSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    previewImage: `mindhunter.jpg`,
+    previewVideoLink: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
     textReviews: [
       {
         author: `Kate`,
         date: `2016-12-24`,
         text: `I didn't find it amusing`,
-        reviewRating: 9
+        reviewRating: 9.1
       },
       {
         author: `Roman`,
         date: `2014-06-20`,
         text: `The mannered, madcap proceedings are often delightful, occasionally silly`,
-        reviewRating: 3
+        reviewRating: 5.2
       },
     ]
   },
   {
     id: 14,
-    title: `United Passions`,
+    name: `United Passions`,
     genre: `Comedy`,
-    year: 2019,
-    duration: 55,
+    released: 2019,
+    runTime: 55,
     rating: 5.9,
-    reviews: 90,
+    scoresCount: 90,
     director: `Nikita Mikhalkov`,
     starring: [`Edward Norton`, `Jude Law`],
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    imgSrc: `snatch.jpg`,
-    videoSrc: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    previewImage: `snatch.jpg`,
+    previewVideoLink: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     textReviews: [
       {
         author: `Kate`,
         date: `2016-12-24`,
         text: `I didn't find it amusing`,
-        reviewRating: 9
+        reviewRating: 9.1
       },
       {
         author: `Roman`,
         date: `2014-06-20`,
         text: `The mannered, madcap proceedings are often delightful, occasionally silly`,
-        reviewRating: 3
+        reviewRating: 5.2
       },
     ]
   },
   {
     id: 15,
-    title: `Howard the Duck`,
+    name: `Howard the Duck`,
     genre: `Comedy`,
-    year: 2019,
-    duration: 22,
+    released: 2019,
+    runTime: 22,
     rating: 2.9,
-    reviews: 145,
+    scoresCount: 145,
     director: `Nikita Mikhalkov`,
     starring: [`Edward Norton`, `Jude Law`],
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    imgSrc: `orlando.jpg`,
-    videoSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    previewImage: `orlando.jpg`,
+    previewVideoLink: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
     textReviews: [
       {
         author: `Kate`,
         date: `2016-12-24`,
         text: `I didn't find it amusing`,
-        reviewRating: 9
+        reviewRating: 9.1
       },
       {
         author: `Roman`,
         date: `2014-06-20`,
         text: `The mannered, madcap proceedings are often delightful, occasionally silly`,
-        reviewRating: 3
+        reviewRating: 5.2
       },
     ]
   },
   {
     id: 16,
-    title: `Jack and Jill`,
+    name: `Jack and Jill`,
     genre: `Comedy`,
-    year: 2019,
-    duration: 35,
+    released: 2019,
+    runTime: 35,
     rating: 6.9,
-    reviews: 155,
+    scoresCount: 155,
     director: `Nikita Mikhalkov`,
     starring: [`Edward Norton`, `Jude Law`],
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    imgSrc: `moonrise-kingdom.jpg`,
-    videoSrc: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    previewImage: `moonrise-kingdom.jpg`,
+    previewVideoLink: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     textReviews: [
       {
         author: `Kate`,
         date: `2016-12-24`,
         text: `I didn't find it amusing`,
-        reviewRating: 9
+        reviewRating: 9.1
       },
       {
         author: `Roman`,
         date: `2014-06-20`,
         text: `The mannered, madcap proceedings are often delightful, occasionally silly`,
-        reviewRating: 3
+        reviewRating: 5.2
       },
     ]
   },
   {
     id: 17,
-    title: `Cannibal Holocaust`,
+    name: `Cannibal Holocaust`,
     genre: `Comedy`,
-    year: 2019,
-    duration: 88,
+    released: 2019,
+    runTime: 88,
     rating: 9.9,
-    reviews: 199,
+    scoresCount: 199,
     director: `Nikita Mikhalkov`,
     starring: [`Edward Norton`, `Jude Law`],
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    imgSrc: `war-of-the-worlds.jpg`,
-    videoSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    previewImage: `war-of-the-worlds.jpg`,
+    previewVideoLink: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
     textReviews: [
       {
         author: `Kate`,
         date: `2016-12-24`,
         text: `I didn't find it amusing`,
-        reviewRating: 9
+        reviewRating: 9.1
       },
       {
         author: `Roman`,
         date: `2014-06-20`,
         text: `The mannered, madcap proceedings are often delightful, occasionally silly`,
-        reviewRating: 3
+        reviewRating: 5.2
       },
     ]
   },
   {
     id: 18,
-    title: `johnny-english`,
+    name: `johnny-english`,
     genre: `Comedy`,
-    year: 1919,
-    duration: 88,
+    released: 1919,
+    runTime: 88,
     rating: 2.9,
-    reviews: 199,
+    scoresCount: 199,
     director: `Nikita Mikhalkov`,
     starring: [`Edward Norton`, `Jude Law`],
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    imgSrc: `johnny-english.jpg`,
-    videoSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    previewImage: `johnny-english.jpg`,
+    previewVideoLink: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
     textReviews: [
       {
         author: `Kate`,
         date: `2016-12-24`,
         text: `I didn't find it amusing`,
-        reviewRating: 9
+        reviewRating: 9.1
       },
       {
         author: `Roman`,
         date: `2014-06-20`,
         text: `The mannered, madcap proceedings are often delightful, occasionally silly`,
-        reviewRating: 3
+        reviewRating: 5.2
       },
     ]
   }

@@ -7,18 +7,14 @@ exports[`Should movie card render correctly 1`] = `
 >
   <div
     className="small-movie-card__image"
-  >
-     :
-  </div>
+  />
   <h3
     className="small-movie-card__title"
   >
     <a
       className="small-movie-card__link"
       href="#"
-    >
-      Bohemian Rhapsody
-    </a>
+    />
   </h3>
 </article>
 `;

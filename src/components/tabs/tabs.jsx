@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import {getDuration, formatRating, getTextRating} from "../../utils.js";
 
 const TabNames = {
   OVERVIEW: `overview`,
@@ -20,17 +21,8 @@ class Tabs extends PureComponent {
     return this.state.selectedTab === tabName ? `movie-nav__item--active` : ``;
   }
 
-  // Переписать и использовать
-  // getDuration(duration) {
-  //   const hours = Math.floor(duration / 60);
-  //   const minutes = duration % 60;
-  //   const time = {hours: hours, minutes: minutes};
-  //   return time;
-  // }
-
   render() {
-    const {genre, rating, reviews, director, starring, description, textReviews, duration, year} = this.props.currentMovie;
-    const formatedRating = rating.toString().replace(`.`, `,`);
+    const {genre, rating, director, starring, description, scoresCount, runTime, released, textReviews} = this.props.currentMovie;
     const {selectedTab} = this.state;
 
     return (
@@ -69,10 +61,10 @@ class Tabs extends PureComponent {
         {selectedTab === TabNames.OVERVIEW && (
           <React.Fragment>
             <div className="movie-rating">
-              <div className="movie-rating__score">{formatedRating}</div>
+              <div className="movie-rating__score">{formatRating(rating)}</div>
               <p className="movie-rating__meta">
-                <span className="movie-rating__level">Very good</span>
-                <span className="movie-rating__count">{reviews} ratings</span>
+                <span className="movie-rating__level">{getTextRating(rating)}</span>
+                <span className="movie-rating__count">{scoresCount} ratings</span>
               </p>
             </div>
             <div className="movie-card__text">
@@ -113,7 +105,7 @@ class Tabs extends PureComponent {
               <div className="movie-card__text-col">
                 <p className="movie-card__details-item">
                   <strong className="movie-card__details-name">Run Time</strong>
-                  <span className="movie-card__details-value">{duration}</span>
+                  <span className="movie-card__details-value">{getDuration(runTime)}</span>
                 </p>
                 <p className="movie-card__details-item">
                   <strong className="movie-card__details-name">Genre</strong>
@@ -121,7 +113,7 @@ class Tabs extends PureComponent {
                 </p>
                 <p className="movie-card__details-item">
                   <strong className="movie-card__details-name">Released</strong>
-                  <span className="movie-card__details-value">{year}</span>
+                  <span className="movie-card__details-value">{released}</span>
                 </p>
               </div>
             </div>;
@@ -148,7 +140,7 @@ class Tabs extends PureComponent {
                           </time>
                         </footer>
                       </blockquote>
-                      <div className="review__rating">{reviewRating}</div>
+                      <div className="review__rating">{formatRating(reviewRating)}</div>
                     </div>
                   );
                 })}
@@ -170,7 +162,7 @@ Tabs.propTypes = {
   currentMovie: PropTypes.shape({
     genre: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
-    reviews: PropTypes.number.isRequired,
+    scoresCount: PropTypes.number.isRequired,
     director: PropTypes.string.isRequired,
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,
     description: PropTypes.string.isRequired,
@@ -180,8 +172,8 @@ Tabs.propTypes = {
       text: PropTypes.string.isRequired,
       reviewRating: PropTypes.number.isRequired
     })),
-    duration: PropTypes.number.isRequired,
-    year: PropTypes.number.isRequired
+    runTime: PropTypes.number.isRequired,
+    released: PropTypes.number.isRequired
   })
 };
 

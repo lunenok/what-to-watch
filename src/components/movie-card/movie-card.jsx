@@ -9,7 +9,8 @@ class MovieCard extends PureComponent {
 
   render() {
     const {filmInfo, onCardMouseHoverOn, onCardMouseHoverOff, isPlaying} = this.props;
-    const {id, title, videoSrc, imgSrc} = filmInfo;
+    const {id, name, previewVideoLink, previewImage} = filmInfo;
+
     return (
       <article
         key={id}
@@ -21,12 +22,12 @@ class MovieCard extends PureComponent {
         <div
           className="small-movie-card__image"
         >
-          <VideoPlayer videoSrc={videoSrc} imgSrc={imgSrc} isPlaying={isPlaying}/> :
+          <VideoPlayer videoSrc={previewVideoLink} imgSrc={previewImage} isPlaying={isPlaying}/>
         </div>
         <h3 className="small-movie-card__title">
           <a
             className="small-movie-card__link" href="#"
-          >{title}</a>
+          >{name}</a>
         </h3>
       </article>
     );
@@ -36,11 +37,9 @@ class MovieCard extends PureComponent {
 MovieCard.propTypes = {
   filmInfo: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    imgSrc: PropTypes.string.isRequired,
-    videoSrc: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired
   }).isRequired,
   onCardMouseHoverOn: PropTypes.func.isRequired,
   onCardMouseHoverOff: PropTypes.func.isRequired,

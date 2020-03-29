@@ -28,7 +28,7 @@ class MoviePage extends PureComponent {
     if (currentMovie === null) {
       return null;
     }
-    const {title, genre, year} = currentMovie;
+    const {name, genre, released} = currentMovie;
     return (
       <React.Fragment>
         <div className="visually-hidden">
@@ -78,10 +78,10 @@ class MoviePage extends PureComponent {
             </header>
             <div className="movie-card__wrap">
               <div className="movie-card__desc">
-                <h2 className="movie-card__title">{title}</h2>
+                <h2 className="movie-card__title">{name}</h2>
                 <p className="movie-card__meta">
                   <span className="movie-card__genre">{genre}</span>
-                  <span className="movie-card__year">{year}</span>
+                  <span className="movie-card__year">{released}</span>
                 </p>
                 <div className="movie-card__buttons">
                   <button className="btn btn--play movie-card__button" type="button">
@@ -133,23 +133,23 @@ class MoviePage extends PureComponent {
 MoviePage.propTypes = {
   movies: PropTypes.arrayOf(
       PropTypes.shape({
-        title: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
         genre: PropTypes.string.isRequired,
-        year: PropTypes.number.isRequired,
+        released: PropTypes.number.isRequired,
         rating: PropTypes.number.isRequired,
-        reviews: PropTypes.number.isRequired,
+        scoresCount: PropTypes.number.isRequired,
         director: PropTypes.string.isRequired,
         starring: PropTypes.arrayOf.isRequired,
         description: PropTypes.string.isRequired
       }).isRequired
   ).isRequired,
   currentMovie: PropTypes.shape({
-    title: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired
+    released: PropTypes.number.isRequired
   }),
   dispatch: PropTypes.func,
-  match: PropTypes.object // Правильно?
+  match: PropTypes.object
 };
 
 const mapToState = (state) => ({
