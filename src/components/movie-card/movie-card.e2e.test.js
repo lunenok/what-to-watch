@@ -16,26 +16,6 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-// it(`Should movie title button be pressed`, () => {
-//   const e = {preventDefault: ()=>{}};
-//   const onCardClick = jest.fn();
-//   const movieCards = mount(
-//       <MovieCard
-//         key={testMovie.id}
-//         filmInfo={testMovie}
-//         onMovieClick={onCardClick}
-//         onCardMouseHoverOn={() => {}}
-//         onCardMouseHoverOff={() => {}}
-//         isPlaying={false}
-//       />
-//   );
-//   const movieTitleLink = movieCards.find(`.small-movie-card__link`);
-//   movieTitleLink.forEach((it) => {
-//     it.props().onClick(e);
-//   });
-//   expect(onCardClick.mock.calls.length).toBe(1);
-// });
-
 it(`Handler mouse get data`, () => {
   const onCardMouseHover = jest.fn();
   const movieCards = mount(

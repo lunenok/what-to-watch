@@ -1,10 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/app/app.jsx";
-import {MovieList, PromoFilm} from "./mocks/films.js";
 import {createStore} from "redux";
 import {Provider} from "react-redux";
-import {reducer} from "./reducer.js";
+import {reducer} from "../src/reducer/reducer.js";
 
 const store = createStore(
     reducer,
@@ -13,9 +12,7 @@ const store = createStore(
 
 ReactDOM.render(
     <Provider store={store}>
-      <App promoFilm={PromoFilm} movieList={MovieList}/>
+      <App/>
     </Provider>,
     document.querySelector(`#root`)
 );
-
-// module5-task22

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {changeGenre} from "../../reducer.js";
+import {changeGenre} from "../../reducer/reducer.js";
 
 const GenresList = ({uniqueGenres, dispatch, activeGenre}) => {
 

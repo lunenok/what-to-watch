@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import MainPage from "./../main-screen/main-screen.jsx";
 import MoviePage from "./../movie-page/movie-page.jsx";
@@ -7,34 +8,24 @@ import MoviePage from "./../movie-page/movie-page.jsx";
 class App extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {currentMovie: null};
     this._renderMovieScreen = this._renderMovieScreen.bind(this);
-    this._setMovie = this._setMovie.bind(this);
-  }
-
-  _setMovie(movie) {
-    this.setState({
-      currentMovie: movie
-    });
   }
 
   _renderMovieScreen() {
-    const {currentMovie} = this.state;
-    const {movieList} = this.props;
+    const {movieList, currentMovie, promoFilm} = this.props;
 
     if (currentMovie) {
       return (
         <MoviePage
           currentMovie={currentMovie}
-          onMovieClick={this._setMovie}
+          // Нужно ли то что сверху?
         />
       );
     }
 
     return (
       <MainPage
-        promoFilm={this.props.promoFilm}
-        onMovieClick={this._setMovie}
+        promoFilm={promoFilm}
         movieList={movieList}
       />
     );
@@ -64,6 +55,20 @@ App.propTypes = {
     filmGenre: PropTypes.string.isRequired,
     filmYear: PropTypes.number.isRequired
   }).isRequired,
+  currentMovie: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired,
+    runTime: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    scoresCount: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf(PropTypes.string.isRequired),
+    description: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
+  }),
   movieList: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -80,4 +85,9 @@ App.propTypes = {
   })).isRequired
 };
 
-export default App;
+const mapToState = (state) => ({
+  movieList: state.movieList,
+  promoFilm: state.promoFilm
+});
+
+export default connect(mapToState)(App);

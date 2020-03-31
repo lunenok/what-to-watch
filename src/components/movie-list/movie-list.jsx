@@ -1,61 +1,25 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import MovieCard from "./../movie-card/movie-card.jsx";
 import {NavLink} from "react-router-dom";
 import {connect} from "react-redux";
+import {getMoviesListByGenre} from "../../reducer/selectors.js";
 
-class MovieList extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      activeCard: null
-    };
-    this._onCardMouseHoverOn = this._onCardMouseHoverOn.bind(this);
-    this._onCardMouseHoverOff = this._onCardMouseHoverOff.bind(this);
+const MovieList = ({movieList, shownCount, activeGenre}) => {
+  const filtedFilms = getMoviesListByGenre(movieList, activeGenre);
 
-    this.timerId = null;
-  }
-
-  _onCardMouseHoverOn(movie) {
-    this.timerId = setTimeout(() => {
-      this.setState({
-        activeCard: movie
-      });
-    }, 1000);
-  }
-
-  _onCardMouseHoverOff() {
-    this.setState({
-      activeCard: null
-    });
-    clearTimeout(this.timerId);
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.timerId);
-  }
-
-  render() {
-    const {movieList, shownCount} = this.props;
-    const {activeCard} = this.state;
-
-
-    return (
-      <div className="catalog__movies-list">
-        {movieList.slice(0, shownCount).map((movie) =>
-          <NavLink key={movie.id} to={`/movie/${movie.id}`} className="small-movie-card catalog__movies-card" style={{color: `#c9b37e`}}>
-            <MovieCard
-              filmInfo={movie}
-              onCardMouseHoverOn={this._onCardMouseHoverOn}
-              onCardMouseHoverOff={this._onCardMouseHoverOff}
-              isPlaying={activeCard === movie}
-            />
-          </NavLink>
-        )}
-      </div>
-    );
-  }
-}
+  return (
+    <div className="catalog__movies-list">
+      {filtedFilms.slice(0, shownCount).map((movie) =>
+        <NavLink key={movie.id} to={`/movie/${movie.id}`} className="small-movie-card catalog__movies-card" style={{color: `#c9b37e`}}>
+          <MovieCard
+            filmInfo={movie}
+          />
+        </NavLink>
+      )}
+    </div>
+  );
+};
 
 MovieList.propTypes = {
   movieList: PropTypes.arrayOf(PropTypes.shape({
@@ -72,11 +36,13 @@ MovieList.propTypes = {
     previewImage: PropTypes.string.isRequired,
     previewVideoLink: PropTypes.string.isRequired,
   })).isRequired,
-  shownCount: PropTypes.number.isRequired
+  shownCount: PropTypes.number.isRequired,
+  activeGenre: PropTypes.string.isRequired
 };
 
 const mapToState = (state) => ({
-  movieList: state.movies,
+  movieList: state.movieList,
+  activeGenre: state.genre,
   shownCount: state.shownCount
 });
 

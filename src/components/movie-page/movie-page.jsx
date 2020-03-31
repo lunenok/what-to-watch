@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 import Tabs from "./../tabs/tabs.jsx";
 import MovieLike from "./../movie-like/movie-like.jsx";
 import {withRouter} from "react-router-dom";
-import {changeCurrentMovie} from "../../reducer";
+import {changeCurrentMovie} from "../../reducer/reducer";
 import {connect} from "react-redux";
 import {NavLink} from "react-router-dom";
-import {resetStore} from "../../reducer.js";
+import {resetStore} from "../../reducer/reducer.js";
+import {getMoviesLikeThis} from "../../reducer/selectors.js";
 
 class MoviePage extends PureComponent {
   constructor(props) {
@@ -28,6 +29,8 @@ class MoviePage extends PureComponent {
     if (currentMovie === null) {
       return null;
     }
+    const movieLikeThis = getMoviesLikeThis(movies, currentMovie);
+
     const {name, genre, released} = currentMovie;
     return (
       <React.Fragment>
@@ -111,7 +114,7 @@ class MoviePage extends PureComponent {
           </div>
         </section>
         <div className="page-content">
-          <MovieLike movieLikeThis={movies}/>
+          <MovieLike movieLikeThis={movieLikeThis}/>
           <footer className="page-footer">
             <div className="logo">
               <a href="main.html" className="logo__link logo__link--light">
@@ -154,7 +157,7 @@ MoviePage.propTypes = {
 
 const mapToState = (state) => ({
   currentMovie: state.currentMovie,
-  movies: state.movies
+  movies: state.movieList
 });
 
 export default connect(mapToState)(withRouter(MoviePage));

@@ -5,11 +5,13 @@ import GenresList from "../genres-list/genres-list.jsx";
 import ShowMore from "../show-more/show-more.jsx";
 import {getUniqueGenres} from "./../../utils.js";
 import {connect} from "react-redux";
+import {getMoviesListLenghtByGenre} from "../../reducer/selectors.js";
 
-const MainPage = ({promoFilm, movieList, currentGenreCount, shownCount}) => {
+const MainPage = ({promoFilm, movieList, genre, shownCount}) => {
 
   const {filmName, filmGenre, filmYear} = promoFilm;
   const uniqueGenres = getUniqueGenres(movieList);
+  const currentGenreCount = getMoviesListLenghtByGenre(movieList, genre);
 
   return (
     <React.Fragment>
@@ -131,12 +133,13 @@ MainPage.propTypes = {
     previewVideoLink: PropTypes.string.isRequired,
   })).isRequired,
   shownCount: PropTypes.number.isRequired,
-  currentGenreCount: PropTypes.number.isRequired
+  currentGenreCount: PropTypes.number.isRequired,
+  genre: PropTypes.string.isRequired,
 };
 
 const mapToState = (state) => ({
   shownCount: state.shownCount,
-  currentGenreCount: state.currentGenreCount
+  genre: state.genre,
 });
 
 export default connect(mapToState)(MainPage);
