@@ -1,5 +1,5 @@
 import React from "react";
-import withVideo from "../../hocs/with-video.jsx";
+import withVideo from "../../hocs/with-video/with-video.jsx";
 import PropTypes from "prop-types";
 
 const VideoPlayer = ({children}) => {
