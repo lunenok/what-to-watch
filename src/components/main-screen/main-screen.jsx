@@ -133,7 +133,6 @@ MainPage.propTypes = {
     previewVideoLink: PropTypes.string.isRequired,
   })).isRequired,
   shownCount: PropTypes.number.isRequired,
-  currentGenreCount: PropTypes.number.isRequired,
   genre: PropTypes.string.isRequired,
 };
 

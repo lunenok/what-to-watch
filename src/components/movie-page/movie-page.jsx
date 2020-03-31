@@ -6,8 +6,9 @@ import {withRouter} from "react-router-dom";
 import {changeCurrentMovie} from "../../reducer/reducer";
 import {connect} from "react-redux";
 import {NavLink} from "react-router-dom";
-import {resetStore} from "../../reducer/reducer.js";
+import {resetStore, playPauseMovie} from "../../reducer/reducer.js";
 import {getMoviesLikeThis} from "../../reducer/selectors.js";
+import VideoPlayerFull from "../../hocs/with-video-controls/with-video-controls.jsx";
 
 class MoviePage extends PureComponent {
   constructor(props) {
@@ -25,13 +26,18 @@ class MoviePage extends PureComponent {
   }
 
   render() {
-    const {currentMovie, movies, dispatch} = this.props;
+    const {currentMovie, movies, dispatch, isPlaying} = this.props;
     if (currentMovie === null) {
       return null;
     }
     const movieLikeThis = getMoviesLikeThis(movies, currentMovie);
 
     const {name, genre, released} = currentMovie;
+
+    if (isPlaying) {
+      return (<VideoPlayerFull/>);
+    }
+
     return (
       <React.Fragment>
         <div className="visually-hidden">
@@ -87,7 +93,7 @@ class MoviePage extends PureComponent {
                   <span className="movie-card__year">{released}</span>
                 </p>
                 <div className="movie-card__buttons">
-                  <button className="btn btn--play movie-card__button" type="button">
+                  <button className="btn btn--play movie-card__button" type="button" onClick={() => dispatch(playPauseMovie(true))}>
                     <svg viewBox="0 0 19 19" width={19} height={19}>
                       <use xlinkHref="#play-s" />
                     </svg>
@@ -152,12 +158,14 @@ MoviePage.propTypes = {
     released: PropTypes.number.isRequired
   }),
   dispatch: PropTypes.func,
-  match: PropTypes.object
+  match: PropTypes.object,
+  isPlaying: PropTypes.bool.isRequired
 };
 
 const mapToState = (state) => ({
   currentMovie: state.currentMovie,
-  movies: state.movieList
+  movies: state.movieList,
+  isPlaying: state.isPlaying
 });
 
 export default connect(mapToState)(withRouter(MoviePage));

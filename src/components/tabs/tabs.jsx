@@ -146,8 +146,8 @@ Tabs.propTypes = {
       reviewRating: PropTypes.number.isRequired
     })).isRequired
   }),
-  onTabClick: PropTypes.number.isRequired,
-  currentTab: PropTypes.object.isRequired
+  onTabClick: PropTypes.func.isRequired,
+  currentTab: PropTypes.string.isRequired
 };
 
 export default withActiveTab(Tabs);
