@@ -7,6 +7,7 @@ const initialState = {
   movieList: MovieList,
   promoFilm: PromoFilm,
   currentMovie: null,
+  isPlaying: false,
   shownCount: DEFAULT_SHOW_NUBMER,
 };
 
@@ -14,7 +15,8 @@ const ActionType = {
   GENRE_CHANGED: `GENRE_CHANGED`,
   CURRENT_MOVIE_CHANGED: `CURRENT_MOVIE_CHANGED`,
   RESET_STORE: `RESET_STORE`,
-  SHOW_MORE: `SHOW_MORE`
+  SHOW_MORE: `SHOW_MORE`,
+  PLAY_MOVIE: `PLAY_MOVIE`
 };
 
 const changeGenre = (genre) => ({
@@ -30,6 +32,11 @@ const changeCurrentMovie = (id) => ({
 const changeFilmsCount = () => ({
   type: ActionType.SHOW_MORE,
   payload: DEFAULT_SHOW_NUBMER
+});
+
+const playPauseMovie = (boolean) => ({
+  type: ActionType.PLAY_MOVIE,
+  payload: boolean
 });
 
 const resetStore = () => ({
@@ -51,6 +58,9 @@ const reducer = (state = initialState, action) => {
     case ActionType.SHOW_MORE:
       return {...state, shownCount: state.shownCount + action.payload};
 
+    case ActionType.PLAY_MOVIE:
+      return {...state, isPlaying: action.payload};
+
     case ActionType.RESET_STORE:
       return {...state, genre: `All genres`, currentMovie: null, shownCount: DEFAULT_SHOW_NUBMER};
   }
@@ -58,4 +68,4 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {reducer, ActionType, changeGenre, changeCurrentMovie, changeFilmsCount, resetStore};
+export {reducer, ActionType, changeGenre, changeCurrentMovie, changeFilmsCount, playPauseMovie, resetStore};

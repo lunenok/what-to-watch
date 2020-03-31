@@ -508,5 +508,5 @@ export const MovieList = [
 export const PromoFilm = {
   filmName: `The Grand Budapest Hotel`,
   filmGenre: `Drama`,
-  filmYear: 2014
+  filmYear: 2014,
 };

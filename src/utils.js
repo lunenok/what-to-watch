@@ -38,3 +38,20 @@ export const getTextRating = (rating) => {
   }
   return null;
 };
+
+export const getProgress = (maxValue, currentValue) => {
+  return String((currentValue / maxValue) * 100);
+};
+
+export const getRemainingTime = (duration, currentTime) => {
+  const difference = duration - currentTime;
+  const hours = `${Math.floor(difference / 3600)}`;
+  const minutes = `${Math.floor(difference / 60)}`;
+  const sec = `${Math.floor(difference % 60)}`;
+
+  const hoursStr = hours.length === 2 ? hours : `0${hours}`;
+  const minutesStr = minutes.length === 2 ? minutes : `0${minutes}`;
+  const secStr = sec.length === 2 ? sec : `0${sec}`;
+
+  return `${hoursStr}:${minutesStr}:${secStr}`;
+};
