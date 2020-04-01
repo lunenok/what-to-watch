@@ -13,7 +13,7 @@ const MovieLike = ({movieLikeThis}) => {
           return (
             <NavLink key={movie.id} to={`/movie/${movie.id}`} className="small-movie-card catalog__movies-card" style={{color: `#c9b37e`}}>
               <div className="small-movie-card__image">
-                <img src={`/img/` + movie.previewImage} alt={movie.name} width={280} height={175} />
+                <img src={movie.previewImage} alt={movie.name} width={280} height={175} />
               </div>
               <h3 className="small-movie-card__title">
                 <a className="small-movie-card__link" href="#">{movie.name}</a>
