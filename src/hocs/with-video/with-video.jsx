@@ -44,7 +44,7 @@ const withVideo = (Component) => {
       const video = this._videoRef.current;
       const {videoSrc, imgSrc} = this.props;
       video.src = videoSrc;
-      video.poster = `img/` + imgSrc;
+      video.poster = imgSrc;
     }
 
     componentWillUnmount() {

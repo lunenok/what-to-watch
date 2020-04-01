@@ -5,10 +5,10 @@ import {playPauseMovie} from "../../reducer/reducer.js";
 
 const VideoPlayerFull = (props) => {
   const {playerRef, isPlaying, onPlayButtonClick, onFullScreenButtonClick, onLoadedMetadata, onTimeUpdate, remainingTime, progress, currentMovie, dispatch} = props;
-  const {name, previewVideoLink, previewImage} = currentMovie;
+  const {name, videoLink, previewImage} = currentMovie;
   return (
     <div className="player">
-      <video src={previewVideoLink} ref ={playerRef} className="player__video" autoPlay poster={`../img/${previewImage}`} onLoadedMetadata={onLoadedMetadata} onTimeUpdate={onTimeUpdate}/>
+      <video src={videoLink} ref ={playerRef} className="player__video" autoPlay poster={`../img/${previewImage}`} onLoadedMetadata={onLoadedMetadata} onTimeUpdate={onTimeUpdate}/>
       <button type="button" className="player__exit" onClick={() => dispatch(playPauseMovie(false))}>Exit</button>
       <div className="player__controls">
         <div className="player__controls-row">
@@ -69,7 +69,7 @@ VideoPlayerFull.propTypes = {
     starring: PropTypes.arrayOf(PropTypes.string.isRequired),
     description: PropTypes.string.isRequired,
     previewImage: PropTypes.string.isRequired,
-    previewVideoLink: PropTypes.string.isRequired,
+    videoLink: PropTypes.string.isRequired,
   }),
   playerRef: PropTypes.oneOfType([
     PropTypes.func,
