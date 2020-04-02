@@ -3,6 +3,11 @@ import {adaptMovieList} from "../adapter.js";
 
 const DEFAULT_SHOW_NUBMER = 8;
 
+const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};
+
 const initialState = {
   genre: `All genres`,
   movieList: [],
@@ -10,6 +15,7 @@ const initialState = {
   currentMovie: null,
   isPlaying: false,
   shownCount: DEFAULT_SHOW_NUBMER,
+  authorizationStatus: AuthorizationStatus.NO_AUTH
 };
 
 const ActionType = {
@@ -18,7 +24,8 @@ const ActionType = {
   RESET_STORE: `RESET_STORE`,
   SHOW_MORE: `SHOW_MORE`,
   PLAY_MOVIE: `PLAY_MOVIE`,
-  LOAD_MOVIES: `LOAD_MOVIES`
+  LOAD_MOVIES: `LOAD_MOVIES`,
+  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION` // user
 };
 
 const changeGenre = (genre) => ({
@@ -51,14 +58,43 @@ const ActionCreator = {
       type: ActionType.LOAD_MOVIES,
       payload: adaptMovieList(movies)
     };
-  }
+  },
+
+  requireAuthorization: (status) => {
+    return {
+      type: ActionType.REQUIRED_AUTHORIZATION,
+      payload: status,
+    };
+  }, // user
 };
 
-const Operation = {
+const DataOperation = {
   loadMovies: () => (dispatch, getState, api) => {
     return api.get(`/films`)
       .then((response) => {
         dispatch(ActionCreator.loadMovies(response.data));
+      });
+  },
+};
+
+const UserOperation = {
+  checkAuth: () => (dispatch, getState, api) => {
+    return api.get(`/login`)
+      .then(() => {
+        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+      })
+      .catch((err) => {
+        throw err;
+      });
+  },
+
+  login: (authData) => (dispatch, getState, api) => {
+    return api.post(`/login`, {
+      email: authData.login,
+      password: authData.password,
+    })
+      .then(() => {
+        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       });
   },
 };
@@ -85,6 +121,9 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_MOVIES:
       return {...state, movieList: action.payload};
 
+    case ActionType.REQUIRED_AUTHORIZATION:
+      return {...state, authorizationStatus: action.payload}; // user
+
     case ActionType.RESET_STORE:
       return {...state, genre: `All genres`, currentMovie: null, shownCount: DEFAULT_SHOW_NUBMER};
   }
@@ -92,4 +131,4 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {reducer, Operation, ActionType, changeGenre, changeCurrentMovie, changeFilmsCount, playPauseMovie, resetStore};
+export {reducer, DataOperation, UserOperation, AuthorizationStatus, ActionCreator, ActionType, changeGenre, changeCurrentMovie, changeFilmsCount, playPauseMovie, resetStore};

@@ -4,7 +4,9 @@ import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import MainPage from "./../main-screen/main-screen.jsx";
 import MoviePage from "./../movie-page/movie-page.jsx";
-
+import AuthScreen from "../sign-in/sign-in.jsx";
+import {UserOperation} from "../../reducer/reducer.js";
+import {AuthorizationStatus} from "../../reducer/reducer.js";
 class App extends PureComponent {
   constructor(props) {
     super(props);
@@ -18,7 +20,6 @@ class App extends PureComponent {
       return (
         <MoviePage
           currentMovie={currentMovie}
-          // Нужно ли то что сверху?
         />
       );
     }
@@ -31,6 +32,25 @@ class App extends PureComponent {
     );
   }
 
+  _renderSignIn() {
+    const {movieList, authorizationStatus, promoFilm} = this.props;
+    if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
+      return (
+        <AuthScreen
+          onSubmit={this.props.login}
+        />
+      );
+    }
+
+    return (
+      <MainPage
+        promoFilm={promoFilm}
+        movieList={movieList}
+      />
+    );
+
+  }
+
   render() {
     return (
       <BrowserRouter>
@@ -41,6 +61,9 @@ class App extends PureComponent {
           </Route>
           <Route path="/movie/:id">
             <MoviePage/>
+          </Route>
+          <Route exact path="/dev">
+            {this._renderSignIn()}
           </Route>
         </Switch>
       </BrowserRouter>
@@ -82,12 +105,21 @@ App.propTypes = {
     description: PropTypes.string.isRequired,
     previewImage: PropTypes.string.isRequired,
     previewVideoLink: PropTypes.string.isRequired,
-  })).isRequired
+  })).isRequired,
+  login: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.string.isRequired
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  login(authData) {
+    dispatch(UserOperation.login(authData));
+  },
+});
 
 const mapToState = (state) => ({
   movieList: state.movieList,
-  promoFilm: state.promoFilm
+  promoFilm: state.promoFilm,
+  authorizationStatus: state.authorizationStatus
 });
 
-export default connect(mapToState)(App);
+export default connect(mapToState, mapDispatchToProps)(App);
