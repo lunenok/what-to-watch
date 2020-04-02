@@ -9,7 +9,8 @@ import {getMoviesListLenghtByGenre} from "../../reducer/selectors.js";
 
 const MainPage = ({promoFilm, movieList, genre, shownCount}) => {
 
-  const {filmName, filmGenre, filmYear} = promoFilm;
+  const {name, released, backgroundImage, posterImage} = promoFilm;
+  const promoGenre = promoFilm.genre;
   const uniqueGenres = getUniqueGenres(movieList);
   const currentGenreCount = getMoviesListLenghtByGenre(movieList, genre);
 
@@ -42,7 +43,7 @@ const MainPage = ({promoFilm, movieList, genre, shownCount}) => {
       </div>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={backgroundImage} alt={`${name} image`} />
         </div>
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header movie-card__head">
@@ -62,13 +63,13 @@ const MainPage = ({promoFilm, movieList, genre, shownCount}) => {
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width={218} height={327} />
+              <img src={posterImage} alt={`${name} image`} width={218} height={327} />
             </div>
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{filmName}</h2>
+              <h2 className="movie-card__title">{name}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{filmGenre}</span>
-                <span className="movie-card__year">{filmYear}</span>
+                <span className="movie-card__genre">{promoGenre}</span>
+                <span className="movie-card__year">{released}</span>
               </p>
               <div className="movie-card__buttons">
                 <button className="btn btn--play movie-card__button" type="button">
@@ -114,9 +115,9 @@ const MainPage = ({promoFilm, movieList, genre, shownCount}) => {
 
 MainPage.propTypes = {
   promoFilm: PropTypes.exact({
-    filmName: PropTypes.string.isRequired,
-    filmGenre: PropTypes.string.isRequired,
-    filmYear: PropTypes.number.isRequired
+    name: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired
   }).isRequired,
   movieList: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,

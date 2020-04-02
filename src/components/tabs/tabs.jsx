@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {getDuration, formatRating, getTextRating} from "../../utils.js";
 import withActiveTab from "../../hocs/with-active-tab/with-active-tab.jsx";
+import {connect} from "react-redux";
 
 const TabNames = {
   OVERVIEW: `Overview`,
@@ -10,8 +11,8 @@ const TabNames = {
 };
 
 const Tabs = (props) => {
-  const {currentMovie, currentTab, onTabClick} = props;
-  const {genre, rating, director, starring, description, scoresCount, runTime, released, textReviews} = currentMovie;
+  const {currentMovie, currentTab, onTabClick, textReviews} = props;
+  const {genre, rating, director, starring, description, scoresCount, runTime, released} = currentMovie;
 
   return (
     <div className="movie-card__desc">
@@ -100,12 +101,13 @@ const Tabs = (props) => {
             <div className="movie-card__reviews-col">
 
               {textReviews.map((review) => {
-                const {author, date, text, reviewRating} = review;
+                const {user, date, comment, rating} = review;
+                const {author} = user;
                 return (
                   <div key={author} className="review">
                     <blockquote className="review__quote">
                       <p className="review__text">
-                        {text}
+                        {comment}
                       </p>
                       <footer className="review__details">
                         <cite className="review__author">{author}</cite>
@@ -114,7 +116,7 @@ const Tabs = (props) => {
                         </time>
                       </footer>
                     </blockquote>
-                    <div className="review__rating">{formatRating(reviewRating)}</div>
+                    <div className="review__rating">{formatRating(rating)}</div>
                   </div>
                 );
               })}
@@ -150,4 +152,8 @@ Tabs.propTypes = {
   currentTab: PropTypes.string.isRequired
 };
 
-export default withActiveTab(Tabs);
+const mapToState = (state) => ({
+  textReviews: state.reviews,
+});
+
+export default connect(mapToState)(withActiveTab(Tabs));

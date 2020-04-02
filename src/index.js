@@ -5,7 +5,7 @@ import {createStore, applyMiddleware, compose} from "redux";
 import thunk from "redux-thunk";
 import {Provider} from "react-redux";
 import {reducer} from "./reducer/reducer.js";
-import {DataOperation, UserOperation, ActionCreator, AuthorizationStatus} from "./reducer/reducer.js";
+import {ActionCreator, AuthorizationStatus} from "./reducer/reducer.js";
 import {createAPI} from "./api.js";
 
 const onUnauthorized = () => {
@@ -21,9 +21,6 @@ const store = createStore(
         window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
     )
 );
-
-store.dispatch(DataOperation.loadMovies());
-store.dispatch(UserOperation.checkAuth());
 
 ReactDOM.render(
     <Provider store={store}>

@@ -506,7 +506,7 @@
 // ];
 
 export const PromoFilm = {
-  filmName: `The Grand Budapest Hotel`,
-  filmGenre: `Drama`,
-  filmYear: 2014,
+  name: `The Grand Budapest Hotel`,
+  genre: `Drama`,
+  released: 2014,
 };

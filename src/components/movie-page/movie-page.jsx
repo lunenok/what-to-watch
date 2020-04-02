@@ -32,7 +32,7 @@ class MoviePage extends PureComponent {
     }
     const movieLikeThis = getMoviesLikeThis(movies, currentMovie);
 
-    const {name, genre, released} = currentMovie;
+    const {name, genre, released, backgroundImage, posterImage, backgroundColor} = currentMovie;
 
     if (isPlaying) {
       return (<VideoPlayerFull/>);
@@ -65,10 +65,10 @@ class MoviePage extends PureComponent {
             </g>
           </symbol></svg>{/* endinject */}
         </div>
-        <section className="movie-card movie-card--full">
+        <section className="movie-card movie-card--full" style={{backgroundColor}}>
           <div className="movie-card__hero">
             <div className="movie-card__bg">
-              <img src="/img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+              <img src={backgroundImage} alt={`${name} img`} />
             </div>
             <h1 className="visually-hidden">WTW</h1>
             <header className="page-header movie-card__head">
@@ -113,7 +113,7 @@ class MoviePage extends PureComponent {
           <div className="movie-card__wrap movie-card__translate-top">
             <div className="movie-card__info">
               <div className="movie-card__poster movie-card__poster--big">
-                <img src="/img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width={218} height={327} />
+                <img src={posterImage} alt={`${name} img`} width={218} height={327} />
               </div>
               <Tabs currentMovie={this.props.currentMovie}/>
             </div>
