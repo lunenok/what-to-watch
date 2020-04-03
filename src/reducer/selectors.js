@@ -15,3 +15,7 @@ export const getMoviesListLenghtByGenre = (moviesList, genre) => {
   const thisGenreMovieList = getMoviesListByGenre(moviesList, genre);
   return thisGenreMovieList.length;
 };
+
+export const getFavoriteMovies = (movieList) => {
+  return movieList.filter((movie) => movie.isFavorite === true);
+};

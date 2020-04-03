@@ -5,20 +5,18 @@ import GenresList from "../genres-list/genres-list.jsx";
 import ShowMore from "../show-more/show-more.jsx";
 import {getUniqueGenres} from "./../../utils.js";
 import {connect} from "react-redux";
-import {AuthorizationStatus, playPauseMovie} from "../../reducer/reducer.js";
+import {AuthorizationStatus} from "../../reducer/reducer.js";
 import {getMoviesListLenghtByGenre} from "../../reducer/selectors.js";
-import VideoPlayerFull from "../../hocs/with-video-controls/with-video-controls.jsx";
+import {Link} from "react-router-dom";
+import {AppRoute} from "../../constants.js";
+import {DataOperation} from "../../reducer/reducer.js";
 
-const MainPage = ({promoFilm, movieList, genre, shownCount, authorizationStatus, dispatch, isPlaying}) => {
+const MainPage = ({promoFilm, movieList, genre, shownCount, authorizationStatus, addToFavorite}) => {
 
-  const {name, released, backgroundImage, posterImage} = promoFilm;
+  const {id, name, released, backgroundImage, posterImage, isFavorite} = promoFilm;
   const promoGenre = promoFilm.genre;
   const uniqueGenres = getUniqueGenres(movieList);
   const currentGenreCount = getMoviesListLenghtByGenre(movieList, genre);
-
-  if (isPlaying) {
-    return (<VideoPlayerFull/>);
-  }
 
   return (
     <React.Fragment>
@@ -66,7 +64,7 @@ const MainPage = ({promoFilm, movieList, genre, shownCount, authorizationStatus,
                 <img src="img/avatar.jpg" alt="User avatar" width={63} height={63} />
               </div> :
               <div className="user-block">
-                <a href="sign-in.html" className="user-block__link">Sign in</a>
+                <Link to={AppRoute.SIGN_IN} className="user-block__link">Sign in</Link>
               </div>
             }
           </div>
@@ -83,18 +81,28 @@ const MainPage = ({promoFilm, movieList, genre, shownCount, authorizationStatus,
                 <span className="movie-card__year">{released}</span>
               </p>
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button" onClick={() => dispatch(playPauseMovie(true))}>
+                <Link to={AppRoute.PLAYER} className="btn btn--play movie-card__button" type="button">
                   <svg viewBox="0 0 19 19" width={19} height={19}>
                     <use xlinkHref="#play-s" />
                   </svg>
                   <span>Play</span>
-                </button>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width={19} height={20}>
-                    <use xlinkHref="#add" />
-                  </svg>
-                  <span>My list</span>
-                </button>
+                </Link>
+
+                {!isFavorite ?
+                  <button className="btn btn--list movie-card__button" type="button" onClick={DataOperation.addFavorite()}>
+                    <svg viewBox="0 0 19 20" width={19} height={20}>
+                      <use xlinkHref="#add" />
+                    </svg>
+                    <span>My list</span>
+                  </button> :
+                  <button className="btn btn--list movie-card__button" type="button" onClick={DataOperation.addFavorite()}>
+                    <svg viewBox="0 0 18 14" width={18} height={14}>
+                      <use xlinkHref="#in-list" />
+                    </svg>
+                    <span>My list</span>
+                  </button>
+                }
+
               </div>
             </div>
           </div>
@@ -167,8 +175,15 @@ MainPage.propTypes = {
   genre: PropTypes.string.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,
-  isPlaying: PropTypes.bool.isRequired
+  isPlaying: PropTypes.bool.isRequired,
+  addToFavorite: PropTypes.func.isRequired
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  addToFavorite(id, status) {
+    dispatch(DataOperation.addFavorite(id, status));
+  }
+});
 
 const mapToState = (state) => ({
   shownCount: state.shownCount,
@@ -177,4 +192,4 @@ const mapToState = (state) => ({
   authorizationStatus: state.authorizationStatus
 });
 
-export default connect(mapToState)(MainPage);
+export default connect(mapToState, mapDispatchToProps)(MainPage);

@@ -1,42 +1,26 @@
 import React, {PureComponent} from "react";
-import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {Switch, Route, Router} from "react-router-dom";
+import history from "../../history.js";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import MainPage from "./../main-screen/main-screen.jsx";
 import MoviePage from "./../movie-page/movie-page.jsx";
 import AuthScreen from "../sign-in/sign-in.jsx";
+import VideoPlayerFull from "../../hocs/with-video-controls/with-video-controls.jsx";
 import {DataOperation, UserOperation, reviewOperation} from "../../reducer/reducer.js";
 import {AuthorizationStatus} from "../../reducer/reducer.js";
 import AddReview from "../add-review/add-review.jsx";
+import {AppRoute} from "../../constants.js";
 class App extends PureComponent {
   constructor(props) {
     super(props);
-    this._renderMovieScreen = this._renderMovieScreen.bind(this);
   }
 
   componentDidMount() {
     this.props.loadPromoMovie();
     this.props.loadMovies();
     this.props.checkAuth();
-  }
-
-  _renderMovieScreen() {
-    const {movieList, currentMovie, promoFilm} = this.props;
-
-    if (currentMovie) {
-      return (
-        <MoviePage
-          currentMovie={currentMovie}
-        />
-      );
-    }
-
-    return (
-      <MainPage
-        promoFilm={promoFilm}
-        movieList={movieList}
-      />
-    );
+    this.props.loadFavoriteMovies();
   }
 
   _renderSignIn() {
@@ -55,36 +39,52 @@ class App extends PureComponent {
         movieList={movieList}
       />
     );
-
   }
 
   render() {
-    if (this.props.movieList === null || this.props.promoFilm === null) {
-      return (
-        <div>loading...</div>
-      );
-    }
+    // if (this.props.movieList === null || this.props.promoFilm === null) {
+    //   return (
+    //     <div>loading...</div>
+    //   );
+    // }
+
+    const {movieList, currentMovie, promoFilm} = this.props;
 
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <Switch>
+
           <Route exact path="/">
-            {this._renderMovieScreen()}
-            {/* Тут сделать навлинки */}
+            <MainPage
+              promoFilm={promoFilm}
+              movieList={movieList}
+            />
           </Route>
+
+          <Route exact path={AppRoute.PLAYER}>
+            <VideoPlayerFull/>
+          </Route>
+
           <Route path="/movie/:id">
-            <MoviePage/>
+            <MoviePage
+              currentMovie={currentMovie}
+            />
           </Route>
-          <Route exact path="/dev">
-            {this._renderSignIn()}
+
+          <Route exact path={AppRoute.SIGN_IN}>
+            <AuthScreen
+              onSubmit={this.props.login}
+            />
           </Route>
-          <Route exact path="/dev-review">
+
+          <Route exact path={AppRoute.REVIEW}>
             <AddReview
               onSubmit={this.props.comment}
             />
           </Route>
+
         </Switch>
-      </BrowserRouter>
+      </Router>
 
     );
   }
@@ -153,6 +153,7 @@ App.propTypes = {
   comment: PropTypes.func.isRequired,
   loadPromoMovie: PropTypes.func.isRequired,
   loadMovies: PropTypes.func.isRequired,
+  loadFavoriteMovies: PropTypes.func.isRequired,
   checkAuth: PropTypes.func.isRequired,
 };
 
@@ -171,6 +172,10 @@ const mapDispatchToProps = (dispatch) => ({
 
   loadMovies() {
     dispatch(DataOperation.loadMovies());
+  },
+
+  loadFavoriteMovies() {
+    dispatch(DataOperation.loadFavoriteMovies());
   },
 
   loadPromoMovie() {

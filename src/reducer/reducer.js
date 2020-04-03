@@ -10,6 +10,7 @@ const AuthorizationStatus = {
 const initialState = {
   genre: `All genres`,
   movieList: [],
+  favoriteMovieList: [],
   promoFilm: {},
   currentMovie: null,
   reviews: [],
@@ -28,6 +29,8 @@ const ActionType = {
   LOAD_PROMO_MOVIE: `LOAD_PROMO_MOVIE`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
+  ADD_TO_FAVORITE: `ADD_TO_FAVORITE`,
+  LOAD_FAVORITE_MOVIES: `LOAD_FAVORITE_MOVIES`
 };
 
 const changeGenre = (genre) => ({
@@ -54,10 +57,24 @@ const resetStore = () => ({
   type: ActionType.RESET_STORE
 });
 
+// export const addFavoriteMovieToList = (movieList, favoriteMovie) => {
+//   const favoriteMovieIndex = movieList.findIndex((movie) => movie.id === favoriteMovie.id);
+//   const newMovieList = movieList;
+//   newMovieList[favoriteMovieIndex] = favoriteMovie;
+//   return newMovieList;
+// };
+
 const ActionCreator = {
   loadMovies: (movies) => {
     return {
       type: ActionType.LOAD_MOVIES,
+      payload: adaptMovieList(movies)
+    };
+  },
+
+  loadFavoriteMovies: (movies) => {
+    return {
+      type: ActionType.LOAD_FAVORITE_MOVIES,
       payload: adaptMovieList(movies)
     };
   },
@@ -81,7 +98,14 @@ const ActionCreator = {
       type: ActionType.REQUIRED_AUTHORIZATION,
       payload: status,
     };
-  }, // user
+  },
+
+  // addFavorite: (movie) => {
+  //   return {
+  //     type: ActionType.ADD_TO_FAVORITE,
+  //     payload: movie
+  //   };
+  // },
 };
 
 const DataOperation = {
@@ -89,6 +113,13 @@ const DataOperation = {
     return api.get(`/films`)
       .then((response) => {
         dispatch(ActionCreator.loadMovies(response.data));
+      });
+  },
+
+  loadFavoriteMovies: () => (dispatch, getState, api) => {
+    return api.get(`/favorite`)
+      .then((response) => {
+        dispatch(ActionCreator.loadFavoriteMovies(response.data));
       });
   },
 
@@ -104,7 +135,11 @@ const DataOperation = {
       .then((response) => {
         dispatch(ActionCreator.loadReviews(response.data));
       });
-  }
+  },
+
+  addFavorite: (id, status) => (dispatch, getState, api) => {
+    return api.post(`/favorite/${id}/${status}`);
+  },
 };
 
 const UserOperation = {
@@ -159,6 +194,9 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.LOAD_MOVIES:
       return {...state, movieList: action.payload};
+
+    case ActionType.LOAD_FAVORITE_MOVIES:
+      return {...state, favoriteMovieList: action.payload};
 
     case ActionType.LOAD_PROMO_MOVIE:
       return {...state, promoFilm: action.payload};
