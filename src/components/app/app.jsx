@@ -5,10 +5,9 @@ import PropTypes from "prop-types";
 import MainPage from "./../main-screen/main-screen.jsx";
 import MoviePage from "./../movie-page/movie-page.jsx";
 import AuthScreen from "../sign-in/sign-in.jsx";
-import {UserOperation, reviewOperation} from "../../reducer/reducer.js";
+import {DataOperation, UserOperation, reviewOperation} from "../../reducer/reducer.js";
 import {AuthorizationStatus} from "../../reducer/reducer.js";
 import AddReview from "../add-review/add-review.jsx";
-import {DataOperation} from "../../reducer/reducer.js"
 class App extends PureComponent {
   constructor(props) {
     super(props);
@@ -17,7 +16,6 @@ class App extends PureComponent {
 
   componentDidMount() {
     this.props.loadPromoMovie();
-    this.props.loadReviews();
     this.props.loadMovies();
     this.props.checkAuth();
   }
@@ -61,13 +59,11 @@ class App extends PureComponent {
   }
 
   render() {
-    if (this.props.reviews === null || this.props.movieList === null || this.props.promoFilm === null) {
+    if (this.props.movieList === null || this.props.promoFilm === null) {
       return (
         <div>loading...</div>
       );
     }
-
-    console.log(this.props)
 
     return (
       <BrowserRouter>
@@ -95,42 +91,69 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  promoFilm: PropTypes.exact({
+  promoFilm: PropTypes.shape({
     name: PropTypes.string.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    scoresCount: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf(PropTypes.string),
+    runTime: PropTypes.number.isRequired,
     genre: PropTypes.string.isRequired,
-    released: PropTypes.number.isRequired
+    released: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired
   }).isRequired,
   currentMovie: PropTypes.shape({
-    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    released: PropTypes.number.isRequired,
-    runTime: PropTypes.number.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     scoresCount: PropTypes.number.isRequired,
     director: PropTypes.string.isRequired,
-    starring: PropTypes.arrayOf(PropTypes.string.isRequired),
-    description: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    previewVideoLink: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf(PropTypes.string),
+    runTime: PropTypes.number.isRequired,
+    genre: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired
   }),
   movieList: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    released: PropTypes.number.isRequired,
-    runTime: PropTypes.number.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     scoresCount: PropTypes.number.isRequired,
     director: PropTypes.string.isRequired,
-    starring: PropTypes.arrayOf(PropTypes.string.isRequired),
-    description: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    previewVideoLink: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf(PropTypes.string),
+    runTime: PropTypes.number.isRequired,
+    genre: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired
   })).isRequired,
   login: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   comment: PropTypes.func.isRequired,
+  loadPromoMovie: PropTypes.func.isRequired,
+  loadMovies: PropTypes.func.isRequired,
+  checkAuth: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -153,17 +176,12 @@ const mapDispatchToProps = (dispatch) => ({
   loadPromoMovie() {
     dispatch(DataOperation.loadPromoMovie());
   },
-
-  loadReviews() {
-    dispatch(DataOperation.loadReviews());
-  }
 });
 
 const mapToState = (state) => ({
   movieList: state.movieList,
   promoFilm: state.promoFilm,
   authorizationStatus: state.authorizationStatus,
-  reviews: state.reviews,
 });
 
 export default connect(mapToState, mapDispatchToProps)(App);

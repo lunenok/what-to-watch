@@ -1,4 +1,4 @@
-import {adaptMovieList, adaptPromoMovie} from "../adapter.js";
+import {adaptMovieList, adaptPromoMovie, adaptReview} from "../adapter.js";
 
 const DEFAULT_SHOW_NUBMER = 8;
 
@@ -72,7 +72,7 @@ const ActionCreator = {
   loadReviews: (reviews) => {
     return {
       type: ActionType.LOAD_REVIEWS,
-      payload: reviews
+      payload: adaptReview(reviews)
     };
   },
 
@@ -99,8 +99,8 @@ const DataOperation = {
       });
   },
 
-  loadReviews: () => (dispatch, getState, api) => {
-    return api.get(`/comments/4`)
+  loadReviews: (id) => (dispatch, getState, api) => {
+    return api.get(`/comments/${id}`)
       .then((response) => {
         dispatch(ActionCreator.loadReviews(response.data));
       });

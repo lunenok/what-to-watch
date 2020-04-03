@@ -45,3 +45,18 @@ export const adaptPromoMovie = (movie) => {
     previewVideoLink: movie.preview_video_link
   };
 };
+
+export const adaptReview = (reviews) => {
+  return (
+    reviews.map((review) => {
+      return {
+        reviewId: review.id,
+        reviewRating: review.rating,
+        reviewComment: review.comment,
+        reviewDate: review.date,
+        reviewUserId: review.user.id,
+        reviewUserName: review.user.name
+      };
+    })
+  );
+};
