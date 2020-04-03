@@ -3,13 +3,12 @@ import PropTypes from "prop-types";
 import Tabs from "./../tabs/tabs.jsx";
 import MovieLike from "./../movie-like/movie-like.jsx";
 import {withRouter} from "react-router-dom";
-import {changeCurrentMovie} from "../../reducer/reducer";
+import {changeCurrentMovie, AuthorizationStatus} from "../../reducer/reducer";
 import {connect} from "react-redux";
 import {NavLink} from "react-router-dom";
 import {resetStore, playPauseMovie} from "../../reducer/reducer.js";
 import {getMoviesLikeThis} from "../../reducer/selectors.js";
 import VideoPlayerFull from "../../hocs/with-video-controls/with-video-controls.jsx";
-
 class MoviePage extends PureComponent {
   constructor(props) {
     super(props);
@@ -26,13 +25,13 @@ class MoviePage extends PureComponent {
   }
 
   render() {
-    const {currentMovie, movies, dispatch, isPlaying} = this.props;
+    const {currentMovie, movies, dispatch, isPlaying, authorizationStatus} = this.props;
     if (currentMovie === null) {
       return null;
     }
     const movieLikeThis = getMoviesLikeThis(movies, currentMovie);
 
-    const {name, genre, released} = currentMovie;
+    const {name, genre, released, backgroundImage, posterImage, backgroundColor} = currentMovie;
 
     if (isPlaying) {
       return (<VideoPlayerFull/>);
@@ -65,10 +64,10 @@ class MoviePage extends PureComponent {
             </g>
           </symbol></svg>{/* endinject */}
         </div>
-        <section className="movie-card movie-card--full">
+        <section className="movie-card movie-card--full" style={{backgroundColor}}>
           <div className="movie-card__hero">
             <div className="movie-card__bg">
-              <img src="/img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+              <img src={backgroundImage} alt={`${name} img`} />
             </div>
             <h1 className="visually-hidden">WTW</h1>
             <header className="page-header movie-card__head">
@@ -80,9 +79,14 @@ class MoviePage extends PureComponent {
                 </NavLink>
               </div>
               <div className="user-block">
-                <div className="user-block__avatar">
-                  <img src="/img/avatar.jpg" alt="User avatar" width={63} height={63} />
-                </div>
+                {authorizationStatus === AuthorizationStatus.AUTH ?
+                  <div className="user-block__avatar">
+                    <img src="img/avatar.jpg" alt="User avatar" width={63} height={63} />
+                  </div> :
+                  <div className="user-block">
+                    <a href="sign-in.html" className="user-block__link">Sign in</a>
+                  </div>
+                }
               </div>
             </header>
             <div className="movie-card__wrap">
@@ -105,7 +109,10 @@ class MoviePage extends PureComponent {
                     </svg>
                     <span>My list</span>
                   </button>
-                  <a href="add-review.html" className="btn movie-card__button">Add review</a>
+                  {authorizationStatus === AuthorizationStatus.AUTH ?
+                    <a href="add-review.html" className="btn movie-card__button">Add review</a> :
+                    null
+                  }
                 </div>
               </div>
             </div>
@@ -113,7 +120,7 @@ class MoviePage extends PureComponent {
           <div className="movie-card__wrap movie-card__translate-top">
             <div className="movie-card__info">
               <div className="movie-card__poster movie-card__poster--big">
-                <img src="/img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width={218} height={327} />
+                <img src={posterImage} alt={`${name} img`} width={218} height={327} />
               </div>
               <Tabs currentMovie={this.props.currentMovie}/>
             </div>
@@ -143,29 +150,54 @@ MoviePage.propTypes = {
   movies: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string.isRequired,
-        genre: PropTypes.string.isRequired,
-        released: PropTypes.number.isRequired,
+        posterImage: PropTypes.string.isRequired,
+        previewImage: PropTypes.string.isRequired,
+        backgroundImage: PropTypes.string.isRequired,
+        backgroundColor: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
         rating: PropTypes.number.isRequired,
         scoresCount: PropTypes.number.isRequired,
         director: PropTypes.string.isRequired,
-        starring: PropTypes.arrayOf.isRequired,
-        description: PropTypes.string.isRequired
+        starring: PropTypes.arrayOf(PropTypes.string),
+        runTime: PropTypes.number.isRequired,
+        genre: PropTypes.string.isRequired,
+        released: PropTypes.number.isRequired,
+        id: PropTypes.number.isRequired,
+        isFavorite: PropTypes.bool.isRequired,
+        videoLink: PropTypes.string.isRequired,
+        previewVideoLink: PropTypes.string.isRequired
       }).isRequired
   ).isRequired,
   currentMovie: PropTypes.shape({
     name: PropTypes.string.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    scoresCount: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf(PropTypes.string),
+    runTime: PropTypes.number.isRequired,
     genre: PropTypes.string.isRequired,
-    released: PropTypes.number.isRequired
+    released: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired
   }),
   dispatch: PropTypes.func,
   match: PropTypes.object,
-  isPlaying: PropTypes.bool.isRequired
+  isPlaying: PropTypes.bool.isRequired,
+  authorizationStatus: PropTypes.string.isRequired
 };
 
 const mapToState = (state) => ({
   currentMovie: state.currentMovie,
   movies: state.movieList,
-  isPlaying: state.isPlaying
+  isPlaying: state.isPlaying,
+  authorizationStatus: state.authorizationStatus,
 });
 
 export default connect(mapToState)(withRouter(MoviePage));

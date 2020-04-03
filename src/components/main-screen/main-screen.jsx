@@ -5,13 +5,20 @@ import GenresList from "../genres-list/genres-list.jsx";
 import ShowMore from "../show-more/show-more.jsx";
 import {getUniqueGenres} from "./../../utils.js";
 import {connect} from "react-redux";
+import {AuthorizationStatus, playPauseMovie} from "../../reducer/reducer.js";
 import {getMoviesListLenghtByGenre} from "../../reducer/selectors.js";
+import VideoPlayerFull from "../../hocs/with-video-controls/with-video-controls.jsx";
 
-const MainPage = ({promoFilm, movieList, genre, shownCount}) => {
+const MainPage = ({promoFilm, movieList, genre, shownCount, authorizationStatus, dispatch, isPlaying}) => {
 
-  const {filmName, filmGenre, filmYear} = promoFilm;
+  const {name, released, backgroundImage, posterImage} = promoFilm;
+  const promoGenre = promoFilm.genre;
   const uniqueGenres = getUniqueGenres(movieList);
   const currentGenreCount = getMoviesListLenghtByGenre(movieList, genre);
+
+  if (isPlaying) {
+    return (<VideoPlayerFull/>);
+  }
 
   return (
     <React.Fragment>
@@ -42,7 +49,7 @@ const MainPage = ({promoFilm, movieList, genre, shownCount}) => {
       </div>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={backgroundImage} alt={`${name} image`} />
         </div>
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header movie-card__head">
@@ -54,24 +61,29 @@ const MainPage = ({promoFilm, movieList, genre, shownCount}) => {
             </a>
           </div>
           <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width={63} height={63} />
-            </div>
+            {authorizationStatus === AuthorizationStatus.AUTH ?
+              <div className="user-block__avatar">
+                <img src="img/avatar.jpg" alt="User avatar" width={63} height={63} />
+              </div> :
+              <div className="user-block">
+                <a href="sign-in.html" className="user-block__link">Sign in</a>
+              </div>
+            }
           </div>
         </header>
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width={218} height={327} />
+              <img src={posterImage} alt={`${name} image`} width={218} height={327} />
             </div>
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{filmName}</h2>
+              <h2 className="movie-card__title">{name}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{filmGenre}</span>
-                <span className="movie-card__year">{filmYear}</span>
+                <span className="movie-card__genre">{promoGenre}</span>
+                <span className="movie-card__year">{released}</span>
               </p>
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <button className="btn btn--play movie-card__button" type="button" onClick={() => dispatch(playPauseMovie(true))}>
                   <svg viewBox="0 0 19 19" width={19} height={19}>
                     <use xlinkHref="#play-s" />
                   </svg>
@@ -113,32 +125,56 @@ const MainPage = ({promoFilm, movieList, genre, shownCount}) => {
 };
 
 MainPage.propTypes = {
-  promoFilm: PropTypes.exact({
-    filmName: PropTypes.string.isRequired,
-    filmGenre: PropTypes.string.isRequired,
-    filmYear: PropTypes.number.isRequired
-  }).isRequired,
-  movieList: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
+  promoFilm: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    released: PropTypes.number.isRequired,
-    runTime: PropTypes.number.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     scoresCount: PropTypes.number.isRequired,
     director: PropTypes.string.isRequired,
-    starring: PropTypes.arrayOf(PropTypes.string.isRequired),
-    description: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf(PropTypes.string),
+    runTime: PropTypes.number.isRequired,
+    genre: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired
+  }).isRequired,
+  movieList: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    posterImage: PropTypes.string.isRequired,
     previewImage: PropTypes.string.isRequired,
-    previewVideoLink: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    scoresCount: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf(PropTypes.string),
+    runTime: PropTypes.number.isRequired,
+    genre: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired
   })).isRequired,
   shownCount: PropTypes.number.isRequired,
   genre: PropTypes.string.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  isPlaying: PropTypes.bool.isRequired
 };
 
 const mapToState = (state) => ({
   shownCount: state.shownCount,
   genre: state.genre,
+  isPlaying: state.isPlaying,
+  authorizationStatus: state.authorizationStatus
 });
 
 export default connect(mapToState)(MainPage);

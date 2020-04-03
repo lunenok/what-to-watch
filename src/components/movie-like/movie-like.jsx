@@ -20,7 +20,7 @@ const MovieLike = ({movieLikeThis}) => {
               </h3>
             </NavLink>
           );
-        })};
+        })}
       </div>
     </section>
   );

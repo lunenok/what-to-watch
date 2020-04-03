@@ -1,5 +1,4 @@
-import {PromoFilm} from "../mocks/films.js";
-import {adaptMovieList} from "../adapter.js";
+import {adaptMovieList, adaptPromoMovie, adaptReview} from "../adapter.js";
 
 const DEFAULT_SHOW_NUBMER = 8;
 
@@ -11,8 +10,9 @@ const AuthorizationStatus = {
 const initialState = {
   genre: `All genres`,
   movieList: [],
-  promoFilm: PromoFilm,
+  promoFilm: {},
   currentMovie: null,
+  reviews: [],
   isPlaying: false,
   shownCount: DEFAULT_SHOW_NUBMER,
   authorizationStatus: AuthorizationStatus.NO_AUTH
@@ -25,7 +25,9 @@ const ActionType = {
   SHOW_MORE: `SHOW_MORE`,
   PLAY_MOVIE: `PLAY_MOVIE`,
   LOAD_MOVIES: `LOAD_MOVIES`,
-  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION` // user
+  LOAD_PROMO_MOVIE: `LOAD_PROMO_MOVIE`,
+  LOAD_REVIEWS: `LOAD_REVIEWS`,
+  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
 };
 
 const changeGenre = (genre) => ({
@@ -60,6 +62,20 @@ const ActionCreator = {
     };
   },
 
+  loadPromoMovie: (movie) => {
+    return {
+      type: ActionType.LOAD_PROMO_MOVIE,
+      payload: adaptPromoMovie(movie)
+    };
+  },
+
+  loadReviews: (reviews) => {
+    return {
+      type: ActionType.LOAD_REVIEWS,
+      payload: adaptReview(reviews)
+    };
+  },
+
   requireAuthorization: (status) => {
     return {
       type: ActionType.REQUIRED_AUTHORIZATION,
@@ -75,6 +91,20 @@ const DataOperation = {
         dispatch(ActionCreator.loadMovies(response.data));
       });
   },
+
+  loadPromoMovie: () => (dispatch, getState, api) => {
+    return api.get(`/films/promo`)
+      .then((response) => {
+        dispatch(ActionCreator.loadPromoMovie(response.data));
+      });
+  },
+
+  loadReviews: (id) => (dispatch, getState, api) => {
+    return api.get(`/comments/${id}`)
+      .then((response) => {
+        dispatch(ActionCreator.loadReviews(response.data));
+      });
+  }
 };
 
 const UserOperation = {
@@ -99,6 +129,15 @@ const UserOperation = {
   },
 };
 
+const reviewOperation = {
+  postReview: (review) => (dispatch, getState, api) => {
+    return api.post(`/comments/1`, {
+      rating: review.rating,
+      comment: review.comment,
+    });
+  }
+};
+
 
 const reducer = (state = initialState, action) => {
 
@@ -121,6 +160,12 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_MOVIES:
       return {...state, movieList: action.payload};
 
+    case ActionType.LOAD_PROMO_MOVIE:
+      return {...state, promoFilm: action.payload};
+
+    case ActionType.LOAD_REVIEWS:
+      return {...state, reviews: action.payload};
+
     case ActionType.REQUIRED_AUTHORIZATION:
       return {...state, authorizationStatus: action.payload}; // user
 
@@ -131,4 +176,4 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {reducer, DataOperation, UserOperation, AuthorizationStatus, ActionCreator, ActionType, changeGenre, changeCurrentMovie, changeFilmsCount, playPauseMovie, resetStore};
+export {reducer, DataOperation, UserOperation, reviewOperation, AuthorizationStatus, ActionCreator, ActionType, changeGenre, changeCurrentMovie, changeFilmsCount, playPauseMovie, resetStore};
