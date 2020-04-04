@@ -1,6 +1,4 @@
-import {adaptMovieList, adaptPromoMovie, adaptReview} from "../adapter.js";
-
-const DEFAULT_SHOW_NUBMER = 8;
+import {adaptMovieList, adaptPromoMovie, adaptReview} from "../../adapter.js";
 
 const AuthorizationStatus = {
   AUTH: `AUTH`,
@@ -8,66 +6,33 @@ const AuthorizationStatus = {
 };
 
 const initialState = {
-  genre: `All genres`,
   movieList: [],
   favoriteMovieList: [],
   promoFilm: {},
   currentMovie: null,
   reviews: [],
-  isPlaying: false,
-  shownCount: DEFAULT_SHOW_NUBMER,
-  authorizationStatus: AuthorizationStatus.NO_AUTH,
-  loadingStatus: false,
-  avatarURL: null,
+  authorizationStatus: AuthorizationStatus.NO_AUTH
 };
 
 const ActionType = {
-  GENRE_CHANGED: `GENRE_CHANGED`,
   CURRENT_MOVIE_CHANGED: `CURRENT_MOVIE_CHANGED`,
   RESET_STORE: `RESET_STORE`,
-  SHOW_MORE: `SHOW_MORE`,
-  PLAY_MOVIE: `PLAY_MOVIE`,
   LOAD_MOVIES: `LOAD_MOVIES`,
   LOAD_PROMO_MOVIE: `LOAD_PROMO_MOVIE`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   ADD_TO_FAVORITE: `ADD_TO_FAVORITE`,
-  LOAD_FAVORITE_MOVIES: `LOAD_FAVORITE_MOVIES`,
-  LOADING_START: `LOADING_START`,
-  LOADING_END: `LOADING_END`,
-  LOAD_AVATAR: `LOAD_AVATAR`,
+  LOAD_FAVORITE_MOVIES: `LOAD_FAVORITE_MOVIES`
 };
-
-const changeGenre = (genre) => ({
-  type: ActionType.GENRE_CHANGED,
-  payload: genre
-});
 
 const changeCurrentMovie = (id) => ({
   type: ActionType.CURRENT_MOVIE_CHANGED,
   payload: id
 });
 
-const changeFilmsCount = () => ({
-  type: ActionType.SHOW_MORE,
-  payload: DEFAULT_SHOW_NUBMER
-});
-
-const playPauseMovie = (boolean) => ({
-  type: ActionType.PLAY_MOVIE,
-  payload: boolean
-});
-
 const resetStore = () => ({
   type: ActionType.RESET_STORE
 });
-
-// export const addFavoriteMovieToList = (movieList, favoriteMovie) => {
-//   const favoriteMovieIndex = movieList.findIndex((movie) => movie.id === favoriteMovie.id);
-//   const newMovieList = movieList;
-//   newMovieList[favoriteMovieIndex] = favoriteMovie;
-//   return newMovieList;
-// };
 
 const ActionCreator = {
   loadMovies: (movies) => {
@@ -104,25 +69,6 @@ const ActionCreator = {
       payload: status,
     };
   },
-
-  startLoading: () => {
-    return {
-      type: ActionType.LOADING_START,
-    };
-  },
-
-  endLoading: () => {
-    return {
-      type: ActionType.LOADING_END
-    };
-  },
-
-  loadAvatar: (link) => {
-    return {
-      type: ActionType.LOAD_AVATAR,
-      payload: link.data.avatar_url
-    };
-  }
 };
 
 const DataOperation = {
@@ -154,7 +100,7 @@ const DataOperation = {
       });
   },
 
-  addFavorite: (id = 1, status = 1) => (dispatch, getState, api) => {
+  addFavorite: (id, status) => (dispatch, getState, api) => {
     return api.post(`/favorite/${id}/${status}`);
   },
 };
@@ -162,8 +108,7 @@ const DataOperation = {
 const UserOperation = {
   checkAuth: () => (dispatch, getState, api) => {
     return api.get(`/login`)
-      .then((data) => {
-        dispatch(ActionCreator.loadAvatar(data));
+      .then(() => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       })
       .catch((err) => {
@@ -176,8 +121,7 @@ const UserOperation = {
       email: authData.login,
       password: authData.password,
     })
-      .then((data) => {
-        dispatch(ActionCreator.loadAvatar(data));
+      .then(() => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       });
   },
@@ -185,13 +129,9 @@ const UserOperation = {
 
 const reviewOperation = {
   postReview: (review) => (dispatch, getState, api) => {
-    dispatch(ActionCreator.startLoading());
     return api.post(`/comments/1`, {
       rating: review.rating,
       comment: review.comment,
-    })
-    .then(() => {
-      dispatch(ActionCreator.endLoading());
     });
   }
 };
@@ -200,20 +140,12 @@ const reviewOperation = {
 const reducer = (state = initialState, action) => {
 
   switch (action.type) {
-    case ActionType.GENRE_CHANGED:
-      return {...state, genre: action.payload, shownCount: DEFAULT_SHOW_NUBMER};
 
     case ActionType.CURRENT_MOVIE_CHANGED:
       const currentMovie = state.movieList.find((movie) =>
         parseInt(movie.id, 10) === parseInt(action.payload, 10)
       );
       return {...state, currentMovie};
-
-    case ActionType.SHOW_MORE:
-      return {...state, shownCount: state.shownCount + action.payload};
-
-    case ActionType.PLAY_MOVIE:
-      return {...state, isPlaying: action.payload};
 
     case ActionType.LOAD_MOVIES:
       return {...state, movieList: action.payload};
@@ -231,19 +163,10 @@ const reducer = (state = initialState, action) => {
       return {...state, authorizationStatus: action.payload}; // user
 
     case ActionType.RESET_STORE:
-      return {...state, genre: `All genres`, currentMovie: null, shownCount: DEFAULT_SHOW_NUBMER};
-
-    case ActionType.LOADING_START:
-      return {...state, loadingStatus: true};
-
-    case ActionType.LOADING_END:
-      return {...state, loadingStatus: false};
-
-    case ActionType.LOAD_AVATAR:
-      return {...state, avatarURL: action.payload};
+      return {...state, genre: `All genres`, currentMovie: null};
   }
 
   return state;
 };
 
-export {reducer, DataOperation, UserOperation, reviewOperation, AuthorizationStatus, ActionCreator, ActionType, changeGenre, changeCurrentMovie, changeFilmsCount, playPauseMovie, resetStore};
+export {reducer, DataOperation, UserOperation, reviewOperation, AuthorizationStatus, ActionCreator, ActionType, changeCurrentMovie, resetStore};

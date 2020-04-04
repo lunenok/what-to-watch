@@ -1,4 +1,4 @@
-import {adaptMovieList, adaptPromoMovie, adaptReview} from "../adapter.js";
+import {adaptMovieList, adaptPromoMovie, adaptReview} from "../../adapter.js";
 
 const DEFAULT_SHOW_NUBMER = 8;
 
@@ -16,9 +16,7 @@ const initialState = {
   reviews: [],
   isPlaying: false,
   shownCount: DEFAULT_SHOW_NUBMER,
-  authorizationStatus: AuthorizationStatus.NO_AUTH,
-  loadingStatus: false,
-  avatarURL: null,
+  authorizationStatus: AuthorizationStatus.NO_AUTH
 };
 
 const ActionType = {
@@ -32,10 +30,7 @@ const ActionType = {
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   ADD_TO_FAVORITE: `ADD_TO_FAVORITE`,
-  LOAD_FAVORITE_MOVIES: `LOAD_FAVORITE_MOVIES`,
-  LOADING_START: `LOADING_START`,
-  LOADING_END: `LOADING_END`,
-  LOAD_AVATAR: `LOAD_AVATAR`,
+  LOAD_FAVORITE_MOVIES: `LOAD_FAVORITE_MOVIES`
 };
 
 const changeGenre = (genre) => ({
@@ -104,25 +99,6 @@ const ActionCreator = {
       payload: status,
     };
   },
-
-  startLoading: () => {
-    return {
-      type: ActionType.LOADING_START,
-    };
-  },
-
-  endLoading: () => {
-    return {
-      type: ActionType.LOADING_END
-    };
-  },
-
-  loadAvatar: (link) => {
-    return {
-      type: ActionType.LOAD_AVATAR,
-      payload: link.data.avatar_url
-    };
-  }
 };
 
 const DataOperation = {
@@ -154,7 +130,7 @@ const DataOperation = {
       });
   },
 
-  addFavorite: (id = 1, status = 1) => (dispatch, getState, api) => {
+  addFavorite: (id, status) => (dispatch, getState, api) => {
     return api.post(`/favorite/${id}/${status}`);
   },
 };
@@ -162,8 +138,7 @@ const DataOperation = {
 const UserOperation = {
   checkAuth: () => (dispatch, getState, api) => {
     return api.get(`/login`)
-      .then((data) => {
-        dispatch(ActionCreator.loadAvatar(data));
+      .then(() => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       })
       .catch((err) => {
@@ -176,8 +151,7 @@ const UserOperation = {
       email: authData.login,
       password: authData.password,
     })
-      .then((data) => {
-        dispatch(ActionCreator.loadAvatar(data));
+      .then(() => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       });
   },
@@ -185,13 +159,9 @@ const UserOperation = {
 
 const reviewOperation = {
   postReview: (review) => (dispatch, getState, api) => {
-    dispatch(ActionCreator.startLoading());
     return api.post(`/comments/1`, {
       rating: review.rating,
       comment: review.comment,
-    })
-    .then(() => {
-      dispatch(ActionCreator.endLoading());
     });
   }
 };
@@ -232,15 +202,6 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.RESET_STORE:
       return {...state, genre: `All genres`, currentMovie: null, shownCount: DEFAULT_SHOW_NUBMER};
-
-    case ActionType.LOADING_START:
-      return {...state, loadingStatus: true};
-
-    case ActionType.LOADING_END:
-      return {...state, loadingStatus: false};
-
-    case ActionType.LOAD_AVATAR:
-      return {...state, avatarURL: action.payload};
   }
 
   return state;

@@ -11,7 +11,7 @@ import {Link} from "react-router-dom";
 import {AppRoute} from "../../constants.js";
 import {DataOperation} from "../../reducer/reducer.js";
 
-const MainPage = ({promoFilm, movieList, genre, shownCount, authorizationStatus}) => {
+const MainPage = ({promoFilm, movieList, genre, shownCount, authorizationStatus, addToFavorite, avatarURL}) => {
 
   const {name, released, backgroundImage, posterImage, isFavorite} = promoFilm;
   const promoGenre = promoFilm.genre;
@@ -62,7 +62,7 @@ const MainPage = ({promoFilm, movieList, genre, shownCount, authorizationStatus}
             {authorizationStatus === AuthorizationStatus.AUTH ?
               <div className="user-block__avatar">
                 <Link to={AppRoute.MY_LIST}>
-                  <img src="img/avatar.jpg" alt="User avatar" width={63} height={63} />
+                  <img src={`https://htmlacademy-react-3.appspot.com/${avatarURL}`} alt="User avatar" width={63} height={63} />
                 </Link>
               </div> :
               <div className="user-block">
@@ -91,13 +91,17 @@ const MainPage = ({promoFilm, movieList, genre, shownCount, authorizationStatus}
                 </Link>
 
                 {!isFavorite ?
-                  <button className="btn btn--list movie-card__button" type="button" onClick={DataOperation.addFavorite()}>
+                  <button className="btn btn--list movie-card__button" type="button" onClick={()=>{
+                    addToFavorite();
+                  }}>
                     <svg viewBox="0 0 19 20" width={19} height={20}>
                       <use xlinkHref="#add" />
                     </svg>
                     <span>My list</span>
                   </button> :
-                  <button className="btn btn--list movie-card__button" type="button" onClick={DataOperation.addFavorite()}>
+                  <button className="btn btn--list movie-card__button" type="button" onClick={()=>{
+                    addToFavorite();
+                  }}>
                     <svg viewBox="0 0 18 14" width={18} height={14}>
                       <use xlinkHref="#in-list" />
                     </svg>
@@ -178,20 +182,22 @@ MainPage.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,
   isPlaying: PropTypes.bool.isRequired,
-  addToFavorite: PropTypes.func.isRequired
+  addToFavorite: PropTypes.func.isRequired,
+  avatarURL: PropTypes.string.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({
   addToFavorite(id, status) {
     dispatch(DataOperation.addFavorite(id, status));
-  }
+  },
 });
 
 const mapToState = (state) => ({
   shownCount: state.shownCount,
   genre: state.genre,
   isPlaying: state.isPlaying,
-  authorizationStatus: state.authorizationStatus
+  authorizationStatus: state.authorizationStatus,
+  avatarURL: state.avatarURL,
 });
 
 export default connect(mapToState, mapDispatchToProps)(MainPage);

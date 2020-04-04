@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 
-const Mylist = ({favoriteMovieList}) => {
+const Mylist = ({favoriteMovieList, avatarURL}) => {
 
   return (
     <div className="user-page">
@@ -18,7 +18,7 @@ const Mylist = ({favoriteMovieList}) => {
         <h1 className="page-title user-page__title">My list</h1>
         <div className="user-block">
           <div className="user-block__avatar">
-            <img src="img/avatar.jpg" alt="User avatar" width={63} height={63} />
+            <img src={`https://htmlacademy-react-3.appspot.com/${avatarURL}`} alt="User avatar" width={63} height={63} />
           </div>
         </div>
       </header>
@@ -56,7 +56,7 @@ const Mylist = ({favoriteMovieList}) => {
 };
 
 Mylist.propTypes = {
-  favoriteMovieList: PropTypes.shape({
+  favoriteMovieList: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     posterImage: PropTypes.string.isRequired,
     previewImage: PropTypes.string.isRequired,
@@ -74,11 +74,13 @@ Mylist.propTypes = {
     isFavorite: PropTypes.bool.isRequired,
     videoLink: PropTypes.string.isRequired,
     previewVideoLink: PropTypes.string.isRequired
-  }).isRequired,
+  })).isRequired,
+  avatarURL: PropTypes.string.isRequired,
 };
 
 const mapToState = (state) => ({
-  favoriteMovieList: state.favoriteMovieList
+  favoriteMovieList: state.favoriteMovieList,
+  avatarURL: state.avatarURL,
 });
 
 export default connect(mapToState)(Mylist);

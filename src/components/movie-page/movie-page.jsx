@@ -18,6 +18,7 @@ class MoviePage extends PureComponent {
 
   componentDidMount() {
     this.props.dispatch(changeCurrentMovie(this.props.match.params.id));
+
   }
 
   componentDidUpdate(oldProps) {
@@ -27,7 +28,7 @@ class MoviePage extends PureComponent {
   }
 
   render() {
-    const {currentMovie, movies, dispatch, isPlaying, authorizationStatus} = this.props;
+    const {currentMovie, movies, dispatch, isPlaying, authorizationStatus, avatarURL} = this.props;
     if (currentMovie === null) {
       return null;
     }
@@ -84,7 +85,7 @@ class MoviePage extends PureComponent {
                 {authorizationStatus === AuthorizationStatus.AUTH ?
                   <div className="user-block__avatar">
                     <Link to={AppRoute.MY_LIST}>
-                      <img src="./img/avatar.jpg" alt="User avatar" width={63} height={63} />
+                      <img src={`https://htmlacademy-react-3.appspot.com/${avatarURL}`} alt="User avatar" width={63} height={63} />
                     </Link>
                   </div> :
                   <div className="user-block">
@@ -191,7 +192,8 @@ MoviePage.propTypes = {
   dispatch: PropTypes.func,
   match: PropTypes.object,
   isPlaying: PropTypes.bool.isRequired,
-  authorizationStatus: PropTypes.string.isRequired
+  authorizationStatus: PropTypes.string.isRequired,
+  avatarURL: PropTypes.string.isRequired
 };
 
 const mapToState = (state) => ({
@@ -199,6 +201,7 @@ const mapToState = (state) => ({
   movies: state.movieList,
   isPlaying: state.isPlaying,
   authorizationStatus: state.authorizationStatus,
+  avatarURL: state.avatarURL,
 });
 
 export default connect(mapToState)(withRouter(MoviePage));
