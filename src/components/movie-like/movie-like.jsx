@@ -37,6 +37,9 @@ MovieLike.propTypes = {
         previewImage: PropTypes.string.isRequired
       }).isRequired
   ).isRequired,
+  onMouseEnter: PropTypes.func.isRequired,
+  onMouseLeave: PropTypes.func.isRequired,
+  isPlaying: PropTypes.bool.isRequired
 };
 
 export default withActiveCard(MovieLike);
