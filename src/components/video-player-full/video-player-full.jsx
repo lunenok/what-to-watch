@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {playPauseMovie} from "../../reducer/reducer.js";
+import history from "../../history.js";
 
 const VideoPlayerFull = (props) => {
   const {playerRef, isPlaying, onPlayButtonClick, onFullScreenButtonClick, onLoadedMetadata, onTimeUpdate, remainingTime, progress, promoFilm, currentMovie, dispatch} = props;
@@ -18,10 +19,15 @@ const VideoPlayerFull = (props) => {
 
   const {name, videoLink, previewImage} = movieForPlaying;
 
+  const onExitClick = () => {
+    dispatch(playPauseMovie(false));
+    history.push(`../`);
+  };
+
   return (
     <div className="player">
       <video src={videoLink} ref ={playerRef} className="player__video" autoPlay poster={`../img/${previewImage}`} onLoadedMetadata={onLoadedMetadata} onTimeUpdate={onTimeUpdate}/>
-      <button type="button" className="player__exit" onClick={() => dispatch(playPauseMovie(false))}>Exit</button>
+      <button type="button" className="player__exit" onClick={() => onExitClick()}>Exit</button>
       <div className="player__controls">
         <div className="player__controls-row">
           <div className="player__time">

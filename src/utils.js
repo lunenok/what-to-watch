@@ -1,4 +1,4 @@
-const DEFAULT_GENRE = `All genres`;
+import {MONTHS, DEFAULT_GENRE} from "./constants.js";
 
 export const getUniqueGenres = (movies) => {
   let genres = [DEFAULT_GENRE];
@@ -21,25 +21,10 @@ export const formatRating = (rating) => {
   return rating.toString().replace(`.`, `,`);
 };
 
-const MONTH = {
-  0: `January`,
-  1: `February`,
-  2: `March`,
-  3: `April`,
-  4: `May`,
-  5: `June`,
-  6: `July`,
-  7: `August`,
-  8: `September`,
-  9: `October`,
-  10: `November`,
-  11: `December`,
-};
-
 export const formatDateForReview = (date) => {
   const _date = new Date(date);
   const day = _date.getDate();
-  const month = MONTH[_date.getMonth()];
+  const month = MONTHS[_date.getMonth()];
   const year = _date.getFullYear();
   return `${month} ${day}, ${year}`;
 };

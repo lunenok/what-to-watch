@@ -70,6 +70,14 @@ const withVideoControls = (Component) => {
         />
       );
     }
+
+    componentWillUnmount() {
+      this.setState = {
+        progress: 0,
+        duration: 0,
+        isPlaying: false
+      };
+    }
   }
 
   return WithVideoControls;
