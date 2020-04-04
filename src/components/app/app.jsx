@@ -12,8 +12,6 @@ import VideoPlayerFull from "../../hocs/with-video-controls/with-video-controls.
 import Mylist from "../my-list/my-list.jsx";
 import AddReview from "../add-review/add-review.jsx";
 import PrivateRoute from "../private-route/private-route.jsx";
-
-
 class App extends PureComponent {
   constructor(props) {
     super(props);
@@ -80,23 +78,21 @@ class App extends PureComponent {
             />
           </Route>
 
-          <PrivateRoute exact path={AppRoute.Mylist} render={() => {
+          <PrivateRoute exact path={AppRoute.REVIEW} render={() => {
+            return (
+              <AddReview
+                onSubmit={this.props.comment}
+              />
+            );
+          }}
+          />
+
+          <PrivateRoute exact path={AppRoute.MY_LIST} render={() => {
             return (
               <Mylist/>
             );
           }}
           />
-
-
-          {/* <Route exact path={AppRoute.MY_LIST}>
-            <Mylist/>
-          </Route> */}
-
-          <Route exact path={AppRoute.REVIEW}>
-            <AddReview
-              onSubmit={this.props.comment}
-            />
-          </Route>
 
         </Switch>
       </Router>

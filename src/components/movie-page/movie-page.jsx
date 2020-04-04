@@ -9,6 +9,8 @@ import {NavLink} from "react-router-dom";
 import {resetStore, playPauseMovie} from "../../reducer/reducer.js";
 import {getMoviesLikeThis} from "../../reducer/selectors.js";
 import VideoPlayerFull from "../../hocs/with-video-controls/with-video-controls.jsx";
+import {Link} from "react-router-dom";
+import {AppRoute} from "../../constants.js";
 class MoviePage extends PureComponent {
   constructor(props) {
     super(props);
@@ -81,10 +83,12 @@ class MoviePage extends PureComponent {
               <div className="user-block">
                 {authorizationStatus === AuthorizationStatus.AUTH ?
                   <div className="user-block__avatar">
-                    <img src="img/avatar.jpg" alt="User avatar" width={63} height={63} />
+                    <Link to={AppRoute.MY_LIST}>
+                      <img src="./img/avatar.jpg" alt="User avatar" width={63} height={63} />
+                    </Link>
                   </div> :
                   <div className="user-block">
-                    <a href="sign-in.html" className="user-block__link">Sign in</a>
+                    <Link to={AppRoute.SIGN_IN} className="user-block__link">Sign in</Link>
                   </div>
                 }
               </div>
@@ -109,10 +113,7 @@ class MoviePage extends PureComponent {
                     </svg>
                     <span>My list</span>
                   </button>
-                  {authorizationStatus === AuthorizationStatus.AUTH ?
-                    <a href="add-review.html" className="btn movie-card__button">Add review</a> :
-                    null
-                  }
+                  <Link to={AppRoute.REVIEW} className="btn movie-card__button">Add review</Link>
                 </div>
               </div>
             </div>

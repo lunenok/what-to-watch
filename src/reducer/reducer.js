@@ -99,13 +99,6 @@ const ActionCreator = {
       payload: status,
     };
   },
-
-  // addFavorite: (movie) => {
-  //   return {
-  //     type: ActionType.ADD_TO_FAVORITE,
-  //     payload: movie
-  //   };
-  // },
 };
 
 const DataOperation = {

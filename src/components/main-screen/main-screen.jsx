@@ -11,9 +11,9 @@ import {Link} from "react-router-dom";
 import {AppRoute} from "../../constants.js";
 import {DataOperation} from "../../reducer/reducer.js";
 
-const MainPage = ({promoFilm, movieList, genre, shownCount, authorizationStatus, addToFavorite}) => {
+const MainPage = ({promoFilm, movieList, genre, shownCount, authorizationStatus}) => {
 
-  const {id, name, released, backgroundImage, posterImage, isFavorite} = promoFilm;
+  const {name, released, backgroundImage, posterImage, isFavorite} = promoFilm;
   const promoGenre = promoFilm.genre;
   const uniqueGenres = getUniqueGenres(movieList);
   const currentGenreCount = getMoviesListLenghtByGenre(movieList, genre);
