@@ -2,6 +2,7 @@ import React, {PureComponent, createRef} from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import history from "../../history.js";
+import {connect} from "react-redux";
 
 const Config = {
   MIN_TEXT_LENGHT: 50,
@@ -31,11 +32,13 @@ class AddReview extends PureComponent {
   }
 
   render() {
+    const {id, name, backgroundImage, posterImage} = this.props.currentMovie;
+
     return (
       <section className="movie-card movie-card--full">
         <div className="movie-card__header">
           <div className="movie-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+            <img src={backgroundImage} alt={`${name} img`} />
           </div>
           <h1 className="visually-hidden">WTW</h1>
           <header className="page-header">
@@ -51,7 +54,7 @@ class AddReview extends PureComponent {
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
-                  <a href="movie-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
+                  <a href="movie-page.html" className="breadcrumbs__link">{name}</a>
                 </li>
                 <li className="breadcrumbs__item">
                   <a className="breadcrumbs__link">Add review</a>
@@ -65,7 +68,7 @@ class AddReview extends PureComponent {
             </div>
           </header>
           <div className="movie-card__poster movie-card__poster--small">
-            <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width={218} height={327} />
+            <img src={posterImage} alt={`${name} img`} width={218} height={327} />
           </div>
         </div>
         <div className="add-review">
@@ -106,8 +109,31 @@ class AddReview extends PureComponent {
 
 }
 
+const mapToState = (state) => ({
+  currentMovie: state.currentMovie,
+});
+
 AddReview.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  currentMovie: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    scoresCount: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf(PropTypes.string),
+    runTime: PropTypes.number.isRequired,
+    genre: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired
+  }).isRequired,
 };
 
-export default AddReview;
+export default connect(mapToState)(AddReview);

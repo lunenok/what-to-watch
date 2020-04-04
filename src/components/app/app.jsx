@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import {Switch, Route, Router} from "react-router-dom";
 import {AppRoute} from "../../constants.js";
 import {connect} from "react-redux";
-import {DataOperation, UserOperation, reviewOperation, AuthorizationStatus} from "../../reducer/reducer.js";
+import {DataOperation, UserOperation, AuthorizationStatus} from "../../reducer/reducer.js";
 import history from "../../history.js";
 import PropTypes from "prop-types";
 import MainPage from "./../main-screen/main-screen.jsx";
@@ -10,7 +10,6 @@ import MoviePage from "./../movie-page/movie-page.jsx";
 import AuthScreen from "../sign-in/sign-in.jsx";
 import VideoPlayerFull from "../../hocs/with-video-controls/with-video-controls.jsx";
 import Mylist from "../my-list/my-list.jsx";
-import AddReview from "../add-review/add-review.jsx";
 import PrivateRoute from "../private-route/private-route.jsx";
 class App extends PureComponent {
   constructor(props) {
@@ -77,15 +76,6 @@ class App extends PureComponent {
               onSubmit={this.props.login}
             />
           </Route>
-
-          <PrivateRoute exact path={AppRoute.REVIEW} render={() => {
-            return (
-              <AddReview
-                onSubmit={this.props.comment}
-              />
-            );
-          }}
-          />
 
           <PrivateRoute exact path={AppRoute.MY_LIST} render={() => {
             return (
@@ -161,7 +151,6 @@ App.propTypes = {
   })).isRequired,
   login: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
-  comment: PropTypes.func.isRequired,
   loadPromoMovie: PropTypes.func.isRequired,
   loadMovies: PropTypes.func.isRequired,
   loadFavoriteMovies: PropTypes.func.isRequired,
@@ -175,10 +164,6 @@ const mapDispatchToProps = (dispatch) => ({
 
   checkAuth() {
     dispatch(UserOperation.checkAuth());
-  },
-
-  comment(review) {
-    dispatch(reviewOperation.postReview(review));
   },
 
   loadMovies() {
