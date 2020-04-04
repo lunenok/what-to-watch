@@ -1,16 +1,19 @@
 import React, {PureComponent} from "react";
 import {Switch, Route, Router} from "react-router-dom";
-import history from "../../history.js";
+import {AppRoute} from "../../constants.js";
 import {connect} from "react-redux";
+import {DataOperation, UserOperation, reviewOperation, AuthorizationStatus} from "../../reducer/reducer.js";
+import history from "../../history.js";
 import PropTypes from "prop-types";
 import MainPage from "./../main-screen/main-screen.jsx";
 import MoviePage from "./../movie-page/movie-page.jsx";
 import AuthScreen from "../sign-in/sign-in.jsx";
 import VideoPlayerFull from "../../hocs/with-video-controls/with-video-controls.jsx";
-import {DataOperation, UserOperation, reviewOperation} from "../../reducer/reducer.js";
-import {AuthorizationStatus} from "../../reducer/reducer.js";
+import Mylist from "../my-list/my-list.jsx";
 import AddReview from "../add-review/add-review.jsx";
-import {AppRoute} from "../../constants.js";
+import PrivateRoute from "../private-route/private-route.jsx";
+
+
 class App extends PureComponent {
   constructor(props) {
     super(props);
@@ -76,6 +79,18 @@ class App extends PureComponent {
               onSubmit={this.props.login}
             />
           </Route>
+
+          <PrivateRoute exact path={AppRoute.Mylist} render={() => {
+            return (
+              <Mylist/>
+            );
+          }}
+          />
+
+
+          {/* <Route exact path={AppRoute.MY_LIST}>
+            <Mylist/>
+          </Route> */}
 
           <Route exact path={AppRoute.REVIEW}>
             <AddReview
@@ -187,6 +202,7 @@ const mapToState = (state) => ({
   movieList: state.movieList,
   promoFilm: state.promoFilm,
   authorizationStatus: state.authorizationStatus,
+  favoriteMovieList: state.favoriteMovieList
 });
 
 export default connect(mapToState, mapDispatchToProps)(App);

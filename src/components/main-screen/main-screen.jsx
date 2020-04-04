@@ -61,7 +61,9 @@ const MainPage = ({promoFilm, movieList, genre, shownCount, authorizationStatus,
           <div className="user-block">
             {authorizationStatus === AuthorizationStatus.AUTH ?
               <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width={63} height={63} />
+                <Link to={AppRoute.MY_LIST}>
+                  <img src="img/avatar.jpg" alt="User avatar" width={63} height={63} />
+                </Link>
               </div> :
               <div className="user-block">
                 <Link to={AppRoute.SIGN_IN} className="user-block__link">Sign in</Link>
