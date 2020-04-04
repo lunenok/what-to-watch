@@ -62,13 +62,6 @@ const resetStore = () => ({
   type: ActionType.RESET_STORE
 });
 
-// export const addFavoriteMovieToList = (movieList, favoriteMovie) => {
-//   const favoriteMovieIndex = movieList.findIndex((movie) => movie.id === favoriteMovie.id);
-//   const newMovieList = movieList;
-//   newMovieList[favoriteMovieIndex] = favoriteMovie;
-//   return newMovieList;
-// };
-
 const ActionCreator = {
   loadMovies: (movies) => {
     return {
@@ -154,7 +147,7 @@ const DataOperation = {
       });
   },
 
-  addFavorite: (id = 1, status = 1) => (dispatch, getState, api) => {
+  addFavorite: (id, status) => (dispatch, getState, api) => {
     return api.post(`/favorite/${id}/${status}`);
   },
 };

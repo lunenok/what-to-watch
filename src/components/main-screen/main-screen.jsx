@@ -92,7 +92,7 @@ const MainPage = ({promoFilm, movieList, genre, shownCount, authorizationStatus,
 
                 {!isFavorite ?
                   <button className="btn btn--list movie-card__button" type="button" onClick={()=>{
-                    addToFavorite();
+                    addToFavorite(promoFilm.id, 1);
                   }}>
                     <svg viewBox="0 0 19 20" width={19} height={20}>
                       <use xlinkHref="#add" />
@@ -100,7 +100,7 @@ const MainPage = ({promoFilm, movieList, genre, shownCount, authorizationStatus,
                     <span>My list</span>
                   </button> :
                   <button className="btn btn--list movie-card__button" type="button" onClick={()=>{
-                    addToFavorite();
+                    addToFavorite(promoFilm.id, 0);
                   }}>
                     <svg viewBox="0 0 18 14" width={18} height={14}>
                       <use xlinkHref="#in-list" />

@@ -6,7 +6,7 @@ import {withRouter} from "react-router-dom";
 import {changeCurrentMovie, AuthorizationStatus} from "../../reducer/reducer";
 import {connect} from "react-redux";
 import {NavLink} from "react-router-dom";
-import {resetStore, playPauseMovie} from "../../reducer/reducer.js";
+import {resetStore, playPauseMovie, DataOperation} from "../../reducer/reducer.js";
 import {getMoviesLikeThis} from "../../reducer/selectors.js";
 import VideoPlayerFull from "../../hocs/with-video-controls/with-video-controls.jsx";
 import {Link} from "react-router-dom";
@@ -28,13 +28,13 @@ class MoviePage extends PureComponent {
   }
 
   render() {
-    const {currentMovie, movies, dispatch, isPlaying, authorizationStatus, avatarURL} = this.props;
+    const {currentMovie, movies, dispatch, isPlaying, authorizationStatus, avatarURL, addToFavorite} = this.props;
     if (currentMovie === null) {
       return null;
     }
     const movieLikeThis = getMoviesLikeThis(movies, currentMovie);
 
-    const {name, genre, released, backgroundImage, posterImage, backgroundColor} = currentMovie;
+    const {id, name, genre, released, backgroundImage, posterImage, backgroundColor, isFavorite} = currentMovie;
 
     if (isPlaying) {
       return (<VideoPlayerFull/>);
@@ -108,12 +108,26 @@ class MoviePage extends PureComponent {
                     </svg>
                     <span>Play</span>
                   </button>
-                  <button className="btn btn--list movie-card__button" type="button">
-                    <svg viewBox="0 0 19 20" width={19} height={20}>
-                      <use xlinkHref="#add" />
-                    </svg>
-                    <span>My list</span>
-                  </button>
+
+                  {!isFavorite ?
+                    <button className="btn btn--list movie-card__button" type="button" onClick={()=>{
+                      addToFavorite(id, 1);
+                    }}>
+                      <svg viewBox="0 0 19 20" width={19} height={20}>
+                        <use xlinkHref="#add" />
+                      </svg>
+                      <span>My list</span>
+                    </button> :
+                    <button className="btn btn--list movie-card__button" type="button" onClick={()=>{
+                      addToFavorite(id, 0);
+                    }}>
+                      <svg viewBox="0 0 18 14" width={18} height={14}>
+                        <use xlinkHref="#in-list" />
+                      </svg>
+                      <span>My list</span>
+                    </button>
+                  }
+
                   <Link to={AppRoute.REVIEW} className="btn movie-card__button">Add review</Link>
                 </div>
               </div>
@@ -193,8 +207,16 @@ MoviePage.propTypes = {
   match: PropTypes.object,
   isPlaying: PropTypes.bool.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
-  avatarURL: PropTypes.string.isRequired
+  avatarURL: PropTypes.string.isRequired,
+  addToFavorite: PropTypes.func.isRequired,
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  addToFavorite(id, status) {
+    dispatch(DataOperation.addFavorite(id, status));
+  },
+  dispatch
+});
 
 const mapToState = (state) => ({
   currentMovie: state.currentMovie,
@@ -204,4 +226,4 @@ const mapToState = (state) => ({
   avatarURL: state.avatarURL,
 });
 
-export default connect(mapToState)(withRouter(MoviePage));
+export default connect(mapToState, mapDispatchToProps)(withRouter(MoviePage));
