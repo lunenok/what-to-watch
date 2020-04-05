@@ -147,7 +147,13 @@ const DataOperation = {
   },
 
   addFavorite: (id, status) => (dispatch, getState, api) => {
-    return api.post(`/favorite/${id}/${status}`);
+    return api.post(`/favorite/${id}/${status}`)
+      .then(()=>{
+        api.get(`/films`)
+        .then((response) => {
+          dispatch(ActionCreator.loadMovies(response.data));
+        });
+      });
   },
 };
 

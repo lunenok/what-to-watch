@@ -23,7 +23,9 @@ class MoviePage extends PureComponent {
 
   componentDidMount() {
     this.props.dispatch(changeCurrentMovie(this.props.match.params.id));
-    console.log(this.props);
+    // if (this.props.movies.length === 0) {
+    //   this.props.loadMovies();
+    // }
   }
 
   componentDidUpdate(oldProps) {
@@ -225,6 +227,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   comment(review, id) {
     dispatch(reviewOperation.postReview(review, id));
+  },
+  loadMovies() {
+    dispatch(DataOperation.loadMovies());
   },
   dispatch
 });
