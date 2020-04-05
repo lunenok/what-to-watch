@@ -29,11 +29,13 @@ class AddReview extends PureComponent {
       rating: this.ratingRef.current.elements.rating.value,
       comment: this.commentRef.current.value,
     }, this.props.currentMovie.id);
+
+    history.goBack();
   }
 
   render() {
     const {name, backgroundImage, posterImage} = this.props.currentMovie;
-    const {loadingStatus} = this.props;
+    const {loadingStatus, avatarURL} = this.props;
 
     return (
       <section className="movie-card movie-card--full">
@@ -64,7 +66,7 @@ class AddReview extends PureComponent {
             </nav>
             <div className="user-block">
               <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width={63} height={63} />
+                <img src={`https://htmlacademy-react-3.appspot.com/${avatarURL}`} alt="User avatar" width={63} height={63} />
               </div>
             </div>
           </header>
@@ -88,7 +90,7 @@ class AddReview extends PureComponent {
                 <label className="rating__label" htmlFor="star-5">Rating 5</label>
               </div>
             </div>
-            <div className="add-review__text">
+            <div className="add-review__text" s>
               <textarea
                 className="add-review__textarea"
                 ref={this.commentRef} name="review-text"
@@ -112,7 +114,8 @@ class AddReview extends PureComponent {
 
 const mapToState = (state) => ({
   currentMovie: state.currentMovie,
-  loadingStatus: state.loadingStatus
+  loadingStatus: state.loadingStatus,
+  avatarURL: state.avatarURL,
 });
 
 AddReview.propTypes = {
@@ -136,7 +139,8 @@ AddReview.propTypes = {
     videoLink: PropTypes.string.isRequired,
     previewVideoLink: PropTypes.string.isRequired
   }).isRequired,
-  loadingStatus: PropTypes.func.isRequired
+  loadingStatus: PropTypes.func.isRequired,
+  avatarURL: PropTypes.string.isRequired,
 };
 
 export default connect(mapToState)(AddReview);
