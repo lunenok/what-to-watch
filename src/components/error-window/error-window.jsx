@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const ErrorWindow = ({message}) => {
+const ErrorWindow = ({message = `Выполните вход`}) => {
   return (
-    <div style={{zIndex: 100, width: `100px`, height: `300px`, margin: `0 auto`, top: 0, textAlign: `center`, backgroundColor: `red`, position: `absolute`, left: 0, right: 0, fontSize: `30px`}}>
+    <div style={{zIndex: 100, top: 0, margin: `0 auto`, textAlign: `center`, backgroundColor: `red`, position: `absolute`, left: 0, right: 0, fontSize: `30px`}}>
       {message}
     </div>
   );

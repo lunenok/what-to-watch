@@ -1,18 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
 import withFavoriteMovie from "../../hocs/with-favorite-movie/with-favorite-movie.jsx";
+import {showError, AuthorizationStatus} from "../../reducer/reducer.js";
+import {connect} from "react-redux";
 
 const FavoriteButton = (props) => {
-  const {isFavorite, currentMovie, _onFavoriteButtonClick, addToFavorite, authorizationStatus} = props;
+  const {isFavorite, currentMovie, _onFavoriteButtonClick, addToFavorite, authorizationStatus, dispatch} = props;
 
   if (!isFavorite) {
     return (
       <button className="btn btn--list movie-card__button" type="button" onClick={()=>{
-        // if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
-        //   return (
-        //     <ErrorWindow message={`Пожалуйста, зайдите в учетную запись`}/>
-        //   );
-        // }
+        if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
+          dispatch(showError(true));
+          setTimeout(()=>{
+            dispatch(showError(false));
+          }, 1000);
+          return;
+        }
         addToFavorite(currentMovie.id, 1);
         _onFavoriteButtonClick();
       }}>
@@ -25,11 +29,13 @@ const FavoriteButton = (props) => {
   } else {
     return (
       <button className="btn btn--list movie-card__button" type="button" onClick={()=>{
-        // if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
-        //   return (
-        //     <ErrorWindow message={`Пожалуйста, зайдите в учетную запись`}/>
-        //   );
-        // }
+        if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
+          dispatch(showError(true));
+          setTimeout(()=>{
+            dispatch(showError(false));
+          }, 1000);
+          return;
+        }
         addToFavorite(currentMovie.id, 0);
         _onFavoriteButtonClick();
       }}>
@@ -46,4 +52,4 @@ FavoriteButton.propTypes = {
   children: PropTypes.element
 };
 
-export default withFavoriteMovie(FavoriteButton);
+export default connect()(withFavoriteMovie(FavoriteButton));

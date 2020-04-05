@@ -18,6 +18,7 @@ const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   loadingStatus: false,
   avatarURL: null,
+  isError: false,
 };
 
 const ActionType = {
@@ -35,6 +36,7 @@ const ActionType = {
   LOADING_START: `LOADING_START`,
   LOADING_END: `LOADING_END`,
   LOAD_AVATAR: `LOAD_AVATAR`,
+  SHOW_ERROR: `SHOW_ERROR`
 };
 
 const changeGenre = (genre) => ({
@@ -59,6 +61,11 @@ const playPauseMovie = (boolean) => ({
 
 const resetStore = () => ({
   type: ActionType.RESET_STORE
+});
+
+const showError = (boolean) => ({
+  type: ActionType.SHOW_ERROR,
+  payload: boolean
 });
 
 const ActionCreator = {
@@ -239,9 +246,12 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.LOAD_AVATAR:
       return {...state, avatarURL: action.payload};
+
+    case ActionType.SHOW_ERROR:
+      return {...state, isError: action.payload};
   }
 
   return state;
 };
 
-export {reducer, DataOperation, UserOperation, reviewOperation, AuthorizationStatus, ActionCreator, ActionType, changeGenre, changeCurrentMovie, changeFilmsCount, playPauseMovie, resetStore};
+export {reducer, DataOperation, UserOperation, reviewOperation, AuthorizationStatus, ActionCreator, ActionType, changeGenre, showError, changeCurrentMovie, changeFilmsCount, playPauseMovie, resetStore};

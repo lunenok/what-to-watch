@@ -1,8 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {DataOperation, AuthorizationStatus} from "../../reducer/reducer.js";
-import ErrorWindow from "../../components/error-window/error-window.jsx";
+import {DataOperation} from "../../reducer/reducer.js";
 
 const withFavoriteMovie = (Component) => {
   class WithFavoriteMovie extends PureComponent {
@@ -30,7 +29,6 @@ const withFavoriteMovie = (Component) => {
     }
 
     render() {
-      const {currentMovie, authorizationStatus} = this.props;
       return (
         <Component
           {...this.props}
@@ -39,32 +37,33 @@ const withFavoriteMovie = (Component) => {
           _onFavoriteButtonClick={this._onFavoriteButtonClick}
           addFavorite={this.addFavorite}>
         </Component>
-      )}
+      );
+    }
   }
 
-  // WithFavoriteMovie.propTypes = {
-  //   currentMovie: PropTypes.shape({
-  //     name: PropTypes.string.isRequired,
-  //     posterImage: PropTypes.string.isRequired,
-  //     previewImage: PropTypes.string.isRequired,
-  //     backgroundImage: PropTypes.string.isRequired,
-  //     backgroundColor: PropTypes.string.isRequired,
-  //     description: PropTypes.string.isRequired,
-  //     rating: PropTypes.number.isRequired,
-  //     scoresCount: PropTypes.number.isRequired,
-  //     director: PropTypes.string.isRequired,
-  //     starring: PropTypes.arrayOf(PropTypes.string),
-  //     runTime: PropTypes.number.isRequired,
-  //     genre: PropTypes.string.isRequired,
-  //     released: PropTypes.number.isRequired,
-  //     id: PropTypes.number.isRequired,
-  //     isFavorite: PropTypes.bool.isRequired,
-  //     videoLink: PropTypes.string.isRequired,
-  //     previewVideoLink: PropTypes.string.isRequired
-  //   }).isRequired,
-  //   addToFavorite: PropTypes.func.isRequired,
-  //   authorizationStatus: PropTypes.string.isRequired
-  // };
+  WithFavoriteMovie.propTypes = {
+    currentMovie: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      posterImage: PropTypes.string.isRequired,
+      previewImage: PropTypes.string.isRequired,
+      backgroundImage: PropTypes.string.isRequired,
+      backgroundColor: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      rating: PropTypes.number.isRequired,
+      scoresCount: PropTypes.number.isRequired,
+      director: PropTypes.string.isRequired,
+      starring: PropTypes.arrayOf(PropTypes.string),
+      runTime: PropTypes.number.isRequired,
+      genre: PropTypes.string.isRequired,
+      released: PropTypes.number.isRequired,
+      id: PropTypes.number.isRequired,
+      isFavorite: PropTypes.bool.isRequired,
+      videoLink: PropTypes.string.isRequired,
+      previewVideoLink: PropTypes.string.isRequired
+    }).isRequired,
+    addToFavorite: PropTypes.func.isRequired,
+    authorizationStatus: PropTypes.string.isRequired
+  };
 
 
   const mapDispatchToProps = (dispatch) => ({
@@ -81,6 +80,5 @@ const withFavoriteMovie = (Component) => {
   return connect(mapToState, mapDispatchToProps)(WithFavoriteMovie);
 
 };
-
 
 export default withFavoriteMovie;

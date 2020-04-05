@@ -11,6 +11,7 @@ import AuthScreen from "../sign-in/sign-in.jsx";
 import VideoPlayerFull from "../../hocs/with-video-controls/with-video-controls.jsx";
 import Mylist from "../my-list/my-list.jsx";
 import PrivateRoute from "../private-route/private-route.jsx";
+import ErrorWindow from "../error-window/error-window.jsx";
 class App extends PureComponent {
   constructor(props) {
     super(props);
@@ -24,7 +25,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {movieList, currentMovie, promoFilm} = this.props;
+    const {movieList, currentMovie, promoFilm, showError} = this.props;
 
     if (movieList.length === 0 || Object.keys(promoFilm).length === 0) {
       return (
@@ -34,41 +35,44 @@ class App extends PureComponent {
       );
     } else {
       return (
-        <Router history={history}>
-          <Switch>
+        <React.Fragment>
+          <Router history={history}>
+            <Switch>
 
-            <Route exact path="/">
-              <MainPage
-                promoFilm={promoFilm}
-                movieList={movieList}
+              <Route exact path="/">
+                <MainPage
+                  promoFilm={promoFilm}
+                  movieList={movieList}
+                />
+              </Route>
+
+              <Route exact path={AppRoute.PLAYER}>
+                <VideoPlayerFull/>
+              </Route>
+
+              <Route path="/movie/:id">
+                <MoviePage
+                  currentMovie={currentMovie}
+                />
+              </Route>
+
+              <Route exact path={AppRoute.SIGN_IN}>
+                <AuthScreen
+                  onSubmit={this.props.login}
+                />
+              </Route>
+
+              <PrivateRoute exact path={AppRoute.MY_LIST} render={() => {
+                return (
+                  <Mylist/>
+                );
+              }}
               />
-            </Route>
 
-            <Route exact path={AppRoute.PLAYER}>
-              <VideoPlayerFull/>
-            </Route>
-
-            <Route path="/movie/:id">
-              <MoviePage
-                currentMovie={currentMovie}
-              />
-            </Route>
-
-            <Route exact path={AppRoute.SIGN_IN}>
-              <AuthScreen
-                onSubmit={this.props.login}
-              />
-            </Route>
-
-            <PrivateRoute exact path={AppRoute.MY_LIST} render={() => {
-              return (
-                <Mylist/>
-              );
-            }}
-            />
-
-          </Switch>
-        </Router>
+            </Switch>
+          </Router>
+          {showError && <ErrorWindow/>}
+        </React.Fragment>
       );
     }
   }
@@ -138,6 +142,7 @@ App.propTypes = {
   loadMovies: PropTypes.func.isRequired,
   loadFavoriteMovies: PropTypes.func.isRequired,
   checkAuth: PropTypes.func.isRequired,
+  showError: PropTypes.bool.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -166,7 +171,8 @@ const mapToState = (state) => ({
   movieList: state.movieList,
   promoFilm: state.promoFilm,
   authorizationStatus: state.authorizationStatus,
-  favoriteMovieList: state.favoriteMovieList
+  favoriteMovieList: state.favoriteMovieList,
+  showError: state.isError
 });
 
 export default connect(mapToState, mapDispatchToProps)(App);
