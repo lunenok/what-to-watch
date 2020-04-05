@@ -14,6 +14,7 @@ import {Link} from "react-router-dom";
 import {AppRoute} from "../../constants.js";
 import AddReview from "../add-review/add-review.jsx";
 import PrivateRoute from "../private-route/private-route.jsx";
+import FavoriteButton from "../favorite-button/favorite-button.jsx";
 class MoviePage extends PureComponent {
   constructor(props) {
     super(props);
@@ -34,13 +35,13 @@ class MoviePage extends PureComponent {
   }
 
   render() {
-    const {currentMovie, movies, dispatch, authorizationStatus, avatarURL, addToFavorite} = this.props;
+    const {currentMovie, movies, dispatch, authorizationStatus, avatarURL} = this.props;
     if (currentMovie === null) {
       return null;
     }
     const movieLikeThis = getMoviesLikeThis(movies, currentMovie);
 
-    const {id, name, genre, released, backgroundImage, posterImage, backgroundColor, isFavorite} = currentMovie;
+    const {id, name, genre, released, backgroundImage, posterImage, backgroundColor} = currentMovie;
 
     return (
       <React.Fragment>
@@ -106,12 +107,7 @@ class MoviePage extends PureComponent {
                       <span className="movie-card__year">{released}</span>
                     </p>
                     <div className="movie-card__buttons">
-                      {/* <button className="btn btn--play movie-card__button" type="button" onClick={() => dispatch(playPauseMovie(true))}>
-                        <svg viewBox="0 0 19 19" width={19} height={19}>
-                          <use xlinkHref="#play-s" />
-                        </svg>
-                        <span>Play</span>
-                      </button> */}
+
                       <Link to={`/movie/${id}/player`} className="btn btn--play movie-card__button">
                         <svg viewBox="0 0 19 19" width={19} height={19}>
                           <use xlinkHref="#play-s" />
@@ -119,24 +115,7 @@ class MoviePage extends PureComponent {
                         <span>Play</span>
                       </Link>
 
-                      {!isFavorite ?
-                        <button className="btn btn--list movie-card__button" type="button" onClick={()=>{
-                          addToFavorite(id, 1);
-                        }}>
-                          <svg viewBox="0 0 19 20" width={19} height={20}>
-                            <use xlinkHref="#add" />
-                          </svg>
-                          <span>My list</span>
-                        </button> :
-                        <button className="btn btn--list movie-card__button" type="button" onClick={()=>{
-                          addToFavorite(id, 0);
-                        }}>
-                          <svg viewBox="0 0 18 14" width={18} height={14}>
-                            <use xlinkHref="#in-list" />
-                          </svg>
-                          <span>My list</span>
-                        </button>
-                      }
+                      <FavoriteButton currentMovie={currentMovie}/>
 
                       <Link to={`/movie/${id}/review`} className="btn movie-card__button">Add review</Link>
 
@@ -236,7 +215,6 @@ MoviePage.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   avatarURL: PropTypes.string.isRequired,
-  addToFavorite: PropTypes.func.isRequired,
   comment: PropTypes.func.isRequired
 };
 

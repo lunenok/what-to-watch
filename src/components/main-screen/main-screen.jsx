@@ -10,10 +10,11 @@ import {getMoviesListLenghtByGenre} from "../../reducer/selectors.js";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../constants.js";
 import {DataOperation} from "../../reducer/reducer.js";
+import FavoriteButton from "../favorite-button/favorite-button.jsx";
 
-const MainPage = ({promoFilm, movieList, genre, shownCount, authorizationStatus, addToFavorite, avatarURL}) => {
+const MainPage = ({promoFilm, movieList, genre, shownCount, authorizationStatus, avatarURL}) => {
 
-  const {name, released, backgroundImage, posterImage, isFavorite} = promoFilm;
+  const {name, released, backgroundImage, posterImage} = promoFilm;
   const promoGenre = promoFilm.genre;
   const uniqueGenres = getUniqueGenres(movieList);
   const currentGenreCount = getMoviesListLenghtByGenre(movieList, genre);
@@ -90,24 +91,7 @@ const MainPage = ({promoFilm, movieList, genre, shownCount, authorizationStatus,
                   <span>Play</span>
                 </Link>
 
-                {!isFavorite ?
-                  <button className="btn btn--list movie-card__button" type="button" onClick={()=>{
-                    addToFavorite(promoFilm.id, 1);
-                  }}>
-                    <svg viewBox="0 0 19 20" width={19} height={20}>
-                      <use xlinkHref="#add" />
-                    </svg>
-                    <span>My list</span>
-                  </button> :
-                  <button className="btn btn--list movie-card__button" type="button" onClick={()=>{
-                    addToFavorite(promoFilm.id, 0);
-                  }}>
-                    <svg viewBox="0 0 18 14" width={18} height={14}>
-                      <use xlinkHref="#in-list" />
-                    </svg>
-                    <span>My list</span>
-                  </button>
-                }
+                <FavoriteButton currentMovie={promoFilm}/>
 
               </div>
             </div>
