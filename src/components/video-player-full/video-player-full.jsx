@@ -21,7 +21,7 @@ const VideoPlayerFull = (props) => {
 
   const onExitClick = () => {
     dispatch(playPauseMovie(false));
-    history.push(`../`);
+    history.goBack();
   };
 
   return (

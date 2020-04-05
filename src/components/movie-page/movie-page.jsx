@@ -7,7 +7,7 @@ import {Switch, Route} from "react-router-dom";
 import {changeCurrentMovie, AuthorizationStatus} from "../../reducer/reducer";
 import {connect} from "react-redux";
 import {NavLink} from "react-router-dom";
-import {resetStore, playPauseMovie, DataOperation, reviewOperation} from "../../reducer/reducer.js";
+import {resetStore, DataOperation, reviewOperation} from "../../reducer/reducer.js";
 import {getMoviesLikeThis} from "../../reducer/selectors.js";
 import VideoPlayerFull from "../../hocs/with-video-controls/with-video-controls.jsx";
 import {Link} from "react-router-dom";
@@ -34,17 +34,13 @@ class MoviePage extends PureComponent {
   }
 
   render() {
-    const {currentMovie, movies, dispatch, isPlaying, authorizationStatus, avatarURL, addToFavorite} = this.props;
+    const {currentMovie, movies, dispatch, authorizationStatus, avatarURL, addToFavorite} = this.props;
     if (currentMovie === null) {
       return null;
     }
     const movieLikeThis = getMoviesLikeThis(movies, currentMovie);
 
     const {id, name, genre, released, backgroundImage, posterImage, backgroundColor, isFavorite} = currentMovie;
-
-    if (isPlaying) {
-      return (<VideoPlayerFull/>);
-    }
 
     return (
       <React.Fragment>
@@ -110,12 +106,18 @@ class MoviePage extends PureComponent {
                       <span className="movie-card__year">{released}</span>
                     </p>
                     <div className="movie-card__buttons">
-                      <button className="btn btn--play movie-card__button" type="button" onClick={() => dispatch(playPauseMovie(true))}>
+                      {/* <button className="btn btn--play movie-card__button" type="button" onClick={() => dispatch(playPauseMovie(true))}>
                         <svg viewBox="0 0 19 19" width={19} height={19}>
                           <use xlinkHref="#play-s" />
                         </svg>
                         <span>Play</span>
-                      </button>
+                      </button> */}
+                      <Link to={`/movie/${id}/player`} className="btn btn--play movie-card__button">
+                        <svg viewBox="0 0 19 19" width={19} height={19}>
+                          <use xlinkHref="#play-s" />
+                        </svg>
+                        <span>Play</span>
+                      </Link>
 
                       {!isFavorite ?
                         <button className="btn btn--list movie-card__button" type="button" onClick={()=>{
@@ -171,6 +173,13 @@ class MoviePage extends PureComponent {
           <PrivateRoute exact path={`/movie/${id}/review`} render={() => {
             return (
               <AddReview onSubmit={this.props.comment}/>
+            );
+          }}
+          />
+
+          <Route exact path={`/movie/${id}/player`} render={() => {
+            return (
+              <VideoPlayerFull/>
             );
           }}
           />
