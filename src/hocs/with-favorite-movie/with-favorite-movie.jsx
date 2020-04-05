@@ -32,7 +32,7 @@ const withFavoriteMovie = (Component) => {
           <button className="btn btn--list movie-card__button" type="button" onClick={()=>{
             if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
               return (
-                <ErrorWindow errorMessage={`Пожалуйста, зайдите в учетную запись`}/>
+                <ErrorWindow message={`Пожалуйста, зайдите в учетную запись`}/>
               );
             }
             this.addToFavorite(currentMovie.id, 1);
@@ -51,7 +51,7 @@ const withFavoriteMovie = (Component) => {
           <button className="btn btn--list movie-card__button" type="button" onClick={()=>{
             if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
               return (
-                <ErrorWindow errorMessage={`Пожалуйста, зайдите в учетную запись`}/>
+                <ErrorWindow message={`Пожалуйста, зайдите в учетную запись`}/>
               );
             }
             this.addToFavorite(currentMovie.id, 0);

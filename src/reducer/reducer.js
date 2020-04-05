@@ -10,7 +10,6 @@ const AuthorizationStatus = {
 const initialState = {
   genre: `All genres`,
   movieList: [],
-  favoriteMovieList: [],
   promoFilm: {},
   currentMovie: null,
   reviews: [],

@@ -15,6 +15,7 @@ import {AppRoute} from "../../constants.js";
 import AddReview from "../add-review/add-review.jsx";
 import PrivateRoute from "../private-route/private-route.jsx";
 import FavoriteButton from "../favorite-button/favorite-button.jsx";
+
 class MoviePage extends PureComponent {
   constructor(props) {
     super(props);
@@ -22,10 +23,7 @@ class MoviePage extends PureComponent {
 
   componentDidMount() {
     this.props.dispatch(changeCurrentMovie(this.props.match.params.id));
-    const {currentMovie} = this.props;
-    if (currentMovie === null) {
-      this.props.dispatch(DataOperation.loadMovies());
-    }
+    console.log(this.props);
   }
 
   componentDidUpdate(oldProps) {
@@ -36,11 +34,14 @@ class MoviePage extends PureComponent {
 
   render() {
     const {currentMovie, movies, dispatch, authorizationStatus, avatarURL} = this.props;
-    if (currentMovie === null) {
-      return null;
-    }
-    const movieLikeThis = getMoviesLikeThis(movies, currentMovie);
 
+    if (currentMovie === null) {
+      return (
+        <p>...loading...</p>
+      );
+    }
+
+    const movieLikeThis = getMoviesLikeThis(movies, currentMovie);
     const {id, name, genre, released, backgroundImage, posterImage, backgroundColor} = currentMovie;
 
     return (

@@ -164,10 +164,9 @@ MainPage.propTypes = {
   shownCount: PropTypes.number.isRequired,
   genre: PropTypes.string.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
-  dispatch: PropTypes.func.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   addToFavorite: PropTypes.func.isRequired,
-  avatarURL: PropTypes.string.isRequired
+  avatarURL: PropTypes.string
 };
 
 const mapDispatchToProps = (dispatch) => ({

@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import {Switch, Route, Router} from "react-router-dom";
 import {AppRoute} from "../../constants.js";
 import {connect} from "react-redux";
-import {DataOperation, UserOperation, AuthorizationStatus} from "../../reducer/reducer.js";
+import {DataOperation, UserOperation} from "../../reducer/reducer.js";
 import history from "../../history.js";
 import PropTypes from "prop-types";
 import MainPage from "./../main-screen/main-screen.jsx";
@@ -23,71 +23,54 @@ class App extends PureComponent {
     this.props.loadFavoriteMovies();
   }
 
-  _renderSignIn() {
-    const {movieList, authorizationStatus, promoFilm} = this.props;
-    if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
-      return (
-        <AuthScreen
-          onSubmit={this.props.login}
-        />
-      );
-    }
-
-    return (
-      <MainPage
-        promoFilm={promoFilm}
-        movieList={movieList}
-      />
-    );
-  }
-
   render() {
-    // if (this.props.movieList === null || this.props.promoFilm === null) {
-    //   return (
-    //     <div>loading...</div>
-    //   );
-    // }
-
     const {movieList, currentMovie, promoFilm} = this.props;
 
-    return (
-      <Router history={history}>
-        <Switch>
+    if (movieList.length === 0 || Object.keys(promoFilm).length === 0) {
+      return (
+        <div>
+          ...loading...
+        </div>
+      );
+    } else {
+      return (
+        <Router history={history}>
+          <Switch>
 
-          <Route exact path="/">
-            <MainPage
-              promoFilm={promoFilm}
-              movieList={movieList}
+            <Route exact path="/">
+              <MainPage
+                promoFilm={promoFilm}
+                movieList={movieList}
+              />
+            </Route>
+
+            <Route exact path={AppRoute.PLAYER}>
+              <VideoPlayerFull/>
+            </Route>
+
+            <Route path="/movie/:id">
+              <MoviePage
+                currentMovie={currentMovie}
+              />
+            </Route>
+
+            <Route exact path={AppRoute.SIGN_IN}>
+              <AuthScreen
+                onSubmit={this.props.login}
+              />
+            </Route>
+
+            <PrivateRoute exact path={AppRoute.MY_LIST} render={() => {
+              return (
+                <Mylist/>
+              );
+            }}
             />
-          </Route>
 
-          <Route exact path={AppRoute.PLAYER}>
-            <VideoPlayerFull/>
-          </Route>
-
-          <Route path="/movie/:id">
-            <MoviePage
-              currentMovie={currentMovie}
-            />
-          </Route>
-
-          <Route exact path={AppRoute.SIGN_IN}>
-            <AuthScreen
-              onSubmit={this.props.login}
-            />
-          </Route>
-
-          <PrivateRoute exact path={AppRoute.MY_LIST} render={() => {
-            return (
-              <Mylist/>
-            );
-          }}
-          />
-
-        </Switch>
-      </Router>
-
-    );
+          </Switch>
+        </Router>
+      );
+    }
   }
 }
 
