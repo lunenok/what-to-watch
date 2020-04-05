@@ -1,7 +1,8 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {DataOperation} from "../../reducer/reducer.js";
+import {DataOperation, AuthorizationStatus} from "../../reducer/reducer.js";
+import ErrorWindow from "../../components/error-window/error-window.jsx";
 
 const withFavoriteMovie = (Component) => {
   class WithFavoriteMovie extends PureComponent {
@@ -23,12 +24,17 @@ const withFavoriteMovie = (Component) => {
     }
 
     render() {
-      const {currentMovie} = this.props;
+      const {currentMovie, authorizationStatus} = this.props;
 
       if (!this.state.isFavorite) {
         return (
           // <Component>
           <button className="btn btn--list movie-card__button" type="button" onClick={()=>{
+            if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
+              return (
+                <ErrorWindow errorMessage={`Пожалуйста, зайдите в учетную запись`}/>
+              );
+            }
             this.addToFavorite(currentMovie.id, 1);
             this._onFavoriteButtonClick();
           }}>
@@ -43,6 +49,11 @@ const withFavoriteMovie = (Component) => {
         return (
           // <Component>
           <button className="btn btn--list movie-card__button" type="button" onClick={()=>{
+            if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
+              return (
+                <ErrorWindow errorMessage={`Пожалуйста, зайдите в учетную запись`}/>
+              );
+            }
             this.addToFavorite(currentMovie.id, 0);
             this._onFavoriteButtonClick();
           }}>
@@ -77,7 +88,8 @@ const withFavoriteMovie = (Component) => {
       videoLink: PropTypes.string.isRequired,
       previewVideoLink: PropTypes.string.isRequired
     }).isRequired,
-    addToFavorite: PropTypes.func.isRequired
+    addToFavorite: PropTypes.func.isRequired,
+    authorizationStatus: PropTypes.string.isRequired
   };
 
 
@@ -88,7 +100,8 @@ const withFavoriteMovie = (Component) => {
     dispatch
   });
 
-  const mapToState = () => ({
+  const mapToState = (state) => ({
+    authorizationStatus: state.authorizationStatus,
   });
 
   return connect(mapToState, mapDispatchToProps)(WithFavoriteMovie);

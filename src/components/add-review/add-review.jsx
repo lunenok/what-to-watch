@@ -47,7 +47,7 @@ class AddReview extends PureComponent {
           <header className="page-header">
             <div className="logo">
               <Link onClick={() => {
-                history.push(`../`);
+                history.goBack();
               }} className="logo__link">
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
