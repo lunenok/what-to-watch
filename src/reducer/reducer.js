@@ -177,9 +177,9 @@ const UserOperation = {
 };
 
 const reviewOperation = {
-  postReview: (review) => (dispatch, getState, api) => {
+  postReview: (review, id) => (dispatch, getState, api) => {
     dispatch(ActionCreator.startLoading());
-    return api.post(`/comments/1`, {
+    return api.post(`/comments/${id}`, {
       rating: review.rating,
       comment: review.comment,
     })

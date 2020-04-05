@@ -235,8 +235,8 @@ const mapDispatchToProps = (dispatch) => ({
   addToFavorite(id, status) {
     dispatch(DataOperation.addFavorite(id, status));
   },
-  comment(review) {
-    dispatch(reviewOperation.postReview(review));
+  comment(review, id) {
+    dispatch(reviewOperation.postReview(review, id));
   },
   dispatch
 });

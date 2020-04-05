@@ -27,12 +27,13 @@ class AddReview extends PureComponent {
 
     onSubmit({
       rating: this.ratingRef.current.elements.rating.value,
-      comment: this.commentRef.current.value
-    });
+      comment: this.commentRef.current.value,
+    }, this.props.currentMovie.id);
   }
 
   render() {
-    const {id, name, backgroundImage, posterImage} = this.props.currentMovie;
+    const {name, backgroundImage, posterImage} = this.props.currentMovie;
+    const {loadingStatus} = this.props;
 
     return (
       <section className="movie-card movie-card--full">
@@ -72,7 +73,7 @@ class AddReview extends PureComponent {
           </div>
         </div>
         <div className="add-review">
-          <form action="#" className="add-review__form" ref={this.ratingRef} onSubmit={this.handleSubmit}>
+          <form action="#" className="add-review__form" ref={this.ratingRef} onSubmit={this.handleSubmit} disabled={loadingStatus}>
             <div className="rating">
               <div className="rating__stars">
                 <input className="rating__input" id="star-1" type="radio" name="rating" defaultValue={1} />
@@ -111,6 +112,7 @@ class AddReview extends PureComponent {
 
 const mapToState = (state) => ({
   currentMovie: state.currentMovie,
+  loadingStatus: state.loadingStatus
 });
 
 AddReview.propTypes = {
@@ -134,6 +136,7 @@ AddReview.propTypes = {
     videoLink: PropTypes.string.isRequired,
     previewVideoLink: PropTypes.string.isRequired
   }).isRequired,
+  loadingStatus: PropTypes.func.isRequired
 };
 
 export default connect(mapToState)(AddReview);
