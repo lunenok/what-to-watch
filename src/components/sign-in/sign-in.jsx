@@ -2,6 +2,8 @@ import React, {PureComponent, createRef} from "react";
 import PropTypes from "prop-types";
 import history from "../../history.js";
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
+import {AuthorizationStatus} from "../../reducer/reducer.js";
 class AuthScreen extends PureComponent {
 
   constructor(props) {
@@ -27,6 +29,12 @@ class AuthScreen extends PureComponent {
   }
 
   render() {
+    const {authorizationStatus} = this.props;
+
+    if (authorizationStatus === AuthorizationStatus.AUTH) {
+      history.goBack();
+    }
+
     return (
       <div className="user-page">
         <header className="page-header user-page__head">
@@ -76,7 +84,12 @@ class AuthScreen extends PureComponent {
 
 AuthScreen.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.func.isRequired
 };
 
+const mapToState = (state) => ({
+  authorizationStatus: state.authorizationStatus,
+});
 
-export default AuthScreen;
+
+export default connect(mapToState)(AuthScreen);
