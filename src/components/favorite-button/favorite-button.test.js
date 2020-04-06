@@ -1,13 +1,11 @@
+import FavoriteButton from "./favorite-button.jsx";
 import React from "react";
 import renderer from "react-test-renderer";
-import {App} from "./app.jsx";
 import {Provider} from "react-redux";
 import configureStore from 'redux-mock-store';
 import {AuthorizationStatus} from "../../reducer/reducer.js";
 
 const mockStore = configureStore([]);
-
-jest.mock(`../video-player/video-player`);
 
 const mockMovie = {
   name: `Seven Years in Tibet`,
@@ -29,32 +27,19 @@ const mockMovie = {
   previewVideoLink: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
 };
 
-const movieList = [mockMovie, mockMovie];
-
-it(`Render App`, () => {
+it(`Should favorite button render correctly`, () => {
   const store = mockStore({
-    genre: `All genres`,
-    currentMovie: mockMovie,
-    movieList: [mockMovie, mockMovie],
-    promoFilm: mockMovie,
-    reviews: [],
-    isPlaying: false,
-    shownCount: 8,
     authorizationStatus: AuthorizationStatus.NO_AUTH,
-    loadingStatus: false,
-    avatarURL: null,
-    isError: false,
   });
 
   const tree = renderer
     .create(
         <Provider store={store}>
-          <App currentMovie={mockMovie} movieList={movieList} promoFilm={mockMovie} showEror={`false`} loadPromoMovie={()=>{}} loadMovies={()=>{}} checkAuth={()=>{}} loadFavoriteMovies={()=>{}}/>
+          <FavoriteButton currentMovie={mockMovie}/>
         </Provider>
     )
     .toJSON();
 
   expect(tree).toMatchSnapshot();
 });
-
 

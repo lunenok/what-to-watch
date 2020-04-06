@@ -1,23 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
 import MovieCard from "./../movie-card/movie-card.jsx";
-import {NavLink} from "react-router-dom";
+import {NavLink, Router} from "react-router-dom";
 import {connect} from "react-redux";
 import {getMoviesListByGenre} from "../../reducer/selectors.js";
+import history from "../../history.js";
 
 const MovieList = ({movieList, shownCount, activeGenre}) => {
   const filtedFilms = getMoviesListByGenre(movieList, activeGenre);
 
   return (
-    <div className="catalog__movies-list">
-      {filtedFilms.slice(0, shownCount).map((movie) =>
-        <NavLink key={movie.id} to={`/movie/${movie.id}`} className="small-movie-card catalog__movies-card" style={{color: `#c9b37e`}}>
-          <MovieCard
-            filmInfo={movie}
-          />
-        </NavLink>
-      )}
-    </div>
+    <Router history={history}>
+      <div className="catalog__movies-list">
+        {filtedFilms.slice(0, shownCount).map((movie) =>
+          <NavLink key={movie.id} to={`/movie/${movie.id}`} className="small-movie-card catalog__movies-card" style={{color: `#c9b37e`}}>
+            <MovieCard
+              filmInfo={movie}
+            />
+          </NavLink>
+        )}
+      </div>
+    </Router>
   );
 };
 

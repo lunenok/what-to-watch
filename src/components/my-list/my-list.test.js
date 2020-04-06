@@ -1,13 +1,11 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {App} from "./app.jsx";
 import {Provider} from "react-redux";
 import configureStore from 'redux-mock-store';
+import {MyList} from "./my-list.jsx";
 import {AuthorizationStatus} from "../../reducer/reducer.js";
 
 const mockStore = configureStore([]);
-
-jest.mock(`../video-player/video-player`);
 
 const mockMovie = {
   name: `Seven Years in Tibet`,
@@ -29,9 +27,16 @@ const mockMovie = {
   previewVideoLink: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
 };
 
-const movieList = [mockMovie, mockMovie];
+const mockUser = {
+  id: 1,
+  email: `1@1.ru`,
+  name: `ignat`,
+  avatarUrl: `/wtw/static/avatar/8.jpg`
+};
 
-it(`Render App`, () => {
+const favoriteMovieListMock = [mockMovie, mockMovie];
+
+it(`Should add review page render correctly`, () => {
   const store = mockStore({
     genre: `All genres`,
     currentMovie: mockMovie,
@@ -42,19 +47,18 @@ it(`Render App`, () => {
     shownCount: 8,
     authorizationStatus: AuthorizationStatus.NO_AUTH,
     loadingStatus: false,
-    avatarURL: null,
+    avatarURL: mockUser.avatarUrl,
     isError: false,
+    favoriteMovieList: [mockMovie]
   });
 
   const tree = renderer
     .create(
         <Provider store={store}>
-          <App currentMovie={mockMovie} movieList={movieList} promoFilm={mockMovie} showEror={`false`} loadPromoMovie={()=>{}} loadMovies={()=>{}} checkAuth={()=>{}} loadFavoriteMovies={()=>{}}/>
+          <MyList dispatch={()=>{}} favoriteMovieList={favoriteMovieListMock} avatarURL={mockUser.avatarUrl}/>
         </Provider>
     )
     .toJSON();
 
   expect(tree).toMatchSnapshot();
 });
-
-

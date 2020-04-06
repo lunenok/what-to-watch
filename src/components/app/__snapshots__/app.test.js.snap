@@ -117,8 +117,8 @@ Array [
       className="movie-card__bg"
     >
       <img
-        alt="The Grand Budapest Hotel"
-        src="img/bg-the-grand-budapest-hotel.jpg"
+        alt="Seven Years in Tibet image"
+        src="https://htmlacademy-react-3.appspot.com/wtw/static/film/background/Seven_Years_in_Tibet.jpg"
       />
     </div>
     <h1
@@ -156,14 +156,15 @@ Array [
         className="user-block"
       >
         <div
-          className="user-block__avatar"
+          className="user-block"
         >
-          <img
-            alt="User avatar"
-            height={63}
-            src="img/avatar.jpg"
-            width={63}
-          />
+          <a
+            className="user-block__link"
+            href="/login"
+            onClick={[Function]}
+          >
+            Sign in
+          </a>
         </div>
       </div>
     </header>
@@ -177,9 +178,9 @@ Array [
           className="movie-card__poster"
         >
           <img
-            alt="The Grand Budapest Hotel poster"
+            alt="Seven Years in Tibet image"
             height={327}
-            src="img/the-grand-budapest-hotel-poster.jpg"
+            src="https://htmlacademy-react-3.appspot.com/wtw/static/film/poster/Seven_Years_in_Tibet.jpg"
             width={218}
           />
         </div>
@@ -189,7 +190,7 @@ Array [
           <h2
             className="movie-card__title"
           >
-            The Wizard of Oz
+            Seven Years in Tibet
           </h2>
           <p
             className="movie-card__meta"
@@ -202,14 +203,16 @@ Array [
             <span
               className="movie-card__year"
             >
-              1939
+              1997
             </span>
           </p>
           <div
             className="movie-card__buttons"
           >
-            <button
+            <a
               className="btn btn--play movie-card__button"
+              href="/player"
+              onClick={[Function]}
               type="button"
             >
               <svg
@@ -224,9 +227,10 @@ Array [
               <span>
                 Play
               </span>
-            </button>
+            </a>
             <button
               className="btn btn--list movie-card__button"
+              onClick={[Function]}
               type="button"
             >
               <svg
@@ -280,7 +284,7 @@ Array [
             href="#"
             onClick={[Function]}
           >
-            Drama
+            Adventure
           </a>
         </li>
       </ul>
@@ -290,7 +294,7 @@ Array [
         <a
           aria-current={null}
           className="small-movie-card catalog__movies-card"
-          href="/movie/3"
+          href="/movie/1"
           onClick={[Function]}
           style={
             Object {
@@ -311,14 +315,16 @@ Array [
               <a
                 className="small-movie-card__link"
                 href="#"
-              />
+              >
+                Seven Years in Tibet
+              </a>
             </h3>
           </article>
         </a>
         <a
           aria-current={null}
           className="small-movie-card catalog__movies-card"
-          href="/movie/4"
+          href="/movie/1"
           onClick={[Function]}
           style={
             Object {
@@ -339,7 +345,9 @@ Array [
               <a
                 className="small-movie-card__link"
                 href="#"
-              />
+              >
+                Seven Years in Tibet
+              </a>
             </h3>
           </article>
         </a>

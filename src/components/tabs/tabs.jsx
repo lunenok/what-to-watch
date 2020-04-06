@@ -11,7 +11,7 @@ const TabNames = {
   REVIEWS: `Reviews`
 };
 
-class Tabs extends PureComponent {
+export class Tabs extends PureComponent {
 
   constructor(props) {
     super(props);
@@ -164,24 +164,24 @@ Tabs.propTypes = {
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,
     description: PropTypes.string.isRequired,
     textReviews: PropTypes.arrayOf(PropTypes.shape({
-      author: PropTypes.string.isRequired,
-      date: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired,
-      reviewRating: PropTypes.number.isRequired
-    })).isRequired
+      author: PropTypes.string,
+      date: PropTypes.string,
+      text: PropTypes.string,
+      reviewRating: PropTypes.number
+    }))
   }),
   onTabClick: PropTypes.func.isRequired,
   currentTab: PropTypes.string.isRequired,
   loadReviews: PropTypes.func.isRequired,
   textReviews: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    comment: PropTypes.string.isRequired,
-    date: PropTypes.number.isRequired,
+    id: PropTypes.number,
+    rating: PropTypes.number,
+    comment: PropTypes.string,
+    date: PropTypes.number,
     user: PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-    }).isRequired,
+      id: PropTypes.number,
+      name: PropTypes.string,
+    }),
   })).isRequired
 };
 

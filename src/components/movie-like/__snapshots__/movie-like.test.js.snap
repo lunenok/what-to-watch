@@ -12,59 +12,38 @@ exports[`Should movie like-list render correctly 1`] = `
   <div
     className="catalog__movies-list"
   >
-    <article
+    <a
+      aria-current={null}
       className="small-movie-card catalog__movies-card"
+      href="/movie/1"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      style={
+        Object {
+          "color": "#c9b37e",
+        }
+      }
     >
-      <div
-        className="small-movie-card__image"
-        onClick={[Function]}
+      <article
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
       >
-        <img
-          alt="Bohemian Rhapsody"
-          height={175}
-          src="img/war-of-the-worlds.jpg"
-          width={280}
+        <div
+          className="small-movie-card__image"
         />
-      </div>
-      <h3
-        className="small-movie-card__title"
-      >
-        <a
-          className="small-movie-card__link"
-          href="movie-page.html"
-          onClick={[Function]}
+        <h3
+          className="small-movie-card__title"
         >
-          Bohemian Rhapsody
-        </a>
-      </h3>
-    </article>
-    <article
-      className="small-movie-card catalog__movies-card"
-    >
-      <div
-        className="small-movie-card__image"
-        onClick={[Function]}
-      >
-        <img
-          alt="Battlefield Earth: A Saga of the Year 3000"
-          height={175}
-          src="img/war-of-the-worlds.jpg"
-          width={280}
-        />
-      </div>
-      <h3
-        className="small-movie-card__title"
-      >
-        <a
-          className="small-movie-card__link"
-          href="movie-page.html"
-          onClick={[Function]}
-        >
-          Battlefield Earth: A Saga of the Year 3000
-        </a>
-      </h3>
-    </article>
-    ;
+          <a
+            className="small-movie-card__link"
+            href="#"
+          >
+            Seven Years in Tibet
+          </a>
+        </h3>
+      </article>
+    </a>
   </div>
 </section>
 `;

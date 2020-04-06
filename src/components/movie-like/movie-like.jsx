@@ -1,28 +1,30 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {NavLink} from "react-router-dom";
+import {NavLink, Router} from "react-router-dom";
+import withActiveCard from "../../hocs/with-active-card/with-active-card.jsx";
+import MovieCard from "./../movie-card/movie-card.jsx";
+import history from "../../history.js";
 
-const MovieLike = ({movieLikeThis}) => {
+const MovieLike = ({movieLikeThis, onMouseEnter, onMouseLeave}) => {
 
   return (
-    <section className="catalog catalog--like-this">
-      <h2 className="catalog__title">More like this</h2>
-      <div className="catalog__movies-list">
+    <Router history={history}>
+      <section className="catalog catalog--like-this">
+        <h2 className="catalog__title">More like this</h2>
+        <div className="catalog__movies-list">
 
-        {movieLikeThis.map((movie) => {
-          return (
-            <NavLink key={movie.id} to={`/movie/${movie.id}`} className="small-movie-card catalog__movies-card" style={{color: `#c9b37e`}}>
-              <div className="small-movie-card__image">
-                <img src={movie.previewImage} alt={movie.name} width={280} height={175} />
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="#">{movie.name}</a>
-              </h3>
-            </NavLink>
-          );
-        })}
-      </div>
-    </section>
+          {movieLikeThis.map((movie) => {
+            return (
+              <NavLink key={movie.id} to={`/movie/${movie.id}`} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} className="small-movie-card catalog__movies-card" style={{color: `#c9b37e`}}>
+                <MovieCard
+                  filmInfo={movie}
+                />
+              </NavLink>
+            );
+          })}
+        </div>
+      </section>
+    </Router>
   );
 };
 
@@ -34,6 +36,9 @@ MovieLike.propTypes = {
         previewImage: PropTypes.string.isRequired
       }).isRequired
   ).isRequired,
+  onMouseEnter: PropTypes.func.isRequired,
+  onMouseLeave: PropTypes.func.isRequired,
+  isPlaying: PropTypes.bool.isRequired
 };
 
-export default MovieLike;
+export default withActiveCard(MovieLike);

@@ -10,7 +10,7 @@ const MovieCard = (props) => {
   return (
     <article onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       <div className="small-movie-card__image">
-        <VideoPlayer videoSrc={previewVideoLink} imgSrc={previewImage} isPlaying={isPlaying}/>
+        <VideoPlayer previewVideoLink={previewVideoLink} previewImage={previewImage} isPlaying={isPlaying}/>
       </div>
       <h3 className="small-movie-card__title">
         <a className="small-movie-card__link" href="#">{name}</a>

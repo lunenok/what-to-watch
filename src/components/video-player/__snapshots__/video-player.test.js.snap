@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should video player render correctrly 1`] = `
+<video
+  height={175}
+  muted={true}
+  width={280}
+/>
+`;

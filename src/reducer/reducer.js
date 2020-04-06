@@ -10,13 +10,16 @@ const AuthorizationStatus = {
 const initialState = {
   genre: `All genres`,
   movieList: [],
-  favoriteMovieList: [],
   promoFilm: {},
   currentMovie: null,
   reviews: [],
   isPlaying: false,
   shownCount: DEFAULT_SHOW_NUBMER,
-  authorizationStatus: AuthorizationStatus.NO_AUTH
+  authorizationStatus: AuthorizationStatus.NO_AUTH,
+  loadingStatus: false,
+  avatarURL: null,
+  isError: false,
+  favoriteMovieList: []
 };
 
 const ActionType = {
@@ -30,7 +33,11 @@ const ActionType = {
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   ADD_TO_FAVORITE: `ADD_TO_FAVORITE`,
-  LOAD_FAVORITE_MOVIES: `LOAD_FAVORITE_MOVIES`
+  LOAD_FAVORITE_MOVIES: `LOAD_FAVORITE_MOVIES`,
+  LOADING_START: `LOADING_START`,
+  LOADING_END: `LOADING_END`,
+  LOAD_AVATAR: `LOAD_AVATAR`,
+  SHOW_ERROR: `SHOW_ERROR`
 };
 
 const changeGenre = (genre) => ({
@@ -57,12 +64,10 @@ const resetStore = () => ({
   type: ActionType.RESET_STORE
 });
 
-// export const addFavoriteMovieToList = (movieList, favoriteMovie) => {
-//   const favoriteMovieIndex = movieList.findIndex((movie) => movie.id === favoriteMovie.id);
-//   const newMovieList = movieList;
-//   newMovieList[favoriteMovieIndex] = favoriteMovie;
-//   return newMovieList;
-// };
+const showError = (boolean) => ({
+  type: ActionType.SHOW_ERROR,
+  payload: boolean
+});
 
 const ActionCreator = {
   loadMovies: (movies) => {
@@ -100,12 +105,24 @@ const ActionCreator = {
     };
   },
 
-  // addFavorite: (movie) => {
-  //   return {
-  //     type: ActionType.ADD_TO_FAVORITE,
-  //     payload: movie
-  //   };
-  // },
+  startLoading: () => {
+    return {
+      type: ActionType.LOADING_START,
+    };
+  },
+
+  endLoading: () => {
+    return {
+      type: ActionType.LOADING_END
+    };
+  },
+
+  loadAvatar: (link) => {
+    return {
+      type: ActionType.LOAD_AVATAR,
+      payload: link.data.avatar_url
+    };
+  }
 };
 
 const DataOperation = {
@@ -138,14 +155,21 @@ const DataOperation = {
   },
 
   addFavorite: (id, status) => (dispatch, getState, api) => {
-    return api.post(`/favorite/${id}/${status}`);
+    return api.post(`/favorite/${id}/${status}`)
+      .then(()=>{
+        api.get(`/films`)
+        .then((response) => {
+          dispatch(ActionCreator.loadMovies(response.data));
+        });
+      });
   },
 };
 
 const UserOperation = {
   checkAuth: () => (dispatch, getState, api) => {
     return api.get(`/login`)
-      .then(() => {
+      .then((data) => {
+        dispatch(ActionCreator.loadAvatar(data));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       })
       .catch((err) => {
@@ -158,17 +182,22 @@ const UserOperation = {
       email: authData.login,
       password: authData.password,
     })
-      .then(() => {
+      .then((data) => {
+        dispatch(ActionCreator.loadAvatar(data));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       });
   },
 };
 
 const reviewOperation = {
-  postReview: (review) => (dispatch, getState, api) => {
-    return api.post(`/comments/1`, {
+  postReview: (review, id) => (dispatch, getState, api) => {
+    dispatch(ActionCreator.startLoading());
+    return api.post(`/comments/${id}`, {
       rating: review.rating,
       comment: review.comment,
+    })
+    .then(() => {
+      dispatch(ActionCreator.endLoading());
     });
   }
 };
@@ -209,9 +238,21 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.RESET_STORE:
       return {...state, genre: `All genres`, currentMovie: null, shownCount: DEFAULT_SHOW_NUBMER};
+
+    case ActionType.LOADING_START:
+      return {...state, loadingStatus: true};
+
+    case ActionType.LOADING_END:
+      return {...state, loadingStatus: false};
+
+    case ActionType.LOAD_AVATAR:
+      return {...state, avatarURL: action.payload};
+
+    case ActionType.SHOW_ERROR:
+      return {...state, isError: action.payload};
   }
 
   return state;
 };
 
-export {reducer, DataOperation, UserOperation, reviewOperation, AuthorizationStatus, ActionCreator, ActionType, changeGenre, changeCurrentMovie, changeFilmsCount, playPauseMovie, resetStore};
+export {reducer, DataOperation, UserOperation, reviewOperation, AuthorizationStatus, ActionCreator, ActionType, changeGenre, showError, changeCurrentMovie, changeFilmsCount, playPauseMovie, resetStore};
