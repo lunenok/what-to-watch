@@ -44,10 +44,6 @@ it(`Should movie page render correctly`, () => {
             onMovieClick={()=>{}}
             match={{params: {id: 1}, isExact: true, path: ``, url: ``}}
             dispatch={()=>{}}
-            // match={mockMovie}
-            // params={mockMovie}
-            // props={[]}
-            // id={`1`}
           />
         </Provider>
     )
