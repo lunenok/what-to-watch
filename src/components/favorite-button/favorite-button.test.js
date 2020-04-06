@@ -1,6 +1,6 @@
+import FavoriteButton from "./favorite-button.jsx";
 import React from "react";
 import renderer from "react-test-renderer";
-import MainPage from "./main-screen.jsx";
 import {Provider} from "react-redux";
 import configureStore from 'redux-mock-store';
 import {AuthorizationStatus} from "../../reducer/reducer.js";
@@ -27,33 +27,19 @@ const mockMovie = {
   previewVideoLink: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
 };
 
-it(`Should main-screen render correctly`, () => {
+it(`Should favorite button render correctly`, () => {
   const store = mockStore({
-    genre: `Adventure`,
-    currentMovie: mockMovie,
-    movieList: [mockMovie, mockMovie],
-    promoFilm: mockMovie,
-    reviews: [],
-    isPlaying: false,
-    shownCount: 8,
     authorizationStatus: AuthorizationStatus.NO_AUTH,
-    loadingStatus: false,
-    avatarURL: null,
-    isError: false,
   });
-
-  const mockMovieList = [mockMovie, mockMovie];
 
   const tree = renderer
     .create(
         <Provider store={store}>
-          <MainPage
-            promoFilm={mockMovie}
-            movieList={mockMovieList}
-          />
+          <FavoriteButton currentMovie={mockMovie}/>
         </Provider>
     )
     .toJSON();
 
   expect(tree).toMatchSnapshot();
 });
+

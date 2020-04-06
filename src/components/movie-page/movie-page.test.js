@@ -35,7 +35,7 @@ const testMovie = {
   ]
 };
 
-it(`Should movie card render correctly`, () => {
+it(`Should movie page render correctly`, () => {
   const store = mockStore({
     genre: `All genres`,
     currentMovie: null,
