@@ -77,7 +77,7 @@ it(`Render App`, () => {
   const store = mockStore({
     genre: `All genres`,
     currentMovie: null,
-    movies: movieTestList
+    movieList: movieTestList
   });
 
   const tree = renderer

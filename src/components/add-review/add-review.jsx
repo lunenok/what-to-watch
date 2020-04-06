@@ -140,7 +140,7 @@ AddReview.propTypes = {
     previewVideoLink: PropTypes.string.isRequired
   }).isRequired,
   loadingStatus: PropTypes.func.isRequired,
-  avatarURL: PropTypes.string.isRequired,
+  avatarURL: PropTypes.string,
 };
 
 export default connect(mapToState)(AddReview);

@@ -1,6 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Tabs from "./tabs.jsx";
+import {Provider} from "react-redux";
+import configureStore from 'redux-mock-store';
+
+const mockStore = configureStore([]);
 
 const testMovie = {
   id: 1,
@@ -32,8 +36,17 @@ const testMovie = {
 };
 
 it(`Should tabs page render correctly`, () => {
+  const store = mockStore({
+    genre: `All genres`,
+    currentMovie: testMovie,
+    movieList: []
+  });
   const tree = renderer
-    .create(<Tabs currentMovie={testMovie}/>)
+    .create(
+        <Provider store={store}>
+          <Tabs currentMovie={testMovie}/>
+        </Provider>
+    )
     .toJSON();
 
   expect(tree).toMatchSnapshot();

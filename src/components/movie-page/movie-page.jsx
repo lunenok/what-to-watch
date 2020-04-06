@@ -217,7 +217,7 @@ MoviePage.propTypes = {
   match: PropTypes.object,
   isPlaying: PropTypes.bool.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
-  avatarURL: PropTypes.string.isRequired,
+  avatarURL: PropTypes.string,
   comment: PropTypes.func.isRequired
 };
 

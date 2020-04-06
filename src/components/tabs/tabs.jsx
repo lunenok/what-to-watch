@@ -164,11 +164,11 @@ Tabs.propTypes = {
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,
     description: PropTypes.string.isRequired,
     textReviews: PropTypes.arrayOf(PropTypes.shape({
-      author: PropTypes.string.isRequired,
-      date: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired,
-      reviewRating: PropTypes.number.isRequired
-    })).isRequired
+      author: PropTypes.string,
+      date: PropTypes.string,
+      text: PropTypes.string,
+      reviewRating: PropTypes.number
+    }))
   }),
   onTabClick: PropTypes.func.isRequired,
   currentTab: PropTypes.string.isRequired,

@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {NavLink} from "react-router-dom";
-import VideoPlayer from "./../video-player/video-player.jsx";
 import withActiveCard from "../../hocs/with-active-card/with-active-card.jsx";
+import MovieCard from "./../movie-card/movie-card.jsx";
 
-const MovieLike = ({movieLikeThis, onMouseEnter, onMouseLeave, isPlaying}) => {
+const MovieLike = ({movieLikeThis, onMouseEnter, onMouseLeave}) => {
 
 
   return (
@@ -15,12 +15,9 @@ const MovieLike = ({movieLikeThis, onMouseEnter, onMouseLeave, isPlaying}) => {
         {movieLikeThis.map((movie) => {
           return (
             <NavLink key={movie.id} to={`/movie/${movie.id}`} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} className="small-movie-card catalog__movies-card" style={{color: `#c9b37e`}}>
-              <div className="small-movie-card__image">
-                <VideoPlayer videoSrc={movie.previewVideoLink} imgSrc={movie.previewImage} isPlaying={isPlaying}/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="#">{movie.name}</a>
-              </h3>
+              <MovieCard
+                filmInfo={movie}
+              />
             </NavLink>
           );
         })}
@@ -43,5 +40,3 @@ MovieLike.propTypes = {
 };
 
 export default withActiveCard(MovieLike);
-
-// export default MovieLike;

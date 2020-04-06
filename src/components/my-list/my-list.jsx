@@ -90,7 +90,7 @@ MyList.propTypes = {
     videoLink: PropTypes.string.isRequired,
     previewVideoLink: PropTypes.string.isRequired
   })).isRequired,
-  avatarURL: PropTypes.string.isRequired,
+  avatarURL: PropTypes.string,
   dispatch: PropTypes.func.isRequired,
 };
 
