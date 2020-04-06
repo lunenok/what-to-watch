@@ -1,8 +1,11 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import MovieLike from "./movie-like.jsx";
+import VideoPlayerFull from "./video-player-full.jsx";
+import {Provider} from "react-redux";
+import configureStore from 'redux-mock-store';
+import {AuthorizationStatus} from "../../reducer/reducer.js";
 
-jest.mock(`../video-player/video-player`);
+const mockStore = configureStore([]);
 
 const mockMovie = {
   name: `Seven Years in Tibet`,
@@ -24,14 +27,31 @@ const mockMovie = {
   previewVideoLink: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
 };
 
-const movieLikeThis = [mockMovie];
+it(`Should video player render correctrly`, () => {
+  const store = mockStore({
+    genre: `All genres`,
+    currentMovie: mockMovie,
+    movieList: [mockMovie, mockMovie],
+    promoFilm: mockMovie,
+    reviews: [],
+    isPlaying: false,
+    shownCount: 8,
+    authorizationStatus: AuthorizationStatus.NO_AUTH,
+    loadingStatus: false,
+    avatarURL: null,
+    isError: false,
+  });
 
-it(`Should movie like-list render correctly`, () => {
   const tree = renderer
     .create(
-        <MovieLike movieLikeThis={movieLikeThis}/>
-    )
-    .toJSON();
+        <Provider store={store}>
+          <VideoPlayerFull/>
+        </Provider>,
+        {
+          createNodeMock: () => {
+            return {};
+          }
+        }).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

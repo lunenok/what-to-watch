@@ -19,6 +19,7 @@ const initialState = {
   loadingStatus: false,
   avatarURL: null,
   isError: false,
+  favoriteMovieList: []
 };
 
 const ActionType = {

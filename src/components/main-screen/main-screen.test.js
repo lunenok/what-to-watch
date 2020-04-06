@@ -6,6 +6,7 @@ import configureStore from 'redux-mock-store';
 import {AuthorizationStatus} from "../../reducer/reducer.js";
 
 const mockStore = configureStore([]);
+jest.mock(`../video-player/video-player`);
 
 const mockMovie = {
   name: `Seven Years in Tibet`,

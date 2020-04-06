@@ -1,8 +1,11 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import MovieLike from "./movie-like.jsx";
+import {Provider} from "react-redux";
+import configureStore from 'redux-mock-store';
+import MyList from "./my-list.jsx";
+import {AuthorizationStatus} from "../../reducer/reducer.js";
 
-jest.mock(`../video-player/video-player`);
+const mockStore = configureStore([]);
 
 const mockMovie = {
   name: `Seven Years in Tibet`,
@@ -24,12 +27,34 @@ const mockMovie = {
   previewVideoLink: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
 };
 
-const movieLikeThis = [mockMovie];
+const mockUser = {
+  id: 1,
+  email: `1@1.ru`,
+  name: `ignat`,
+  avatarUrl: `/wtw/static/avatar/8.jpg`
+};
 
-it(`Should movie like-list render correctly`, () => {
+it(`Should add review page render correctly`, () => {
+  const store = mockStore({
+    genre: `All genres`,
+    currentMovie: mockMovie,
+    movieList: [mockMovie, mockMovie],
+    promoFilm: mockMovie,
+    reviews: [],
+    isPlaying: false,
+    shownCount: 8,
+    authorizationStatus: AuthorizationStatus.NO_AUTH,
+    loadingStatus: false,
+    avatarURL: mockUser.avatarUrl,
+    isError: false,
+    favoriteMovieList: [mockMovie]
+  });
+
   const tree = renderer
     .create(
-        <MovieLike movieLikeThis={movieLikeThis}/>
+        <Provider store={store}>
+          <MyList/>
+        </Provider>
     )
     .toJSON();
 
