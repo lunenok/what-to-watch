@@ -17,7 +17,7 @@ import PrivateRoute from "../private-route/private-route.jsx";
 import FavoriteButton from "../favorite-button/favorite-button.jsx";
 import history from "../../history.js";
 
-class MoviePage extends PureComponent {
+export class MoviePage extends PureComponent {
   constructor(props) {
     super(props);
   }

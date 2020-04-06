@@ -1,10 +1,6 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import {MoviePage} from "./movie-page.jsx";
-import {Provider} from "react-redux";
-import configureStore from 'redux-mock-store';
-
-const mockStore = configureStore([]);
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+import withVideo from "./with-video.jsx";
 
 const mockMovie = {
   name: `Seven Years in Tibet`,
@@ -26,32 +22,23 @@ const mockMovie = {
   previewVideoLink: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
 };
 
-const movieList = [mockMovie, mockMovie];
+const MockComponent = () => <div props={mockMovie}/>;
+const WrappedMockComponent = withVideo(MockComponent);
+jest.mock(`../../components/video-player/video-player`);
 
-it(`Should movie page render correctly`, () => {
-  const store = mockStore({
-    genre: `All genres`,
-    currentMovie: null,
-    movies: null
-  });
-
-  const tree = renderer
-    .create(
-        <Provider store={store}>
-          <MoviePage
-            movies={movieList}
-            currentMovie={mockMovie}
-            onMovieClick={()=>{}}
-            match={{params: {id: 1}, isExact: true, path: ``, url: ``}}
-            dispatch={()=>{}}
-            // match={mockMovie}
-            // params={mockMovie}
-            // props={[]}
-            // id={`1`}
-          />
-        </Provider>
-    )
-    .toJSON();
+it(`withVideo is rendered correctly`, () => {
+  const tree = renderer.create((
+    <WrappedMockComponent
+      video={mockMovie.previewVideoLink}
+      previewVideoLink={mockMovie.previewVideoLink}
+      previewImage={mockMovie.previewImage}
+      isPlaying={true}
+    />
+  ), {
+    createNodeMock() {
+      return {};
+    }
+  }).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

@@ -12,7 +12,7 @@ import VideoPlayerFull from "../../hocs/with-video-controls/with-video-controls.
 import Mylist from "../my-list/my-list.jsx";
 import PrivateRoute from "../private-route/private-route.jsx";
 import ErrorWindow from "../error-window/error-window.jsx";
-class App extends PureComponent {
+export class App extends PureComponent {
   constructor(props) {
     super(props);
   }

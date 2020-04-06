@@ -5,7 +5,7 @@ import {Link, Router} from "react-router-dom";
 import history from "../../history.js";
 import {DataOperation} from "../../reducer/reducer.js";
 
-class MyList extends PureComponent {
+export class MyList extends PureComponent {
   constructor(props) {
     super(props);
   }

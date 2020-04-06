@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from 'redux-mock-store';
-import MyList from "./my-list.jsx";
+import {MyList} from "./my-list.jsx";
 import {AuthorizationStatus} from "../../reducer/reducer.js";
 
 const mockStore = configureStore([]);
@@ -34,6 +34,8 @@ const mockUser = {
   avatarUrl: `/wtw/static/avatar/8.jpg`
 };
 
+const favoriteMovieListMock = [mockMovie, mockMovie];
+
 it(`Should add review page render correctly`, () => {
   const store = mockStore({
     genre: `All genres`,
@@ -53,7 +55,7 @@ it(`Should add review page render correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <MyList/>
+          <MyList dispatch={()=>{}} favoriteMovieList={favoriteMovieListMock} avatarURL={mockUser.avatarUrl}/>
         </Provider>
     )
     .toJSON();

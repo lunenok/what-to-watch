@@ -11,7 +11,7 @@ const TabNames = {
   REVIEWS: `Reviews`
 };
 
-class Tabs extends PureComponent {
+export class Tabs extends PureComponent {
 
   constructor(props) {
     super(props);

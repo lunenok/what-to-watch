@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Tabs from "./tabs.jsx";
+import {Tabs} from "./tabs.jsx";
 import {Provider} from "react-redux";
 import configureStore from 'redux-mock-store';
 
@@ -44,7 +44,7 @@ it(`Should tabs page render correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <Tabs currentMovie={testMovie}/>
+          <Tabs currentMovie={testMovie} loadReviews={()=>{}}/>
         </Provider>
     )
     .toJSON();
