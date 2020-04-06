@@ -27,6 +27,8 @@ class App extends PureComponent {
   render() {
     const {movieList, currentMovie, promoFilm, showError} = this.props;
 
+    console.log(movieList);
+
     if (movieList.length === 0 || Object.keys(promoFilm).length === 0) {
       return (
         <div>
