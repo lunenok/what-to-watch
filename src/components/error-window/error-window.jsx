@@ -10,7 +10,7 @@ const ErrorWindow = ({message = `Выполните вход`}) => {
 };
 
 ErrorWindow.propTypes = {
-  message: PropTypes.string.isRequired
+  message: PropTypes.string,
 };
 
 export default ErrorWindow;
