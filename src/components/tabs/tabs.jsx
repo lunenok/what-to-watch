@@ -185,14 +185,14 @@ Tabs.propTypes = {
   })).isRequired
 };
 
+const mapToState = (state) => ({
+  textReviews: state.reviews,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   loadReviews(id) {
     dispatch(DataOperation.loadReviews(id));
   }
-});
-
-const mapToState = (state) => ({
-  textReviews: state.reviews,
 });
 
 export default connect(mapToState, mapDispatchToProps)(withActiveTab(Tabs));

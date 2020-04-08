@@ -35,7 +35,7 @@ class AddReview extends PureComponent {
   }
 
   render() {
-    const {name, backgroundImage, posterImage} = this.props.currentMovie;
+    const {id, name, backgroundImage, posterImage} = this.props.currentMovie;
     const {loadingStatus, avatarURL} = this.props;
 
     return (
@@ -48,9 +48,7 @@ class AddReview extends PureComponent {
             <h1 className="visually-hidden">WTW</h1>
             <header className="page-header">
               <div className="logo">
-                <Link onClick={() => {
-                  history.goBack();
-                }} className="logo__link">
+                <Link to={`/movie/${id}`} className="logo__link">
                   <span className="logo__letter logo__letter--1">W</span>
                   <span className="logo__letter logo__letter--2">T</span>
                   <span className="logo__letter logo__letter--3">W</span>
@@ -92,7 +90,7 @@ class AddReview extends PureComponent {
                   <label className="rating__label" htmlFor="star-5">Rating 5</label>
                 </div>
               </div>
-              <div className="add-review__text" s>
+              <div className="add-review__text">
                 <textarea
                   className="add-review__textarea"
                   ref={this.commentRef} name="review-text"
@@ -115,12 +113,6 @@ class AddReview extends PureComponent {
 
 }
 
-const mapToState = (state) => ({
-  currentMovie: state.currentMovie,
-  loadingStatus: state.loadingStatus,
-  avatarURL: state.avatarURL,
-});
-
 AddReview.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   currentMovie: PropTypes.shape({
@@ -142,8 +134,14 @@ AddReview.propTypes = {
     videoLink: PropTypes.string.isRequired,
     previewVideoLink: PropTypes.string.isRequired
   }).isRequired,
-  loadingStatus: PropTypes.func.isRequired,
+  loadingStatus: PropTypes.bool.isRequired,
   avatarURL: PropTypes.string,
 };
+
+const mapToState = (state) => ({
+  currentMovie: state.currentMovie,
+  loadingStatus: state.loadingStatus,
+  avatarURL: state.avatarURL,
+});
 
 export default connect(mapToState)(AddReview);

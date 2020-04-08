@@ -7,7 +7,7 @@ exports[`Should video player render correctrly 1`] = `
   <video
     autoPlay={true}
     className="player__video"
-    poster="../img/https://htmlacademy-react-3.appspot.com/wtw/static/film/preview/seven-years-in-tibet.jpg"
+    poster="https://htmlacademy-react-3.appspot.com/wtw/static/film/background/Seven_Years_in_Tibet.jpg"
     src="http://media.xiph.org/mango/tears_of_steel_1080p.webm"
   />
   <button

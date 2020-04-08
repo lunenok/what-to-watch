@@ -221,6 +221,14 @@ MoviePage.propTypes = {
   comment: PropTypes.func.isRequired
 };
 
+const mapToState = (state) => ({
+  currentMovie: state.currentMovie,
+  movies: state.movieList,
+  isPlaying: state.isPlaying,
+  authorizationStatus: state.authorizationStatus,
+  avatarURL: state.avatarURL,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   addToFavorite(id, status) {
     dispatch(DataOperation.addFavorite(id, status));
@@ -232,14 +240,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(DataOperation.loadMovies());
   },
   dispatch
-});
-
-const mapToState = (state) => ({
-  currentMovie: state.currentMovie,
-  movies: state.movieList,
-  isPlaying: state.isPlaying,
-  authorizationStatus: state.authorizationStatus,
-  avatarURL: state.avatarURL,
 });
 
 export default connect(mapToState, mapDispatchToProps)(withRouter(MoviePage));

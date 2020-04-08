@@ -172,18 +172,18 @@ MainPage.propTypes = {
   avatarURL: PropTypes.string
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  addToFavorite(id, status) {
-    dispatch(DataOperation.addFavorite(id, status));
-  },
-});
-
 const mapToState = (state) => ({
   shownCount: state.shownCount,
   genre: state.genre,
   isPlaying: state.isPlaying,
   authorizationStatus: state.authorizationStatus,
   avatarURL: state.avatarURL,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  addToFavorite(id, status) {
+    dispatch(DataOperation.addFavorite(id, status));
+  },
 });
 
 export default connect(mapToState, mapDispatchToProps)(MainPage);

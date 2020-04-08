@@ -312,12 +312,12 @@ Array [
             <h3
               className="small-movie-card__title"
             >
-              <a
+              <p
                 className="small-movie-card__link"
                 href="#"
               >
                 Seven Years in Tibet
-              </a>
+              </p>
             </h3>
           </article>
         </a>
@@ -342,12 +342,12 @@ Array [
             <h3
               className="small-movie-card__title"
             >
-              <a
+              <p
                 className="small-movie-card__link"
                 href="#"
               >
                 Seven Years in Tibet
-              </a>
+              </p>
             </h3>
           </article>
         </a>

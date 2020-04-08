@@ -11,7 +11,7 @@ exports[`Should movie card render correctly 1`] = `
   <h3
     className="small-movie-card__title"
   >
-    <a
+    <p
       className="small-movie-card__link"
       href="#"
     />

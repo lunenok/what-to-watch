@@ -28,7 +28,7 @@ exports[`Should add review page render correctly 1`] = `
       >
         <a
           className="logo__link"
-          href=""
+          href="/movie/1"
           onClick={[Function]}
         >
           <span
@@ -186,7 +186,6 @@ exports[`Should add review page render correctly 1`] = `
       </div>
       <div
         className="add-review__text"
-        s={true}
       >
         <textarea
           className="add-review__textarea"
