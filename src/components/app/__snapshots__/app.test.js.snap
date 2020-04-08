@@ -324,7 +324,7 @@ Array [
         <a
           aria-current={null}
           className="small-movie-card catalog__movies-card"
-          href="/movie/1"
+          href="/movie/2"
           onClick={[Function]}
           style={
             Object {

@@ -87,7 +87,7 @@ class AuthScreen extends PureComponent {
 
 AuthScreen.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  authorizationStatus: PropTypes.string.isRequired
+  authorizationStatus: PropTypes.string
 };
 
 const mapToState = (state) => ({

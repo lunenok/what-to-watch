@@ -60,7 +60,12 @@ it(`Should add review page render correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <PrivateRoute props={props}/>
+          <PrivateRoute
+            props={props}
+            exact={true}
+            path={`/`}
+            render={()=>{}}
+          />
         </Provider>
     )
     .toJSON();
