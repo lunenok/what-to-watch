@@ -25,19 +25,19 @@ exports[`Should movie list render correctly 1`] = `
       <h3
         className="small-movie-card__title"
       >
-        <a
+        <p
           className="small-movie-card__link"
           href="#"
         >
           Seven Years in Tibet
-        </a>
+        </p>
       </h3>
     </article>
   </a>
   <a
     aria-current={null}
     className="small-movie-card catalog__movies-card"
-    href="/movie/1"
+    href="/movie/2"
     onClick={[Function]}
     style={
       Object {
@@ -55,12 +55,12 @@ exports[`Should movie list render correctly 1`] = `
       <h3
         className="small-movie-card__title"
       >
-        <a
+        <p
           className="small-movie-card__link"
           href="#"
         >
           Seven Years in Tibet
-        </a>
+        </p>
       </h3>
     </article>
   </a>

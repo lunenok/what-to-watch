@@ -63,8 +63,15 @@ exports[`Should add review page render correctly 1`] = `
     <div
       className="catalog__movies-list"
     >
-      <article
+      <a
         className="small-movie-card catalog__movies-card"
+        href="/movie/1"
+        onClick={[Function]}
+        style={
+          Object {
+            "color": "#c9b37e",
+          }
+        }
       >
         <div
           className="small-movie-card__image"
@@ -78,16 +85,23 @@ exports[`Should add review page render correctly 1`] = `
         <h3
           className="small-movie-card__title"
         >
-          <a
+          <p
             className="small-movie-card__link"
             href="movie-page.html"
           >
             Seven Years in Tibet
-          </a>
+          </p>
         </h3>
-      </article>
-      <article
+      </a>
+      <a
         className="small-movie-card catalog__movies-card"
+        href="/movie/2"
+        onClick={[Function]}
+        style={
+          Object {
+            "color": "#c9b37e",
+          }
+        }
       >
         <div
           className="small-movie-card__image"
@@ -101,14 +115,14 @@ exports[`Should add review page render correctly 1`] = `
         <h3
           className="small-movie-card__title"
         >
-          <a
+          <p
             className="small-movie-card__link"
             href="movie-page.html"
           >
             Seven Years in Tibet
-          </a>
+          </p>
         </h3>
-      </article>
+      </a>
     </div>
   </section>
   <footer

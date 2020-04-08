@@ -17,7 +17,7 @@ const VideoPlayerFull = (props) => {
 
   const movieForPlaying = getMovieForPlaying();
 
-  const {name, videoLink, previewImage} = movieForPlaying;
+  const {name, videoLink, backgroundImage} = movieForPlaying;
 
   const onExitClick = () => {
     dispatch(playPauseMovie(false));
@@ -26,7 +26,7 @@ const VideoPlayerFull = (props) => {
 
   return (
     <div className="player">
-      <video src={videoLink} ref ={playerRef} className="player__video" autoPlay poster={`../img/${previewImage}`} onLoadedMetadata={onLoadedMetadata} onTimeUpdate={onTimeUpdate}/>
+      <video src={videoLink} ref ={playerRef} className="player__video" autoPlay poster={backgroundImage} onLoadedMetadata={onLoadedMetadata} onTimeUpdate={onTimeUpdate}/>
       <button type="button" className="player__exit" onClick={() => onExitClick()}>Exit</button>
       <div className="player__controls">
         <div className="player__controls-row">

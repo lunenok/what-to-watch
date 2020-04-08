@@ -34,7 +34,7 @@ const withFavoriteMovie = (Component) => {
           {...this.props}
           isFavorite={this.state.isFavorite}
           currentMovie={this.currentMovie}
-          _onFavoriteButtonClick={this._onFavoriteButtonClick}
+          onFavoriteButtonClick={this._onFavoriteButtonClick}
           addFavorite={this.addFavorite}>
         </Component>
       );
@@ -65,16 +65,16 @@ const withFavoriteMovie = (Component) => {
     authorizationStatus: PropTypes.string.isRequired
   };
 
+  const mapToState = (state) => ({
+    authorizationStatus: state.authorizationStatus,
+    favoriteMovieList: state.favoriteMovieList
+  });
 
   const mapDispatchToProps = (dispatch) => ({
     addToFavorite(id, status) {
       dispatch(DataOperation.addFavorite(id, status));
     },
     dispatch
-  });
-
-  const mapToState = (state) => ({
-    authorizationStatus: state.authorizationStatus,
   });
 
   return connect(mapToState, mapDispatchToProps)(WithFavoriteMovie);

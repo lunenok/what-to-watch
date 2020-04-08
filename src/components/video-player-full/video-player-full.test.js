@@ -45,9 +45,16 @@ it(`Should video player render correctrly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <VideoPlayerFull/>
-        </Provider>,
-        {
+          <VideoPlayerFull
+            isPlaying={false}
+            onPlayButtonClick={()=>{}}
+            onFullScreenButtonClick={()=>{}}
+            onLoadedMetadata={()=>{}}
+            onTimeUpdate={()=>{}}
+            remainingTime={0}
+            progress={0}
+          />
+        </Provider>, {
           createNodeMock: () => {
             return {};
           }

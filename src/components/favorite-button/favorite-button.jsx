@@ -5,7 +5,7 @@ import {showError, AuthorizationStatus} from "../../reducer/reducer.js";
 import {connect} from "react-redux";
 
 const FavoriteButton = (props) => {
-  const {isFavorite, currentMovie, _onFavoriteButtonClick, addToFavorite, authorizationStatus, dispatch} = props;
+  const {isFavorite, currentMovie, onFavoriteButtonClick, addToFavorite, authorizationStatus, dispatch} = props;
 
   if (!isFavorite) {
     return (
@@ -18,7 +18,7 @@ const FavoriteButton = (props) => {
           return;
         }
         addToFavorite(currentMovie.id, 1);
-        _onFavoriteButtonClick();
+        onFavoriteButtonClick();
       }}>
         <svg viewBox="0 0 19 20" width={19} height={20}>
           <use xlinkHref="#add" />
@@ -37,7 +37,7 @@ const FavoriteButton = (props) => {
           return;
         }
         addToFavorite(currentMovie.id, 0);
-        _onFavoriteButtonClick();
+        onFavoriteButtonClick();
       }}>
         <svg viewBox="0 0 18 14" width={18} height={14}>
           <use xlinkHref="#in-list" />

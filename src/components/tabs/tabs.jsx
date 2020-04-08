@@ -163,12 +163,6 @@ Tabs.propTypes = {
     released: PropTypes.number.isRequired,
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,
     description: PropTypes.string.isRequired,
-    textReviews: PropTypes.arrayOf(PropTypes.shape({
-      author: PropTypes.string,
-      date: PropTypes.string,
-      text: PropTypes.string,
-      reviewRating: PropTypes.number
-    }))
   }),
   onTabClick: PropTypes.func.isRequired,
   currentTab: PropTypes.string.isRequired,
@@ -177,7 +171,7 @@ Tabs.propTypes = {
     id: PropTypes.number,
     rating: PropTypes.number,
     comment: PropTypes.string,
-    date: PropTypes.number,
+    date: PropTypes.string,
     user: PropTypes.shape({
       id: PropTypes.number,
       name: PropTypes.string,
@@ -185,14 +179,14 @@ Tabs.propTypes = {
   })).isRequired
 };
 
+const mapToState = (state) => ({
+  textReviews: state.reviews,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   loadReviews(id) {
     dispatch(DataOperation.loadReviews(id));
   }
-});
-
-const mapToState = (state) => ({
-  textReviews: state.reviews,
 });
 
 export default connect(mapToState, mapDispatchToProps)(withActiveTab(Tabs));

@@ -160,7 +160,15 @@ const DataOperation = {
         api.get(`/films`)
         .then((response) => {
           dispatch(ActionCreator.loadMovies(response.data));
-        });
+        })
+          .then(()=>{
+            if (id === 1) {
+              api.get(`/films/promo`)
+              .then((response) => {
+                dispatch(ActionCreator.loadPromoMovie(response.data));
+              });
+            }
+          });
       });
   },
 };
@@ -234,7 +242,7 @@ const reducer = (state = initialState, action) => {
       return {...state, reviews: action.payload};
 
     case ActionType.REQUIRED_AUTHORIZATION:
-      return {...state, authorizationStatus: action.payload}; // user
+      return {...state, authorizationStatus: action.payload};
 
     case ActionType.RESET_STORE:
       return {...state, genre: `All genres`, currentMovie: null, shownCount: DEFAULT_SHOW_NUBMER};

@@ -1,6 +1,7 @@
 import React, {createRef, PureComponent} from "react";
 import VideoPlayerFull from "../../components/video-player-full/video-player-full.jsx";
 import {getProgress, getRemainingTime} from "../../utils.js";
+import PropTypes from "prop-types";
 
 const withVideoControls = (Component) => {
   class WithVideoControls extends PureComponent {
@@ -79,6 +80,16 @@ const withVideoControls = (Component) => {
       };
     }
   }
+
+  WithVideoControls.propTypes = {
+    onFullScreenButtonClick: PropTypes.func,
+    onTimeUpdate: PropTypes.func,
+    onLoadedMetadata: PropTypes.func,
+    onPlayButtonClick: PropTypes.func,
+    isPlaying: PropTypes.func,
+    remainingTime: PropTypes.string,
+    progress: PropTypes.string,
+  };
 
   return WithVideoControls;
 };

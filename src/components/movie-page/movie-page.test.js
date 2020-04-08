@@ -3,6 +3,7 @@ import renderer from "react-test-renderer";
 import {MoviePage} from "./movie-page.jsx";
 import {Provider} from "react-redux";
 import configureStore from 'redux-mock-store';
+import {AuthorizationStatus} from "../../reducer/reducer.js";
 
 const mockStore = configureStore([]);
 
@@ -31,8 +32,16 @@ const movieList = [mockMovie, mockMovie];
 it(`Should movie page render correctly`, () => {
   const store = mockStore({
     genre: `All genres`,
-    currentMovie: null,
-    movies: null
+    currentMovie: mockMovie,
+    movieList: [mockMovie, mockMovie],
+    promoFilm: mockMovie,
+    reviews: [],
+    isPlaying: false,
+    shownCount: 8,
+    authorizationStatus: AuthorizationStatus.NO_AUTH,
+    loadingStatus: false,
+    avatarURL: null,
+    isError: false,
   });
 
   const tree = renderer
@@ -44,6 +53,9 @@ it(`Should movie page render correctly`, () => {
             onMovieClick={()=>{}}
             match={{params: {id: 1}, isExact: true, path: ``, url: ``}}
             dispatch={()=>{}}
+            isPlaying={false}
+            authorizationStatus={AuthorizationStatus.NO_AUTH}
+            comment={()=>{}}
           />
         </Provider>
     )

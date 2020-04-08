@@ -145,6 +145,14 @@ App.propTypes = {
   showError: PropTypes.bool.isRequired
 };
 
+const mapToState = (state) => ({
+  movieList: state.movieList,
+  promoFilm: state.promoFilm,
+  authorizationStatus: state.authorizationStatus,
+  favoriteMovieList: state.favoriteMovieList,
+  showError: state.isError
+});
+
 const mapDispatchToProps = (dispatch) => ({
   login(authData) {
     dispatch(UserOperation.login(authData));
@@ -165,14 +173,6 @@ const mapDispatchToProps = (dispatch) => ({
   loadPromoMovie() {
     dispatch(DataOperation.loadPromoMovie());
   },
-});
-
-const mapToState = (state) => ({
-  movieList: state.movieList,
-  promoFilm: state.promoFilm,
-  authorizationStatus: state.authorizationStatus,
-  favoriteMovieList: state.favoriteMovieList,
-  showError: state.isError
 });
 
 export default connect(mapToState, mapDispatchToProps)(App);

@@ -24,7 +24,7 @@ const GenresList = ({uniqueGenres, dispatch, activeGenre}) => {
 };
 
 GenresList.propTypes = {
-  uniqueGenres: PropTypes.array,
+  uniqueGenres: PropTypes.arrayOf(PropTypes.string.isRequired),
   dispatch: PropTypes.func,
   activeGenre: PropTypes.string.isRequired
 };

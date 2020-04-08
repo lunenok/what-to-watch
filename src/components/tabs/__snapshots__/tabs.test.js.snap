@@ -11,7 +11,7 @@ exports[`Should tabs page render correctly 1`] = `
       className="movie-nav__list"
     >
       <li
-        className="movie-nav__item "
+        className="movie-nav__item movie-nav__item--active"
       >
         <a
           className="movie-nav__link"
@@ -45,5 +45,52 @@ exports[`Should tabs page render correctly 1`] = `
       </li>
     </ul>
   </nav>
+  <div
+    className="movie-rating"
+  >
+    <div
+      className="movie-rating__score"
+    >
+      3,6
+    </div>
+    <p
+      className="movie-rating__meta"
+    >
+      <span
+        className="movie-rating__level"
+      >
+        Normal
+      </span>
+      <span
+        className="movie-rating__count"
+      >
+        112612
+         ratings
+      </span>
+    </p>
+  </div>
+  <div
+    className="movie-card__text"
+  >
+    <p>
+      True story of Heinrich Harrer, an Austrian mountain climber who became friends with the Dalai Lama at the time of China's takeover of Tibet.
+    </p>
+    <p
+      className="movie-card__director"
+    >
+      <strong>
+        Director: 
+        Jean-Jacques Annaud
+      </strong>
+    </p>
+    <p
+      className="movie-card__starring"
+    >
+      <strong>
+        Starring:
+        Brad Pitt, David Thewlis, BD Wong
+      </strong>
+    </p>
+  </div>
 </div>
 `;
