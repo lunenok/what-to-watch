@@ -67,6 +67,7 @@ const withFavoriteMovie = (Component) => {
 
   const mapToState = (state) => ({
     authorizationStatus: state.authorizationStatus,
+    favoriteMovieList: state.favoriteMovieList
   });
 
   const mapDispatchToProps = (dispatch) => ({
